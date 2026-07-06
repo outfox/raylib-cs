@@ -1,4 +1,13 @@
 <Project>
+  <!-- The net8-era wasm workload (Microsoft.NET.Runtime.WebAssembly.Sdk 8.0.x, imported for
+       RID browser-wasm) unconditionally sets OutputType=Exe after project evaluation, which
+       breaks the net8.0 classlib build with CS5001. Pin it back to Library here: this file is
+       imported after the workload props, so the assignment wins. (net10's wasm SDK leaves
+       OutputType alone; Examples stays an Exe and is excluded.) -->
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'Raylib-cs' And '$(RuntimeIdentifier)' == 'browser-wasm'">
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
   <!-- Raylib-cs 8.1.0 is not on nuget.org yet; pack locally so Examples and tests resolve the package with native runtimes. -->
   <Target Name="_EnsureLocalRaylibCsPackage"
           BeforeTargets="Restore"
