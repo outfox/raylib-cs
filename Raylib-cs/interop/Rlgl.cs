@@ -821,7 +821,7 @@ public static unsafe partial class Rlgl
     /// <summary>Verify framebuffer is complete</summary>
     [LibraryImport(NativeLibName, EntryPoint = "rlFramebufferComplete")]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
-    public static partial int FramebufferComplete(uint id);
+    public static partial CBool FramebufferComplete(uint id);
 
     /// <summary>Delete framebuffer from GPU</summary>
     [LibraryImport(NativeLibName, EntryPoint = "rlUnloadFramebuffer")]
