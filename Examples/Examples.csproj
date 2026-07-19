@@ -23,6 +23,10 @@
         <ProjectReference Include="..\Raylib-cs\Raylib-cs.csproj"/>
     </ItemGroup>
 
+    <!-- NuGet imports this from buildTransitive/ for PackageReference; ProjectReference needs it imported from source
+         so the native raylib library is downloaded and copied to the output. -->
+    <Import Project="..\Raylib-cs\Raylib-cs.targets" Condition="'$(UseRaylibCsPackage)' != 'true'"/>
+
     <ItemGroup Condition="'$(UseRaylibCsPackage)' == 'true'">
         <PackageReference Include="Raylib-cs" Version="$(RaylibCsVersion)"/>
     </ItemGroup>
