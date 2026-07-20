@@ -59,6 +59,10 @@
 
     <Import Project="..\Raylib-cs\Raylib-cs.targets" Condition="'$(UseRaylibCsPackage)' != 'true'"/>
 
+    <ItemGroup Condition="'$(UseRaylibCsPackage)' == 'true'">
+        <PackageReference Include="Raylib-cs" Version="$(RaylibCsVersion)"/>
+    </ItemGroup>
+  
     <ItemGroup Condition="'$(RuntimeIdentifier)' == 'browser-wasm'">
         <WasmExtraFilesToDeploy Include="Web/index.html" TargetPath="index.html"/>
         <WasmExtraFilesToDeploy Include="Web/main.js" TargetPath="main.js"/>
@@ -66,7 +70,7 @@
         <WasmExtraFilesToDeploy Include="..\Raylib-cs\logo\raylib-cs.ico" TargetPath="favicon.ico"/>
 
         <!-- Bundle the example assets into the wasm virtual filesystem at /resources/...
-             so examples load from "resources/..." work unchanged. -->
+             so examples loading from "resources/..." work unchanged. -->
         <WasmFilesToIncludeInFileSystem Include="resources\**\*.*"
                                         TargetPath="resources\%(RecursiveDir)%(Filename)%(Extension)"/>
     </ItemGroup>
