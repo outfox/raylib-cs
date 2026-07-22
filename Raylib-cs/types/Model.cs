@@ -130,16 +130,42 @@ public unsafe struct Model
     public Matrix4x4* BoneMatrices;
 
     /// <summary>
-    /// Bones animated transformation matrices as span. Based on Skeleton.BoneCount length
+    /// Meshes as span. Based on MeshCount length
     /// </summary>
-    public Span<Matrix4x4> BoneMatricesAsSpan()
+    public Span<Mesh> MeshesAsSpan()
     {
-        if (BoneMatrices == null || Skeleton.BoneCount <= 0)
+        if (Meshes == null || MeshCount <= 0)
         {
-            return Span<Matrix4x4>.Empty;
+            return Span<Mesh>.Empty;
         }
 
-        return new Span<Matrix4x4>(BoneMatrices, Skeleton.BoneCount);
+        return new Span<Mesh>(Meshes, MeshCount);
+    }
+
+    /// <summary>
+    /// Materials as span. Based on MaterialCount length
+    /// </summary>
+    public Span<Material> MaterialsAsSpan()
+    {
+        if (Materials == null || MaterialCount <= 0)
+        {
+            return Span<Material>.Empty;
+        }
+
+        return new Span<Material>(Materials, MaterialCount);
+    }
+
+    /// <summary>
+    /// Mesh material number as span. Based on MeshCount length
+    /// </summary>
+    public Span<int> MeshMaterialAsSpan()
+    {
+        if (MeshMaterial == null || MeshCount <= 0)
+        {
+            return Span<int>.Empty;
+        }
+
+        return new Span<int>(MeshMaterial, MeshCount);
     }
 
     /// <summary>
@@ -156,29 +182,16 @@ public unsafe struct Model
     }
 
     /// <summary>
-    /// Mesh material number as span. Based on MaterialCount length
+    /// Bones animated transformation matrices as span. Based on Skeleton.BoneCount length
     /// </summary>
-    public Span<int> MeshMaterialAsSpan()
+    public Span<Matrix4x4> BoneMatricesAsSpan()
     {
-        if (MeshMaterial == null || MaterialCount <= 0)
+        if (BoneMatrices == null || Skeleton.BoneCount <= 0)
         {
-            return Span<int>.Empty;
+            return Span<Matrix4x4>.Empty;
         }
 
-        return new Span<int>(MeshMaterial, MaterialCount);
-    }
-
-    /// <summary>
-    /// Meshes as span. Based on MeshCount length
-    /// </summary>
-    public Span<Mesh> MeshesAsSpan()
-    {
-        if (Meshes == null || MeshCount <= 0)
-        {
-            return Span<Mesh>.Empty;
-        }
-
-        return new Span<Mesh>(Meshes, MeshCount);
+        return new Span<Matrix4x4>(BoneMatrices, Skeleton.BoneCount);
     }
 }
 

@@ -15,7 +15,13 @@
         </PackageReference>
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="'$(UseRaylibCsPackage)' != 'true'">
+        <ProjectReference Include="..\Raylib-cs\Raylib-cs.csproj"/>
+    </ItemGroup>
+
+    <Import Project="..\Raylib-cs\Raylib-cs.targets" Condition="'$(UseRaylibCsPackage)' != 'true'"/>
+
+    <ItemGroup Condition="'$(UseRaylibCsPackage)' == 'true'">
         <PackageReference Include="Raylib-cs" Version="$(RaylibCsVersion)"/>
     </ItemGroup>
 </Project>

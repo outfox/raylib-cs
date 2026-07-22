@@ -3,8 +3,6 @@ using Xunit;
 
 namespace Raylib_cs.Tests;
 
-using System.Collections.Generic;
-
 public static class BlittableHelper
 {
     public static bool IsBlittable<T>()
