@@ -151,8 +151,36 @@ for (const name of Host.GetExampleNames().split('\n').filter(n => n.length > 0))
     opt.textContent = name;
     select.appendChild(opt);
 }
-select.addEventListener('change', () => selectExample(select.value));
+select.addEventListener('change', () => {
+    selectExample(select.value);
+    canvas.focus();
+});
 selectExample(select.value);
+
+// J/K step through examples instead of arrow keys on the focused dropdown,
+// which would otherwise fight with examples that read the arrow keys.
+function stepExample(delta) {
+    const count = select.options.length;
+    if (count === 0) {
+        return;
+    }
+
+    select.selectedIndex = (select.selectedIndex + delta + count) % count;
+    selectExample(select.value);
+    canvas.focus();
+}
+
+document.addEventListener('keydown', (event) => {
+    if (event.repeat || event.target instanceof HTMLSelectElement) {
+        return;
+    }
+
+    if (event.code === 'KeyJ') {
+        stepExample(1);
+    } else if (event.code === 'KeyK') {
+        stepExample(-1);
+    }
+});
 
 setScaleMode(scaleMode, false);
 

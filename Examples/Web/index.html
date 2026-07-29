@@ -46,6 +46,14 @@
             background: #000;
         }
         #status { color: #888; font-size: .85rem; margin: 0; }
+        #hint { color: #888; font-size: .8rem; margin-left: .5rem; }
+        #hint kbd {
+            font-family: inherit;
+            background: #2c2c2c;
+            border: 1px solid #444;
+            border-radius: 3px;
+            padding: 0 .3rem;
+        }
         #error {
             color: #ff6b6b;
             background: #3a1d1d;
@@ -67,6 +75,7 @@
             <option value="native">Native (1x)</option>
             <option value="fit">Fit</option>
         </select>
+        <span id="hint"><kbd>J</kbd>/<kbd>K</kbd> next/previous example</span>
     </div>
     <div id="error" hidden>This example crashed — see the browser console for details. Select another example to continue.</div>
     <div id="viewport">
