@@ -15,10 +15,7 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
 using Examples.Shared;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Shapes;
 
@@ -112,19 +109,31 @@ public partial class EasingsTestbed : IExample
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyPressed(KeyboardKey.T)) boundedT = !boundedT;
+        if (IsKeyPressed(KeyboardKey.T))
+        {
+            boundedT = !boundedT;
+        }
 
         // Choose easing for the X axis
         if (IsKeyPressed(KeyboardKey.Right))
         {
             easingX++;
 
-            if (easingX > EASING_NONE) easingX = 0;
+            if (easingX > EASING_NONE)
+            {
+                easingX = 0;
+            }
         }
         else if (IsKeyPressed(KeyboardKey.Left))
         {
-            if (easingX == 0) easingX = EASING_NONE;
-            else easingX--;
+            if (easingX == 0)
+            {
+                easingX = EASING_NONE;
+            }
+            else
+            {
+                easingX--;
+            }
         }
 
         // Choose easing for the Y axis
@@ -132,20 +141,41 @@ public partial class EasingsTestbed : IExample
         {
             easingY++;
 
-            if (easingY > EASING_NONE) easingY = 0;
+            if (easingY > EASING_NONE)
+            {
+                easingY = 0;
+            }
         }
         else if (IsKeyPressed(KeyboardKey.Up))
         {
-            if (easingY == 0) easingY = EASING_NONE;
-            else easingY--;
+            if (easingY == 0)
+            {
+                easingY = EASING_NONE;
+            }
+            else
+            {
+                easingY--;
+            }
         }
 
         // Change d (duration) value
-        if (IsKeyPressed(KeyboardKey.W) && (d < D_MAX - D_STEP)) d += D_STEP;
-        else if (IsKeyPressed(KeyboardKey.Q) && (d > D_MIN + D_STEP)) d -= D_STEP;
+        if (IsKeyPressed(KeyboardKey.W) && (d < D_MAX - D_STEP))
+        {
+            d += D_STEP;
+        }
+        else if (IsKeyPressed(KeyboardKey.Q) && (d > D_MIN + D_STEP))
+        {
+            d -= D_STEP;
+        }
 
-        if (IsKeyDown(KeyboardKey.S) && (d < D_MAX - D_STEP_FINE)) d += D_STEP_FINE;
-        else if (IsKeyDown(KeyboardKey.A) && (d > D_MIN + D_STEP_FINE)) d -= D_STEP_FINE;
+        if (IsKeyDown(KeyboardKey.S) && (d < D_MAX - D_STEP_FINE))
+        {
+            d += D_STEP_FINE;
+        }
+        else if (IsKeyDown(KeyboardKey.A) && (d > D_MIN + D_STEP_FINE))
+        {
+            d -= D_STEP_FINE;
+        }
 
         // Play, pause and restart controls
         if (IsKeyPressed(KeyboardKey.Space) || IsKeyPressed(KeyboardKey.T) ||
@@ -161,7 +191,10 @@ public partial class EasingsTestbed : IExample
             paused = true;
         }
 
-        if (IsKeyPressed(KeyboardKey.Enter)) paused = !paused;
+        if (IsKeyPressed(KeyboardKey.Enter))
+        {
+            paused = !paused;
+        }
 
         // Movement computation
         if (!paused && ((boundedT && t < d) || !boundedT))

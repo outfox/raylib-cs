@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;
 
 namespace Examples.Core;

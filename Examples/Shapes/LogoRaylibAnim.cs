@@ -13,8 +13,6 @@
 *
 ********************************************************************************************/
 
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class LogoRaylibAnim : IExample

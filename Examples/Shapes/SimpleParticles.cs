@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class SimpleParticles : IExample
@@ -90,11 +86,17 @@ public partial class SimpleParticles : IExample
         // Emit new particles: when emissionRate is 1, emit every frame
         if (emissionRate < 0)
         {
-            if (random.Next(-emissionRate) == 0) EmitParticle(emitterPosition, currentType);
+            if (random.Next(-emissionRate) == 0)
+            {
+                EmitParticle(emitterPosition, currentType);
+            }
         }
         else
         {
-            for (int i = 0; i <= emissionRate; i++) EmitParticle(emitterPosition, currentType);
+            for (int i = 0; i <= emissionRate; i++)
+            {
+                EmitParticle(emitterPosition, currentType);
+            }
         }
 
         // Update the parameters of each particle
@@ -104,14 +106,31 @@ public partial class SimpleParticles : IExample
         UpdateCircularBuffer();
 
         // Change Particle Emission Rate (UP/DOWN arrows)
-        if (IsKeyPressed(KeyboardKey.Up)) emissionRate++;
-        if (IsKeyPressed(KeyboardKey.Down)) emissionRate--;
+        if (IsKeyPressed(KeyboardKey.Up))
+        {
+            emissionRate++;
+        }
+
+        if (IsKeyPressed(KeyboardKey.Down))
+        {
+            emissionRate--;
+        }
 
         // Change Particle Type (LEFT/RIGHT arrows)
-        if (IsKeyPressed(KeyboardKey.Right)) currentType = (currentType == ParticleType.Fire) ? ParticleType.Water : (ParticleType)((int)currentType + 1);
-        if (IsKeyPressed(KeyboardKey.Left)) currentType = (currentType == ParticleType.Water) ? ParticleType.Fire : (ParticleType)((int)currentType - 1);
+        if (IsKeyPressed(KeyboardKey.Right))
+        {
+            currentType = (currentType == ParticleType.Fire) ? ParticleType.Water : (ParticleType)((int)currentType + 1);
+        }
 
-        if (IsMouseButtonDown(MouseButton.Left)) emitterPosition = GetMousePosition();
+        if (IsKeyPressed(KeyboardKey.Left))
+        {
+            currentType = (currentType == ParticleType.Water) ? ParticleType.Fire : (ParticleType)((int)currentType - 1);
+        }
+
+        if (IsMouseButtonDown(MouseButton.Left))
+        {
+            emitterPosition = GetMousePosition();
+        }
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -131,8 +150,14 @@ public partial class SimpleParticles : IExample
         DrawText("UP/DOWN: Change Particle Emission Rate", 15, 35, 10, Color.Black);
         DrawText("LEFT/RIGHT: Change Particle Type (Water, Smoke, Fire)", 15, 55, 10, Color.Black);
 
-        if (emissionRate < 0) DrawText($"Particles every {-emissionRate} frames | Type: {particleTypeNames[(int)currentType]}", 15, 95, 10, Color.DarkGray);
-        else DrawText($"{emissionRate + 1} Particles per frame | Type: {particleTypeNames[(int)currentType]}", 15, 95, 10, Color.DarkGray);
+        if (emissionRate < 0)
+        {
+            DrawText($"Particles every {-emissionRate} frames | Type: {particleTypeNames[(int)currentType]}", 15, 95, 10, Color.DarkGray);
+        }
+        else
+        {
+            DrawText($"{emissionRate + 1} Particles per frame | Type: {particleTypeNames[(int)currentType]}", 15, 95, 10, Color.DarkGray);
+        }
 
         DrawFPS(screenWidth - 80, 10);
 
@@ -227,8 +252,11 @@ public partial class SimpleParticles : IExample
                     buffer[i].color.A -= 4;         // Decrement alpha: smoke fades
 
                     // If alpha transparent, particle dies
-                    if (buffer[i].color.A < 4) buffer[i].alive = false;
-                } break;
+                    if (buffer[i].color.A < 4)
+                        {
+                            buffer[i].alive = false;
+                        }
+                    } break;
                 case ParticleType.Fire:
                 {
                     // Add a little horizontal oscillation to fire particles
@@ -239,8 +267,11 @@ public partial class SimpleParticles : IExample
                     buffer[i].color.G -= 3;         // Decrement green: fire turns reddish starting from yellow
 
                     // If radius too small, particle dies
-                    if (buffer[i].radius <= 0.02f) buffer[i].alive = false;
-                } break;
+                    if (buffer[i].radius <= 0.02f)
+                        {
+                            buffer[i].alive = false;
+                        }
+                    } break;
                 default: break;
             }
 

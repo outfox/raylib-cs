@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Audio;
 
 public unsafe partial class RawStream : IExample
@@ -71,26 +67,40 @@ public unsafe partial class RawStream : IExample
         if (IsKeyDown(KeyboardKey.Up))
         {
             newSineFrequency += 10;
-            if (newSineFrequency > 12500) newSineFrequency = 12500;
+            if (newSineFrequency > 12500)
+            {
+                newSineFrequency = 12500;
+            }
         }
 
         if (IsKeyDown(KeyboardKey.Down))
         {
             newSineFrequency -= 10;
-            if (newSineFrequency < 20) newSineFrequency = 20;
+            if (newSineFrequency < 20)
+            {
+                newSineFrequency = 20;
+            }
         }
 
         if (IsKeyDown(KeyboardKey.Left))
         {
             pan -= 0.01f;
-            if (pan < -1.0f) pan = -1.0f;
+            if (pan < -1.0f)
+            {
+                pan = -1.0f;
+            }
+
             SetAudioStreamPan(stream, pan);
         }
 
         if (IsKeyDown(KeyboardKey.Right))
         {
             pan += 0.01f;
-            if (pan > 1.0f) pan = 1.0f;
+            if (pan > 1.0f)
+            {
+                pan = 1.0f;
+            }
+
             SetAudioStreamPan(stream, pan);
         }
 

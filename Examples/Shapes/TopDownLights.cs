@@ -15,8 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;
 using static Raylib_cs.Rlgl;
 
@@ -66,7 +64,10 @@ public partial class TopDownLights : IExample
 
         public LightInfo()
         {
-            for (int i = 0; i < MAX_SHADOWS; i++) shadows[i] = new ShadowGeometry();
+            for (int i = 0; i < MAX_SHADOWS; i++)
+            {
+                shadows[i] = new ShadowGeometry();
+            }
         }
     }
 
@@ -85,7 +86,10 @@ public partial class TopDownLights : IExample
     public void Init()
     {
         lights = new LightInfo[MAX_LIGHTS];
-        for (int i = 0; i < MAX_LIGHTS; i++) lights[i] = new LightInfo();
+        for (int i = 0; i < MAX_LIGHTS; i++)
+        {
+            lights[i] = new LightInfo();
+        }
 
         // Initialize our 'world' of boxes
         boxCount = 0;
@@ -112,7 +116,10 @@ public partial class TopDownLights : IExample
         // Update
         //----------------------------------------------------------------------------------
         // Drag light 0
-        if (IsMouseButtonDown(MouseButton.Left)) MoveLight(0, GetMousePosition().X, GetMousePosition().Y);
+        if (IsMouseButtonDown(MouseButton.Left))
+        {
+            MoveLight(0, GetMousePosition().X, GetMousePosition().Y);
+        }
 
         // Make a new light
         if (IsMouseButtonPressed(MouseButton.Right) && (nextLight < MAX_LIGHTS))
@@ -122,13 +129,19 @@ public partial class TopDownLights : IExample
         }
 
         // Toggle debug info
-        if (IsKeyPressed(KeyboardKey.F1)) showLines = !showLines;
+        if (IsKeyPressed(KeyboardKey.F1))
+        {
+            showLines = !showLines;
+        }
 
         // Update the lights and keep track if any were dirty so we know if we need to update the master light mask
         bool dirtyLights = false;
         for (int i = 0; i < MAX_LIGHTS; i++)
         {
-            if (UpdateLight(i, boxes, boxCount)) dirtyLights = true;
+            if (UpdateLight(i, boxes, boxCount))
+            {
+                dirtyLights = true;
+            }
         }
 
         // Update the light mask
@@ -146,7 +159,10 @@ public partial class TopDownLights : IExample
             // Merge in all the light masks
             for (int i = 0; i < MAX_LIGHTS; i++)
             {
-                if (lights[i].active) DrawTextureRec(lights[i].mask.Texture, new Rectangle(0, 0, (float)GetScreenWidth(), -(float)GetScreenHeight()), Vector2Zero(), Color.White);
+                if (lights[i].active)
+                {
+                    DrawTextureRec(lights[i].mask.Texture, new Rectangle(0, 0, (float)GetScreenWidth(), -(float)GetScreenHeight()), Vector2Zero(), Color.White);
+                }
             }
 
             DrawRenderBatchActive();
@@ -172,7 +188,10 @@ public partial class TopDownLights : IExample
         // Draw the lights
         for (int i = 0; i < MAX_LIGHTS; i++)
         {
-            if (lights[i].active) DrawCircle((int)lights[i].position.X, (int)lights[i].position.Y, 10, (i == 0) ? Color.Yellow : Color.White);
+            if (lights[i].active)
+            {
+                DrawCircle((int)lights[i].position.X, (int)lights[i].position.Y, 10, (i == 0) ? Color.Yellow : Color.White);
+            }
         }
 
         if (showLines)
@@ -184,7 +203,10 @@ public partial class TopDownLights : IExample
 
             for (int b = 0; b < boxCount; b++)
             {
-                if (CheckCollisionRecs(boxes[b], lights[0].bounds)) DrawRectangleRec(boxes[b], Color.Purple);
+                if (CheckCollisionRecs(boxes[b], lights[0].bounds))
+                {
+                    DrawRectangleRec(boxes[b], Color.Purple);
+                }
 
                 DrawRectangleLines((int)boxes[b].X, (int)boxes[b].Y, (int)boxes[b].Width, (int)boxes[b].Height, Color.DarkBlue);
             }
@@ -210,7 +232,10 @@ public partial class TopDownLights : IExample
         UnloadRenderTexture(lightMask);
         for (int i = 0; i < MAX_LIGHTS; i++)
         {
-            if (lights[i].active) UnloadRenderTexture(lights[i].mask);
+            if (lights[i].active)
+            {
+                UnloadRenderTexture(lights[i].mask);
+            }
         }
     }
 
@@ -233,7 +258,10 @@ public partial class TopDownLights : IExample
     // It takes the edge and projects it back by the light radius and turns it into a quad
     private void ComputeShadowVolumeForEdge(int slot, Vector2 sp, Vector2 ep)
     {
-        if (lights[slot].shadowCount >= MAX_SHADOWS) return;
+        if (lights[slot].shadowCount >= MAX_SHADOWS)
+        {
+            return;
+        }
 
         float extension = lights[slot].outerRadius * 2;
 
@@ -271,7 +299,10 @@ public partial class TopDownLights : IExample
     // See if a light needs to update it's mask
     private bool UpdateLight(int slot, Rectangle[] boxes, int count)
     {
-        if (!lights[slot].active || !lights[slot].dirty) return false;
+        if (!lights[slot].active || !lights[slot].dirty)
+        {
+            return false;
+        }
 
         lights[slot].dirty = false;
         lights[slot].shadowCount = 0;
@@ -280,10 +311,16 @@ public partial class TopDownLights : IExample
         for (int i = 0; i < count; i++)
         {
             // Are we in a box? if so we are not valid
-            if (CheckCollisionPointRec(lights[slot].position, boxes[i])) return false;
+            if (CheckCollisionPointRec(lights[slot].position, boxes[i]))
+            {
+                return false;
+            }
 
             // If this box is outside our bounds, we can skip it
-            if (!CheckCollisionRecs(lights[slot].bounds, boxes[i])) continue;
+            if (!CheckCollisionRecs(lights[slot].bounds, boxes[i]))
+            {
+                continue;
+            }
 
             // Check the edges that are on the same side we are, and cast shadow volumes out from them
 
@@ -291,22 +328,34 @@ public partial class TopDownLights : IExample
             Vector2 sp = new Vector2(boxes[i].X, boxes[i].Y);
             Vector2 ep = new Vector2(boxes[i].X + boxes[i].Width, boxes[i].Y);
 
-            if (lights[slot].position.Y > ep.Y) ComputeShadowVolumeForEdge(slot, sp, ep);
+            if (lights[slot].position.Y > ep.Y)
+            {
+                ComputeShadowVolumeForEdge(slot, sp, ep);
+            }
 
             // Right
             sp = ep;
             ep.Y += boxes[i].Height;
-            if (lights[slot].position.X < ep.X) ComputeShadowVolumeForEdge(slot, sp, ep);
+            if (lights[slot].position.X < ep.X)
+            {
+                ComputeShadowVolumeForEdge(slot, sp, ep);
+            }
 
             // Bottom
             sp = ep;
             ep.X -= boxes[i].Width;
-            if (lights[slot].position.Y < ep.Y) ComputeShadowVolumeForEdge(slot, sp, ep);
+            if (lights[slot].position.Y < ep.Y)
+            {
+                ComputeShadowVolumeForEdge(slot, sp, ep);
+            }
 
             // Left
             sp = ep;
             ep.Y -= boxes[i].Height;
-            if (lights[slot].position.X > ep.X) ComputeShadowVolumeForEdge(slot, sp, ep);
+            if (lights[slot].position.X > ep.X)
+            {
+                ComputeShadowVolumeForEdge(slot, sp, ep);
+            }
 
             // The box itself
             lights[slot].shadows[lights[slot].shadowCount].vertices[0] = new Vector2(boxes[i].X, boxes[i].Y);
@@ -336,7 +385,10 @@ public partial class TopDownLights : IExample
         SetBlendMode(BlendMode.Custom);
 
         // If we are valid, then draw the light radius to the alpha mask
-        if (lights[slot].valid) DrawCircleGradient(lights[slot].position, lights[slot].outerRadius, ColorAlpha(Color.White, 0), Color.White);
+        if (lights[slot].valid)
+        {
+            DrawCircleGradient(lights[slot].position, lights[slot].outerRadius, ColorAlpha(Color.White, 0), Color.White);
+        }
 
         DrawRenderBatchActive();
 

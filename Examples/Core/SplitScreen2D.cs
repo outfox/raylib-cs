@@ -18,9 +18,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 public partial class SplitScreen2D : IExample
@@ -74,15 +71,41 @@ public partial class SplitScreen2D : IExample
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyDown(KeyboardKey.S)) player1.Y += 3.0f;
-        else if (IsKeyDown(KeyboardKey.W)) player1.Y -= 3.0f;
-        if (IsKeyDown(KeyboardKey.D)) player1.X += 3.0f;
-        else if (IsKeyDown(KeyboardKey.A)) player1.X -= 3.0f;
+        if (IsKeyDown(KeyboardKey.S))
+        {
+            player1.Y += 3.0f;
+        }
+        else if (IsKeyDown(KeyboardKey.W))
+        {
+            player1.Y -= 3.0f;
+        }
 
-        if (IsKeyDown(KeyboardKey.Up)) player2.Y -= 3.0f;
-        else if (IsKeyDown(KeyboardKey.Down)) player2.Y += 3.0f;
-        if (IsKeyDown(KeyboardKey.Right)) player2.X += 3.0f;
-        else if (IsKeyDown(KeyboardKey.Left)) player2.X -= 3.0f;
+        if (IsKeyDown(KeyboardKey.D))
+        {
+            player1.X += 3.0f;
+        }
+        else if (IsKeyDown(KeyboardKey.A))
+        {
+            player1.X -= 3.0f;
+        }
+
+        if (IsKeyDown(KeyboardKey.Up))
+        {
+            player2.Y -= 3.0f;
+        }
+        else if (IsKeyDown(KeyboardKey.Down))
+        {
+            player2.Y += 3.0f;
+        }
+
+        if (IsKeyDown(KeyboardKey.Right))
+        {
+            player2.X += 3.0f;
+        }
+        else if (IsKeyDown(KeyboardKey.Left))
+        {
+            player2.X -= 3.0f;
+        }
 
         camera1.Target = new Vector2(player1.X, player1.Y);
         camera2.Target = new Vector2(player2.X, player2.Y);

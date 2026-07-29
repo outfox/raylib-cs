@@ -15,12 +15,7 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Collections.Generic;
-using System.Numerics;
 using System.Text;
-using Raylib_cs;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Text;
 
@@ -135,12 +130,35 @@ public partial class StringsManagement : IExample
         }
 
         // Reset using TextTo* functions
-        if (IsKeyPressed(KeyboardKey.One)) PrepareFirstTextParticle("raylib => fun videogames programming!");
-        if (IsKeyPressed(KeyboardKey.Two)) PrepareFirstTextParticle(TextToUpper("raylib => fun videogames programming!"));
-        if (IsKeyPressed(KeyboardKey.Three)) PrepareFirstTextParticle(TextToLower("raylib => fun videogames programming!"));
-        if (IsKeyPressed(KeyboardKey.Four)) PrepareFirstTextParticle(TextToPascal("raylib_fun_videogames_programming"));
-        if (IsKeyPressed(KeyboardKey.Five)) PrepareFirstTextParticle(TextToSnake("RaylibFunVideogamesProgramming"));
-        if (IsKeyPressed(KeyboardKey.Six)) PrepareFirstTextParticle(TextToCamel("raylib_fun_videogames_programming"));
+        if (IsKeyPressed(KeyboardKey.One))
+        {
+            PrepareFirstTextParticle("raylib => fun videogames programming!");
+        }
+
+        if (IsKeyPressed(KeyboardKey.Two))
+        {
+            PrepareFirstTextParticle(TextToUpper("raylib => fun videogames programming!"));
+        }
+
+        if (IsKeyPressed(KeyboardKey.Three))
+        {
+            PrepareFirstTextParticle(TextToLower("raylib => fun videogames programming!"));
+        }
+
+        if (IsKeyPressed(KeyboardKey.Four))
+        {
+            PrepareFirstTextParticle(TextToPascal("raylib_fun_videogames_programming"));
+        }
+
+        if (IsKeyPressed(KeyboardKey.Five))
+        {
+            PrepareFirstTextParticle(TextToSnake("RaylibFunVideogamesProgramming"));
+        }
+
+        if (IsKeyPressed(KeyboardKey.Six))
+        {
+            PrepareFirstTextParticle(TextToCamel("raylib_fun_videogames_programming"));
+        }
 
         // Slice by char pressed only when we have one text particle
         int charPressed = GetCharPressed();

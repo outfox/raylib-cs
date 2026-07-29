@@ -15,8 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;
 
 namespace Examples.Shapes;
@@ -71,7 +69,10 @@ public partial class LinesDrawing : IExample
         // Update
         //----------------------------------------------------------------------------------
         // Disable the hint text once the user clicks
-        if (IsMouseButtonPressed(MouseButton.Left) && startText) startText = false;
+        if (IsMouseButtonPressed(MouseButton.Left) && startText)
+        {
+            startText = false;
+        }
 
         // Clear the canvas when the user middle-clicks
         if (IsMouseButtonPressed(MouseButton.Middle))
@@ -97,12 +98,18 @@ public partial class LinesDrawing : IExample
 
                 // While the hue is >=360, subtract it to bring it down into the range 0-360
                 // This is more visually accurate than resetting to zero
-                while (lineHue >= 360.0f) lineHue -= 360.0f;
+                while (lineHue >= 360.0f)
+                {
+                    lineHue -= 360.0f;
+                }
 
                 // Create the final color
                 drawColor = ColorFromHSV(lineHue, 1.0f, 1.0f);
             }
-            else if (rightButtonDown) drawColor = Color.RayWhite; // Use the background color as an "eraser"
+            else if (rightButtonDown)
+            {
+                drawColor = Color.RayWhite; // Use the background color as an "eraser"
+            }
 
             // Draw the line onto the canvas
             BeginTextureMode(canvas);
@@ -129,10 +136,16 @@ public partial class LinesDrawing : IExample
             DrawTextureRec(canvas.Texture, new Rectangle(0.0f, 0.0f, (float)canvas.Texture.Width, (float)-canvas.Texture.Height), Vector2Zero(), Color.White);
 
             // Draw the preview circle
-            if (!leftButtonDown) DrawCircleLinesV(GetMousePosition(), lineThickness/2.0f, new Color(127, 127, 127, 127));
+            if (!leftButtonDown)
+        {
+            DrawCircleLinesV(GetMousePosition(), lineThickness/2.0f, new Color(127, 127, 127, 127));
+        }
 
-            // Draw the hint text
-            if (startText) DrawText("try clicking and dragging!", 275, 215, 20, Color.LightGray);
+        // Draw the hint text
+        if (startText)
+        {
+            DrawText("try clicking and dragging!", 275, 215, 20, Color.LightGray);
+        }
 
         EndDrawing();
         //----------------------------------------------------------------------------------

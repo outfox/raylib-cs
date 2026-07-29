@@ -20,10 +20,7 @@
 // using plain raylib drawing/input. Clipboard behaviour (cut/copy/paste and CTRL+X/C/V
 // shortcuts) matches the original.
 
-using System;
-using System.Numerics;
 using System.Text;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Core;
 
@@ -104,7 +101,10 @@ public partial class ClipboardText : IExample
         {
             // Paste text from clipboard
             clipboardText = GetClipboardText_();
-            if (clipboardText != null) SetInputBuffer(clipboardText);
+            if (clipboardText != null)
+            {
+                SetInputBuffer(clipboardText);
+            }
         }
 
         if (btnClearPressed)
@@ -127,12 +127,18 @@ public partial class ClipboardText : IExample
                 inputBuffer.Clear(); // Quick solution to clear text
             }
 
-            if (IsKeyPressed(KeyboardKey.C)) SetClipboardText(inputBuffer.ToString());
+            if (IsKeyPressed(KeyboardKey.C))
+            {
+                SetClipboardText(inputBuffer.ToString());
+            }
 
             if (IsKeyPressed(KeyboardKey.V))
             {
                 clipboardText = GetClipboardText_();
-                if (clipboardText != null) SetInputBuffer(clipboardText);
+                if (clipboardText != null)
+                {
+                    SetInputBuffer(clipboardText);
+                }
             }
         }
         //----------------------------------------------------------------------------------
@@ -148,7 +154,10 @@ public partial class ClipboardText : IExample
         DrawText("[CTRL+X] - CUT | [CTRL+C] COPY | [CTRL+V] | PASTE", 50, 60, 20, Color.Maroon);
 
         // Draw text box
-        if (GuiTextBox(new Rectangle(50, 120, 652, 40), inputBuffer, 256, textBoxEditMode)) textBoxEditMode = !textBoxEditMode;
+        if (GuiTextBox(new Rectangle(50, 120, 652, 40), inputBuffer, 256, textBoxEditMode))
+        {
+            textBoxEditMode = !textBoxEditMode;
+        }
 
         // Random text button
         btnRandomPressed = GuiButton(new Rectangle(50 + 652 + 8, 120, 40, 40), "RND");
@@ -178,7 +187,11 @@ public partial class ClipboardText : IExample
         inputBuffer.Clear();
         if (text != null)
         {
-            if (text.Length > 255) text = text.Substring(0, 255);
+            if (text.Length > 255)
+            {
+                text = text.Substring(0, 255);
+            }
+
             inputBuffer.Append(text);
         }
     }
@@ -204,7 +217,10 @@ public partial class ClipboardText : IExample
         int textWidth = MeasureText(text, 20);
         DrawText(text, (int)(bounds.X + (bounds.Width - textWidth) / 2), (int)(bounds.Y + (bounds.Height - 20) / 2), 20, Color.DarkGray);
 
-        if (hover && IsMouseButtonReleased(MouseButton.Left)) pressed = true;
+        if (hover && IsMouseButtonReleased(MouseButton.Left))
+        {
+            pressed = true;
+        }
 
         return pressed;
     }
@@ -229,7 +245,10 @@ public partial class ClipboardText : IExample
                 key = GetCharPressed();
             }
 
-            if (IsKeyPressed(KeyboardKey.Backspace) && (text.Length > 0)) text.Remove(text.Length - 1, 1);
+            if (IsKeyPressed(KeyboardKey.Backspace) && (text.Length > 0))
+            {
+                text.Remove(text.Length - 1, 1);
+            }
         }
 
         DrawRectangleRec(bounds, Color.RayWhite);
@@ -244,7 +263,10 @@ public partial class ClipboardText : IExample
             DrawText("_", (int)bounds.X + 4 + MeasureText(content, 20), (int)(bounds.Y + (bounds.Height - 20) / 2), 20, Color.DarkGray);
         }
 
-        if (hover && IsMouseButtonPressed(MouseButton.Left)) pressed = true;
+        if (hover && IsMouseButtonPressed(MouseButton.Left))
+        {
+            pressed = true;
+        }
 
         return pressed;
     }
@@ -253,7 +275,10 @@ public partial class ClipboardText : IExample
     {
         DrawRectangleRec(bounds, Color.LightGray);
         DrawRectangleLinesEx(bounds, 1, Color.Gray);
-        if (text != null) DrawText(text, (int)bounds.X + 4, (int)(bounds.Y + (bounds.Height - 20) / 2), 20, Color.Gray);
+        if (text != null)
+        {
+            DrawText(text, (int)bounds.X + 4, (int)(bounds.Y + (bounds.Height - 20) / 2), 20, Color.Gray);
+        }
     }
 
     public static int Main()

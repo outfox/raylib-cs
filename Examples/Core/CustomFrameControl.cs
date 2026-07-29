@@ -28,8 +28,6 @@
 *
 ********************************************************************************************/
 
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 // NOTE: This example is intended to run against a raylib built with SUPPORT_CUSTOM_FRAME_CONTROL,
@@ -84,17 +82,33 @@ public partial class CustomFrameControl : IExample
         PollInputEvents();          // Poll input events (SUPPORT_CUSTOM_FRAME_CONTROL)
 #endif
 
-        if (IsKeyPressed(KeyboardKey.Space)) pause = !pause;
+        if (IsKeyPressed(KeyboardKey.Space))
+        {
+            pause = !pause;
+        }
 
-        if (IsKeyPressed(KeyboardKey.Up)) targetFPS += 20;
-        else if (IsKeyPressed(KeyboardKey.Down)) targetFPS -= 20;
+        if (IsKeyPressed(KeyboardKey.Up))
+        {
+            targetFPS += 20;
+        }
+        else if (IsKeyPressed(KeyboardKey.Down))
+        {
+            targetFPS -= 20;
+        }
 
-        if (targetFPS < 0) targetFPS = 0;
+        if (targetFPS < 0)
+        {
+            targetFPS = 0;
+        }
 
         if (!pause)
         {
             position += 200 * deltaTime;  // We move at 200 pixels per second
-            if (position >= GetScreenWidth()) position = 0;
+            if (position >= GetScreenWidth())
+            {
+                position = 0;
+            }
+
             timeCounter += deltaTime;   // We count time (seconds)
         }
 
@@ -111,7 +125,10 @@ public partial class CustomFrameControl : IExample
 
         ClearBackground(Color.RayWhite);
 
-        for (int i = 0; i < GetScreenWidth() / 200; i++) DrawRectangle(200 * i, 0, 1, GetScreenHeight(), Color.SkyBlue);
+        for (int i = 0; i < GetScreenWidth() / 200; i++)
+        {
+            DrawRectangle(200 * i, 0, 1, GetScreenHeight(), Color.SkyBlue);
+        }
 
         DrawCircle((int)position, GetScreenHeight() / 2 - 25, 50, Color.Red);
 
@@ -147,7 +164,10 @@ public partial class CustomFrameControl : IExample
                 deltaTime = (float)(currentTime - previousTime);
             }
         }
-        else deltaTime = (float)updateDrawTime;    // Framerate could be variable
+        else
+        {
+            deltaTime = (float)updateDrawTime;    // Framerate could be variable
+        }
 
         previousTime = currentTime;
         //----------------------------------------------------------------------------------

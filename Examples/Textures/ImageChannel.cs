@@ -17,9 +17,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Textures;
 
 public partial class ImageChannel : IExample

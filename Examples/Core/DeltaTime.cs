@@ -15,8 +15,6 @@
  *
  ********************************************************************************************/
 
-using System.Numerics;
-
 namespace Examples.Core;
 
 using static Raylib_cs.Raylib;

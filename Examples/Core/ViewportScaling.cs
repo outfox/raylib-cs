@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 public partial class ViewportScaling : IExample
@@ -116,7 +113,10 @@ public partial class ViewportScaling : IExample
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsWindowResized()) ResizeRenderSize(viewportType, ref curScreenWidth, ref curScreenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect, ref target);
+        if (IsWindowResized())
+        {
+            ResizeRenderSize(viewportType, ref curScreenWidth, ref curScreenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect, ref target);
+        }
 
         Vector2 mousePosition = GetMousePosition();
         bool mousePressed = IsMouseButtonPressed(MouseButton.Left);
@@ -179,8 +179,14 @@ public partial class ViewportScaling : IExample
 
         DrawText($"Type: {ViewportTypeNames[(int)viewportType]}", 15, 45, 10, Color.Black);
         Vector2 scaleRatio = new Vector2(destRect.Width / sourceRect.Width, -destRect.Height / sourceRect.Height);
-        if (scaleRatio.X < 0.001f || scaleRatio.Y < 0.001f) DrawText("Scale ratio: INVALID", 15, 60, 10, Color.Black);
-        else DrawText($"Scale ratio: {scaleRatio.X:F2} x {scaleRatio.Y:F2}", 15, 60, 10, Color.Black);
+        if (scaleRatio.X < 0.001f || scaleRatio.Y < 0.001f)
+        {
+            DrawText("Scale ratio: INVALID", 15, 60, 10, Color.Black);
+        }
+        else
+        {
+            DrawText($"Scale ratio: {scaleRatio.X:F2} x {scaleRatio.Y:F2}", 15, 60, 10, Color.Black);
+        }
 
         DrawText($"Source size: {sourceRect.Width:F2} x {-sourceRect.Height:F2}", 15, 75, 10, Color.Black);
         DrawText($"Destination size: {destRect.Width:F2} x {destRect.Height:F2}", 15, 90, 10, Color.Black);

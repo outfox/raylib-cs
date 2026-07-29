@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 [ExcludeFromBrowser("GetMonitorCount() is not implemented on the wasm target")]

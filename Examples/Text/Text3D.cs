@@ -28,11 +28,7 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
 using System.Text;
-using Raylib_cs;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Text;
 
@@ -182,8 +178,16 @@ public partial class Text3D : IExample
         }
 
         // Handle Events
-        if (IsKeyPressed(KeyboardKey.F1)) showLetterBoundry = !showLetterBoundry;
-        if (IsKeyPressed(KeyboardKey.F2)) showTextBoundry = !showTextBoundry;
+        if (IsKeyPressed(KeyboardKey.F1))
+        {
+            showLetterBoundry = !showLetterBoundry;
+        }
+
+        if (IsKeyPressed(KeyboardKey.F2))
+        {
+            showTextBoundry = !showTextBoundry;
+        }
+
         if (IsKeyPressed(KeyboardKey.F3))
         {
             // Handle camera change
@@ -226,18 +230,50 @@ public partial class Text3D : IExample
         }
 
         // Handle text layers changes
-        if (IsKeyPressed(KeyboardKey.Home)) { if (layers > 1) --layers; }
-        else if (IsKeyPressed(KeyboardKey.End)) { if (layers < TextMaxLayers) ++layers; }
+        if (IsKeyPressed(KeyboardKey.Home)) { if (layers > 1)
+            {
+                --layers;
+            }
+        }
+        else if (IsKeyPressed(KeyboardKey.End)) { if (layers < TextMaxLayers)
+            {
+                ++layers;
+            }
+        }
 
         // Handle text changes
-        if (IsKeyPressed(KeyboardKey.Left)) fontSize -= 0.5f;
-        else if (IsKeyPressed(KeyboardKey.Right)) fontSize += 0.5f;
-        else if (IsKeyPressed(KeyboardKey.Up)) fontSpacing -= 0.1f;
-        else if (IsKeyPressed(KeyboardKey.Down)) fontSpacing += 0.1f;
-        else if (IsKeyPressed(KeyboardKey.PageUp)) lineSpacing -= 0.1f;
-        else if (IsKeyPressed(KeyboardKey.PageDown)) lineSpacing += 0.1f;
-        else if (IsKeyDown(KeyboardKey.Insert)) layerDistance -= 0.001f;
-        else if (IsKeyDown(KeyboardKey.Delete)) layerDistance += 0.001f;
+        if (IsKeyPressed(KeyboardKey.Left))
+        {
+            fontSize -= 0.5f;
+        }
+        else if (IsKeyPressed(KeyboardKey.Right))
+        {
+            fontSize += 0.5f;
+        }
+        else if (IsKeyPressed(KeyboardKey.Up))
+        {
+            fontSpacing -= 0.1f;
+        }
+        else if (IsKeyPressed(KeyboardKey.Down))
+        {
+            fontSpacing += 0.1f;
+        }
+        else if (IsKeyPressed(KeyboardKey.PageUp))
+        {
+            lineSpacing -= 0.1f;
+        }
+        else if (IsKeyPressed(KeyboardKey.PageDown))
+        {
+            lineSpacing += 0.1f;
+        }
+        else if (IsKeyDown(KeyboardKey.Insert))
+        {
+            layerDistance -= 0.001f;
+        }
+        else if (IsKeyDown(KeyboardKey.Delete))
+        {
+            layerDistance += 0.001f;
+        }
         else if (IsKeyPressed(KeyboardKey.Tab))
         {
             multicolor = !multicolor;   // Enable /disable multicolor mode
@@ -258,17 +294,26 @@ public partial class Text3D : IExample
         if (IsKeyPressed(KeyboardKey.Backspace))
         {
             // Remove last char
-            if (text.Length > 0) text = text.Substring(0, text.Length - 1);
+            if (text.Length > 0)
+            {
+                text = text.Substring(0, text.Length - 1);
+            }
         }
         else if (IsKeyPressed(KeyboardKey.Enter))
         {
             // handle newline
-            if (text.Length < 63) text += '\n';
+            if (text.Length < 63)
+            {
+                text += '\n';
+            }
         }
         else
         {
             // append only printable chars
-            if ((ch != 0) && (text.Length < 63)) text += char.ConvertFromUtf32(ch);
+            if ((ch != 0) && (text.Length < 63))
+            {
+                text += char.ConvertFromUtf32(ch);
+            }
         }
 
         // Measure 3D text so we can center it
@@ -302,12 +347,20 @@ public partial class Text3D : IExample
         for (int i = 0; i < layers; i++)
         {
             Color clr = light;
-            if (multicolor) clr = multi[i];
+            if (multicolor)
+            {
+                clr = multi[i];
+            }
+
             DrawTextWave3D(font, text, new Vector3(-tbox.X / 2.0f, layerDistance * i, -4.5f), fontSize, fontSpacing, lineSpacing, true, wcfg, time, clr);
         }
 
         // Draw the text boundry if set
-        if (showTextBoundry) DrawCubeWiresV(new Vector3(0.0f, 0.0f, -4.5f + tbox.Z / 2), tbox, dark);
+        if (showTextBoundry)
+        {
+            DrawCubeWiresV(new Vector3(0.0f, 0.0f, -4.5f + tbox.Z / 2), tbox, dark);
+        }
+
         Rlgl.PopMatrix();
 
         // Don't draw the letter boundries for the 3D text below
@@ -490,7 +543,10 @@ public partial class Text3D : IExample
             float tw = (srcRec.X + srcRec.Width) / font.Texture.Width;
             float th = (srcRec.Y + srcRec.Height) / font.Texture.Height;
 
-            if (showLetterBoundry) DrawCubeWiresV(new Vector3(position.X + width / 2, position.Y, position.Z + height / 2), new Vector3(width, LetterBoundrySize, height), LetterBoundryColor);
+            if (showLetterBoundry)
+            {
+                DrawCubeWiresV(new Vector3(position.X + width / 2, position.Y, position.Z + height / 2), new Vector3(width, LetterBoundrySize, height), LetterBoundryColor);
+            }
 
             Rlgl.CheckRenderBatchLimit(4 + 4 * (backface ? 1 : 0));
             Rlgl.SetTexture(font.Texture.Id);
@@ -545,7 +601,10 @@ public partial class Text3D : IExample
 
             // NOTE: Normally we exit the decoding sequence as soon as a bad byte is found (and return 0x3f)
             // but we need to draw all of the bad bytes using the '?' symbol moving one byte
-            if (codepoint == 0x3f) codepointByteCount = 1;
+            if (codepoint == 0x3f)
+            {
+                codepointByteCount = 1;
+            }
 
             if (codepoint == '\n')
             {
@@ -561,8 +620,14 @@ public partial class Text3D : IExample
                     DrawTextCodepoint3D(font, codepoint, new Vector3(position.X + textOffsetX, position.Y, position.Z + textOffsetY), fontSize, backface, tint);
                 }
 
-                if (font.Glyphs[index].AdvanceX == 0) textOffsetX += font.Recs[index].Width * scale + fontSpacing;
-                else textOffsetX += font.Glyphs[index].AdvanceX * scale + fontSpacing;
+                if (font.Glyphs[index].AdvanceX == 0)
+                {
+                    textOffsetX += font.Recs[index].Width * scale + fontSpacing;
+                }
+                else
+                {
+                    textOffsetX += font.Glyphs[index].AdvanceX * scale + fontSpacing;
+                }
             }
 
             i += codepointByteCount;   // Move text bytes counter to next codepoint
@@ -593,7 +658,10 @@ public partial class Text3D : IExample
 
             // NOTE: Normally we exit the decoding sequence as soon as a bad byte is found (and return 0x3f)
             // but we need to draw all of the bad bytes using the '?' symbol moving one byte
-            if (codepoint == 0x3f) codepointByteCount = 1;
+            if (codepoint == 0x3f)
+            {
+                codepointByteCount = 1;
+            }
 
             if (codepoint == '\n')
             {
@@ -626,8 +694,14 @@ public partial class Text3D : IExample
                     DrawTextCodepoint3D(font, codepoint, new Vector3(pos.X + textOffsetX, pos.Y, pos.Z + textOffsetY), fontSize, backface, tint);
                 }
 
-                if (font.Glyphs[index].AdvanceX == 0) textOffsetX += font.Recs[index].Width * scale + fontSpacing;
-                else textOffsetX += font.Glyphs[index].AdvanceX * scale + fontSpacing;
+                if (font.Glyphs[index].AdvanceX == 0)
+                {
+                    textOffsetX += font.Recs[index].Width * scale + fontSpacing;
+                }
+                else
+                {
+                    textOffsetX += font.Glyphs[index].AdvanceX * scale + fontSpacing;
+                }
             }
 
             i += codepointByteCount;   // Move text bytes counter to next codepoint
@@ -660,7 +734,11 @@ public partial class Text3D : IExample
 
             // NOTE: normally we exit the decoding sequence as soon as a bad byte is found (and return 0x3f)
             // but we need to draw all of the bad bytes using the '?' symbol so to not skip any we set next = 1
-            if (letter == 0x3f) next = 1;
+            if (letter == 0x3f)
+            {
+                next = 1;
+            }
+
             i += next - 1;
 
             if (letter != '\n')
@@ -672,22 +750,38 @@ public partial class Text3D : IExample
                 else
                 {
                     lenCounter++;
-                    if (font.Glyphs[index].AdvanceX != 0) textWidth += font.Glyphs[index].AdvanceX * scale;
-                    else textWidth += (font.Recs[index].Width + font.Glyphs[index].OffsetX) * scale;
+                    if (font.Glyphs[index].AdvanceX != 0)
+                    {
+                        textWidth += font.Glyphs[index].AdvanceX * scale;
+                    }
+                    else
+                    {
+                        textWidth += (font.Recs[index].Width + font.Glyphs[index].OffsetX) * scale;
+                    }
                 }
             }
             else
             {
-                if (tempTextWidth < textWidth) tempTextWidth = textWidth;
+                if (tempTextWidth < textWidth)
+                {
+                    tempTextWidth = textWidth;
+                }
+
                 lenCounter = 0;
                 textWidth = 0.0f;
                 textHeight += fontSize + lineSpacing;
             }
 
-            if (tempLen < lenCounter) tempLen = lenCounter;
+            if (tempLen < lenCounter)
+            {
+                tempLen = lenCounter;
+            }
         }
 
-        if (tempTextWidth < textWidth) tempTextWidth = textWidth;
+        if (tempTextWidth < textWidth)
+        {
+            tempTextWidth = textWidth;
+        }
 
         Vector3 vec = new(0, 0, 0);
         vec.X = tempTextWidth + ((tempLen - 1) * fontSpacing); // Adds chars spacing to measure

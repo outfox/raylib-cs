@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class DashedLine : IExample
@@ -59,15 +56,32 @@ public partial class DashedLine : IExample
         lineEndPosition = GetMousePosition(); // Line endpoint follows the mouse
 
         // Change Dash Length (UP/DOWN arrows)
-        if (IsKeyDown(KeyboardKey.Up)) dashLength += 1.0f;
-        if (IsKeyDown(KeyboardKey.Down) && dashLength > 1.0f) dashLength -= 1.0f;
+        if (IsKeyDown(KeyboardKey.Up))
+        {
+            dashLength += 1.0f;
+        }
+
+        if (IsKeyDown(KeyboardKey.Down) && dashLength > 1.0f)
+        {
+            dashLength -= 1.0f;
+        }
 
         // Change Space Length (LEFT/RIGHT arrows)
-        if (IsKeyDown(KeyboardKey.Right)) blankLength += 1.0f;
-        if (IsKeyDown(KeyboardKey.Left) && blankLength > 1.0f) blankLength -= 1.0f;
+        if (IsKeyDown(KeyboardKey.Right))
+        {
+            blankLength += 1.0f;
+        }
+
+        if (IsKeyDown(KeyboardKey.Left) && blankLength > 1.0f)
+        {
+            blankLength -= 1.0f;
+        }
 
         // Cycle through colors ('C' key)
-        if (IsKeyPressed(KeyboardKey.C)) colorIndex = (colorIndex + 1)%lineColors.Length;
+        if (IsKeyPressed(KeyboardKey.C))
+        {
+            colorIndex = (colorIndex + 1)%lineColors.Length;
+        }
         //----------------------------------------------------------------------------------
 
         // Draw

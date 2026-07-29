@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class BulletHell : IExample
@@ -167,13 +163,40 @@ public partial class BulletHell : IExample
         }
 
         // Input logic
-        if ((IsKeyPressed(KeyboardKey.Right) || IsKeyPressed(KeyboardKey.D)) && (bulletRows < 359)) bulletRows++;
-        if ((IsKeyPressed(KeyboardKey.Left) || IsKeyPressed(KeyboardKey.A)) && (bulletRows > 1)) bulletRows--;
-        if (IsKeyPressed(KeyboardKey.Up) || IsKeyPressed(KeyboardKey.W)) bulletSpeed += 0.25f;
-        if ((IsKeyPressed(KeyboardKey.Down) || IsKeyPressed(KeyboardKey.S)) && (bulletSpeed > 0.50f)) bulletSpeed -= 0.25f;
-        if (IsKeyPressed(KeyboardKey.Z) && (spawnCooldown > 1)) spawnCooldown--;
-        if (IsKeyPressed(KeyboardKey.X)) spawnCooldown++;
-        if (IsKeyPressed(KeyboardKey.Enter)) drawInPerformanceMode = !drawInPerformanceMode;
+        if ((IsKeyPressed(KeyboardKey.Right) || IsKeyPressed(KeyboardKey.D)) && (bulletRows < 359))
+        {
+            bulletRows++;
+        }
+
+        if ((IsKeyPressed(KeyboardKey.Left) || IsKeyPressed(KeyboardKey.A)) && (bulletRows > 1))
+        {
+            bulletRows--;
+        }
+
+        if (IsKeyPressed(KeyboardKey.Up) || IsKeyPressed(KeyboardKey.W))
+        {
+            bulletSpeed += 0.25f;
+        }
+
+        if ((IsKeyPressed(KeyboardKey.Down) || IsKeyPressed(KeyboardKey.S)) && (bulletSpeed > 0.50f))
+        {
+            bulletSpeed -= 0.25f;
+        }
+
+        if (IsKeyPressed(KeyboardKey.Z) && (spawnCooldown > 1))
+        {
+            spawnCooldown--;
+        }
+
+        if (IsKeyPressed(KeyboardKey.X))
+        {
+            spawnCooldown++;
+        }
+
+        if (IsKeyPressed(KeyboardKey.Enter))
+        {
+            drawInPerformanceMode = !drawInPerformanceMode;
+        }
 
         if (IsKeyDown(KeyboardKey.Space))
         {
@@ -244,10 +267,16 @@ public partial class BulletHell : IExample
             DrawText("- C: Clear bullets", 40, 140, 10, Color.LightGray);
 
             DrawRectangle(610, 10, 170, 30, new Color(0, 0, 0, 200));
-            if (drawInPerformanceMode) DrawText("Draw method: DrawTexture(*)", 620, 20, 10, Color.Green);
-            else DrawText("Draw method: DrawCircle(*)", 620, 20, 10, Color.Red);
+            if (drawInPerformanceMode)
+        {
+            DrawText("Draw method: DrawTexture(*)", 620, 20, 10, Color.Green);
+        }
+        else
+        {
+            DrawText("Draw method: DrawCircle(*)", 620, 20, 10, Color.Red);
+        }
 
-            DrawRectangle(135, 410, 530, 30, new Color(0, 0, 0, 200));
+        DrawRectangle(135, 410, 530, 30, new Color(0, 0, 0, 200));
             DrawText($"[ FPS: {GetFPS()}, Bullets: {bulletCount - bulletDisabledCount}, Rows: {bulletRows}, Bullet speed: {bulletSpeed:F2}, Angle increment per frame: {angleIncrement}, Cooldown: {spawnCooldown:F0} ]",
                 155, 420, 10, Color.Green);
 

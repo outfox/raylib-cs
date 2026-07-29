@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Audio;
 
 public partial class SoundPositioning : IExample
@@ -67,7 +63,10 @@ public partial class SoundPositioning : IExample
 
         SetSoundPosition(camera, sound, spherePos, 1.0f);
 
-        if (!IsSoundPlaying(sound)) PlaySound(sound);
+        if (!IsSoundPlaying(sound))
+        {
+            PlaySound(sound);
+        }
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -112,7 +111,10 @@ public partial class SoundPositioning : IExample
 
         // Reduce volume for sounds behind the listener
         float dotProduct = Vector3.Dot(forward, normalizedDirection);
-        if (dotProduct < 0.0f) attenuation *= (1.0f + dotProduct * 0.5f);
+        if (dotProduct < 0.0f)
+        {
+            attenuation *= (1.0f + dotProduct * 0.5f);
+        }
 
         // Set stereo panning based on sound position relative to listener
         float pan = 0.5f + 0.5f * Vector3.Dot(normalizedDirection, right);

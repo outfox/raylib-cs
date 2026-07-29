@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;
 
 namespace Examples.Core;
@@ -167,11 +164,17 @@ public partial class Camera3dFps : IExample
         // `#define NORMALIZE_INPUT 0` above it (defined() tests definedness, not the value), so the
         // diagonal-movement normalization is active.
         // Slow down diagonal movement
-        if ((side != 0) && (forward != 0)) input = Vector2Normalize(input);
+        if ((side != 0) && (forward != 0))
+        {
+            input = Vector2Normalize(input);
+        }
 
         float delta = GetFrameTime();
 
-        if (!body.IsGrounded) body.Velocity.Y -= GRAVITY * delta;
+        if (!body.IsGrounded)
+        {
+            body.Velocity.Y -= GRAVITY * delta;
+        }
 
         if (body.IsGrounded && jumpPressed)
         {
@@ -196,7 +199,10 @@ public partial class Camera3dFps : IExample
         Vector3 hvel = new Vector3(body.Velocity.X * decel, 0.0f, body.Velocity.Z * decel);
 
         float hvelLength = Vector3Length(hvel); // Magnitude
-        if (hvelLength < (MAX_SPEED * 0.01f)) hvel = new Vector3(0, 0, 0);
+        if (hvelLength < (MAX_SPEED * 0.01f))
+        {
+            hvel = new Vector3(0, 0, 0);
+        }
 
         // This is what creates strafing
         float speed = Vector3DotProduct(hvel, body.Dir);

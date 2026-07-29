@@ -15,8 +15,6 @@
 *
 ********************************************************************************************/
 
-using static Raylib_cs.Raylib;
-
 namespace Examples.Audio;
 
 public partial class SoundMulti : IExample
@@ -42,7 +40,10 @@ public partial class SoundMulti : IExample
         soundArray[0] = LoadSound("resources/audio/sound.wav");
 
         // Load an alias of the sound into slots 1-9. These do not own the sound data, but can be played
-        for (int i = 1; i < MAX_SOUNDS; i++) soundArray[i] = LoadSoundAlias(soundArray[0]);
+        for (int i = 1; i < MAX_SOUNDS; i++)
+        {
+            soundArray[i] = LoadSoundAlias(soundArray[0]);
+        }
 
         currentSound = 0;               // Set the sound list to the start
     }
@@ -57,7 +58,10 @@ public partial class SoundMulti : IExample
             currentSound++;                         // Increment the sound slot
 
             // If the sound slot is out of bounds, go back to 0
-            if (currentSound >= MAX_SOUNDS) currentSound = 0;
+            if (currentSound >= MAX_SOUNDS)
+            {
+                currentSound = 0;
+            }
 
             // NOTE: Another approach would be to look at the list for the first sound
             // that is not playing and use that slot
@@ -78,7 +82,11 @@ public partial class SoundMulti : IExample
 
     public void Unload()
     {
-        for (int i = 1; i < MAX_SOUNDS; i++) UnloadSoundAlias(soundArray[i]); // Unload sound aliases
+        for (int i = 1; i < MAX_SOUNDS; i++)
+        {
+            UnloadSoundAlias(soundArray[i]); // Unload sound aliases
+        }
+
         UnloadSound(soundArray[0]); // Unload source sound data
 
         CloseAudioDevice();     // Close audio device

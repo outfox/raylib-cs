@@ -19,10 +19,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using System.Runtime.InteropServices;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Models;
 
 public partial class LoadingIqm : IExample

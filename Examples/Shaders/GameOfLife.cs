@@ -18,10 +18,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shaders;
 
 public partial class GameOfLife : IExample
@@ -186,15 +182,30 @@ public partial class GameOfLife : IExample
 
             var centerX = offsetX + (windowWidth / 2.0f) / zoom;
             var centerY = offsetY + (windowHeight / 2.0f) / zoom;
-            if (buttonZoomIn || (mouseWheelMove > 0.0f)) zoom *= 2;
-            if ((buttonZomOut || (mouseWheelMove < 0.0f)) && (zoom > 1)) zoom /= 2;
+            if (buttonZoomIn || (mouseWheelMove > 0.0f))
+            {
+                zoom *= 2;
+            }
+
+            if ((buttonZomOut || (mouseWheelMove < 0.0f)) && (zoom > 1))
+            {
+                zoom /= 2;
+            }
+
             offsetX = centerX - (windowWidth / 2.0f) / zoom;
             offsetY = centerY - (windowHeight / 2.0f) / zoom;
         }
 
         // Change speed: number of frames per step
-        if (buttonFaster && framesPerStep > 1) framesPerStep--;
-        if (buttonSlower) framesPerStep++;
+        if (buttonFaster && framesPerStep > 1)
+        {
+            framesPerStep--;
+        }
+
+        if (buttonSlower)
+        {
+            framesPerStep++;
+        }
 
         // Mouse management
         if ((mode == InteractionMode.Run) || (mode == InteractionMode.Pause))
@@ -216,8 +227,15 @@ public partial class GameOfLife : IExample
             var offsetDecimalY = offsetY - MathF.Floor(offsetY);
             var sizeInWorldX = (int)(MathF.Ceiling((windowWidth + offsetDecimalX * zoom) / zoom));
             var sizeInWorldY = (int)(MathF.Ceiling((windowHeight + offsetDecimalY * zoom) / zoom));
-            if (offsetX + sizeInWorldX >= worldWidth) sizeInWorldX = worldWidth - (int)MathF.Floor(offsetX);
-            if (offsetY + sizeInWorldY >= worldHeight) sizeInWorldY = worldHeight - (int)MathF.Floor(offsetY);
+            if (offsetX + sizeInWorldX >= worldWidth)
+            {
+                sizeInWorldX = worldWidth - (int)MathF.Floor(offsetX);
+            }
+
+            if (offsetY + sizeInWorldY >= worldHeight)
+            {
+                sizeInWorldY = worldHeight - (int)MathF.Floor(offsetY);
+            }
 
             // Create image to draw if not created yet
             if (!imageToDrawValid)
@@ -242,9 +260,21 @@ public partial class GameOfLife : IExample
             {
                 var mouseX = (int)(mousePosition.X + offsetDecimalX * zoom) / zoom;
                 var mouseY = (int)(mousePosition.Y + offsetDecimalY * zoom) / zoom;
-                if (mouseX >= sizeInWorldX) mouseX = sizeInWorldX - 1;
-                if (mouseY >= sizeInWorldY) mouseY = sizeInWorldY - 1;
-                if (firstColor == -1) firstColor = (GetImageColor(imageToDraw, mouseX, mouseY).R < 5) ? 0 : 1;
+                if (mouseX >= sizeInWorldX)
+                {
+                    mouseX = sizeInWorldX - 1;
+                }
+
+                if (mouseY >= sizeInWorldY)
+                {
+                    mouseY = sizeInWorldY - 1;
+                }
+
+                if (firstColor == -1)
+                {
+                    firstColor = (GetImageColor(imageToDraw, mouseX, mouseY).R < 5) ? 0 : 1;
+                }
+
                 var prevColor = (GetImageColor(imageToDraw, mouseX, mouseY).R < 5) ? 0 : 1;
 
                 ImageDrawPixel(ref imageToDraw, mouseX, mouseY, (firstColor != 0) ? Color.Black : Color.RayWhite);
@@ -258,7 +288,10 @@ public partial class GameOfLife : IExample
                     );
                 }
             }
-            else firstColor = -1;
+            else
+            {
+                firstColor = -1;
+            }
         }
 
         // Load selected preset
@@ -306,7 +339,10 @@ public partial class GameOfLife : IExample
                         {
                             for (var y = 0; y < pattern.Height; y++)
                             {
-                                if (GetRandomValue(0, 100) < 15) ImageDrawPixel(ref pattern, x, y, Color.Black);
+                                if (GetRandomValue(0, 100) < 15)
+                                {
+                                    ImageDrawPixel(ref pattern, x, y, Color.Black);
+                                }
                             }
                         }
                         UpdateTextureRec(
@@ -326,10 +362,25 @@ public partial class GameOfLife : IExample
         }
 
         // Check window draw inside world limits
-        if (offsetX < 0) offsetX = 0;
-        if (offsetY < 0) offsetY = 0;
-        if (offsetX > worldWidth - (float)windowWidth / zoom) offsetX = worldWidth - (float)windowWidth / zoom;
-        if (offsetY > worldHeight - (float)windowHeight / zoom) offsetY = worldHeight - (float)windowHeight / zoom;
+        if (offsetX < 0)
+        {
+            offsetX = 0;
+        }
+
+        if (offsetY < 0)
+        {
+            offsetY = 0;
+        }
+
+        if (offsetX > worldWidth - (float)windowWidth / zoom)
+        {
+            offsetX = worldWidth - (float)windowWidth / zoom;
+        }
+
+        if (offsetY > worldHeight - (float)windowHeight / zoom)
+        {
+            offsetY = worldHeight - (float)windowHeight / zoom;
+        }
 
         // Rectangles for drawing texture portion to screen
         var textureSourceToScreen = new Rectangle(offsetX, offsetY, (float)windowWidth / zoom, (float)windowHeight / zoom);

@@ -13,10 +13,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Models;
 
 [ExcludeFromBrowser("cubemap generation is too memory-heavy on web (upstream note)")]

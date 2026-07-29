@@ -20,11 +20,8 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Audio;
 
@@ -105,31 +102,61 @@ public unsafe partial class StreamCallback : IExample
         if (IsKeyDown(KeyboardKey.Up))
         {
             newWaveFrequency += 10;
-            if (newWaveFrequency > 12500) newWaveFrequency = 12500;
+            if (newWaveFrequency > 12500)
+            {
+                newWaveFrequency = 12500;
+            }
         }
 
         if (IsKeyDown(KeyboardKey.Down))
         {
             newWaveFrequency -= 10;
-            if (newWaveFrequency < 20) newWaveFrequency = 20;
+            if (newWaveFrequency < 20)
+            {
+                newWaveFrequency = 20;
+            }
         }
 
         if (IsKeyPressed(KeyboardKey.Left))
         {
-            if (waveType == WaveType.Sine) waveType = WaveType.Sawtooth;
-            else if (waveType == WaveType.Square) waveType = WaveType.Sine;
-            else if (waveType == WaveType.Triangle) waveType = WaveType.Square;
-            else waveType = WaveType.Triangle;
+            if (waveType == WaveType.Sine)
+            {
+                waveType = WaveType.Sawtooth;
+            }
+            else if (waveType == WaveType.Square)
+            {
+                waveType = WaveType.Sine;
+            }
+            else if (waveType == WaveType.Triangle)
+            {
+                waveType = WaveType.Square;
+            }
+            else
+            {
+                waveType = WaveType.Triangle;
+            }
 
             SetWaveCallback();
         }
 
         if (IsKeyPressed(KeyboardKey.Right))
         {
-            if (waveType == WaveType.Sine) waveType = WaveType.Square;
-            else if (waveType == WaveType.Square) waveType = WaveType.Triangle;
-            else if (waveType == WaveType.Triangle) waveType = WaveType.Sawtooth;
-            else waveType = WaveType.Sine;
+            if (waveType == WaveType.Sine)
+            {
+                waveType = WaveType.Square;
+            }
+            else if (waveType == WaveType.Square)
+            {
+                waveType = WaveType.Triangle;
+            }
+            else if (waveType == WaveType.Triangle)
+            {
+                waveType = WaveType.Sawtooth;
+            }
+            else
+            {
+                waveType = WaveType.Sine;
+            }
 
             SetWaveCallback();
         }
@@ -197,8 +224,15 @@ public unsafe partial class StreamCallback : IExample
         }
 
         // Save the synthesized samples for later drawing
-        for (int i = 0; i < SAMPLE_RATE - fc; i++) buffer[i] = buffer[i + fc];
-        for (int i = 0; i < fc; i++) buffer[SAMPLE_RATE - fc + i] = frames[i];
+        for (int i = 0; i < SAMPLE_RATE - fc; i++)
+        {
+            buffer[i] = buffer[i + fc];
+        }
+
+        for (int i = 0; i < fc; i++)
+        {
+            buffer[SAMPLE_RATE - fc + i] = frames[i];
+        }
     }
 
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
@@ -222,8 +256,15 @@ public unsafe partial class StreamCallback : IExample
         }
 
         // Save the synthesized samples for later drawing
-        for (int i = 0; i < SAMPLE_RATE - fc; i++) buffer[i] = buffer[i + fc];
-        for (int i = 0; i < fc; i++) buffer[SAMPLE_RATE - fc + i] = frames[i];
+        for (int i = 0; i < SAMPLE_RATE - fc; i++)
+        {
+            buffer[i] = buffer[i + fc];
+        }
+
+        for (int i = 0; i < fc; i++)
+        {
+            buffer[SAMPLE_RATE - fc + i] = frames[i];
+        }
     }
 
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
@@ -247,8 +288,15 @@ public unsafe partial class StreamCallback : IExample
         }
 
         // Save the synthesized samples for later drawing
-        for (int i = 0; i < SAMPLE_RATE - fc; i++) buffer[i] = buffer[i + fc];
-        for (int i = 0; i < fc; i++) buffer[SAMPLE_RATE - fc + i] = frames[i];
+        for (int i = 0; i < SAMPLE_RATE - fc; i++)
+        {
+            buffer[i] = buffer[i + fc];
+        }
+
+        for (int i = 0; i < fc; i++)
+        {
+            buffer[SAMPLE_RATE - fc + i] = frames[i];
+        }
     }
 
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
@@ -272,8 +320,15 @@ public unsafe partial class StreamCallback : IExample
         }
 
         // Save the synthesized samples for later drawing
-        for (int i = 0; i < SAMPLE_RATE - fc; i++) buffer[i] = buffer[i + fc];
-        for (int i = 0; i < fc; i++) buffer[SAMPLE_RATE - fc + i] = frames[i];
+        for (int i = 0; i < SAMPLE_RATE - fc; i++)
+        {
+            buffer[i] = buffer[i + fc];
+        }
+
+        for (int i = 0; i < fc; i++)
+        {
+            buffer[SAMPLE_RATE - fc + i] = frames[i];
+        }
     }
 
     public static int Main()

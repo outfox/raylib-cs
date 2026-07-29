@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class DrawCircleSector : IExample
@@ -106,16 +102,30 @@ public partial class DrawCircleSector : IExample
         if (hover && IsMouseButtonDown(MouseButton.Left))
         {
             value = minValue + ((mouse.X - bounds.X) / bounds.Width) * (maxValue - minValue);
-            if (value < minValue) value = minValue;
-            if (value > maxValue) value = maxValue;
+            if (value < minValue)
+            {
+                value = minValue;
+            }
+
+            if (value > maxValue)
+            {
+                value = maxValue;
+            }
         }
 
         DrawRectangleRec(bounds, Color.LightGray);
         float pct = (value - minValue) / (maxValue - minValue);
         DrawRectangleRec(new Rectangle(bounds.X, bounds.Y, bounds.Width * pct, bounds.Height), Color.SkyBlue);
         DrawRectangleLinesEx(bounds, 1, Color.Gray);
-        if (!string.IsNullOrEmpty(textLeft)) DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
-        if (!string.IsNullOrEmpty(textRight)) DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (!string.IsNullOrEmpty(textLeft))
+        {
+            DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
+
+        if (!string.IsNullOrEmpty(textRight))
+        {
+            DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     public static int Main()

@@ -15,8 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;
 
 namespace Examples.Core;
@@ -125,11 +123,16 @@ public partial class TextFileLoading : IExample
         float scroll = GetMouseWheelMove();
         cam.Target.Y -= scroll * fontSize * 1.5f;   // Choosing an arbitrary speed for scroll
 
-        if (cam.Target.Y < 0) cam.Target.Y = 0;  // Snapping to 0 if we go too far back
+        if (cam.Target.Y < 0)
+        {
+            cam.Target.Y = 0;  // Snapping to 0 if we go too far back
+        }
 
         // Ensuring that the camera does not scroll past all text
         if (cam.Target.Y > textHeight - screenHeight + textTop)
+        {
             cam.Target.Y = (float)textHeight - screenHeight + textTop;
+        }
 
         // Computing the position of the scrollBar depending on the percentage of text covered
         scrollBar.Y = Lerp((float)textTop, (float)screenHeight - scrollBar.Height, (float)(cam.Target.Y - textTop) / (textHeight - screenHeight));

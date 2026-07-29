@@ -13,9 +13,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class ColorsPalette : IExample

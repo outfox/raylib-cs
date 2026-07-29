@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Models;
 
 [ExcludeFromBrowser("rlEnablePointMode needs glPolygonMode, which OpenGL ES/WebGL lacks (renders as triangles)")]

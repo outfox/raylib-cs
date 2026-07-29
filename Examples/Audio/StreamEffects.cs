@@ -15,7 +15,6 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Audio;
 
@@ -87,30 +86,51 @@ public unsafe partial class StreamEffects : IExample
         {
             pause = !pause;
 
-            if (pause) PauseMusicStream(music);
-            else ResumeMusicStream(music);
+            if (pause)
+            {
+                PauseMusicStream(music);
+            }
+            else
+            {
+                ResumeMusicStream(music);
+            }
         }
 
         // Add/Remove effect: lowpass filter
         if (IsKeyPressed(KeyboardKey.F))
         {
             enableEffectLPF = !enableEffectLPF;
-            if (enableEffectLPF) AttachAudioStreamProcessor(music.Stream, &AudioProcessEffectLPF);
-            else DetachAudioStreamProcessor(music.Stream, &AudioProcessEffectLPF);
+            if (enableEffectLPF)
+            {
+                AttachAudioStreamProcessor(music.Stream, &AudioProcessEffectLPF);
+            }
+            else
+            {
+                DetachAudioStreamProcessor(music.Stream, &AudioProcessEffectLPF);
+            }
         }
 
         // Add/Remove effect: delay
         if (IsKeyPressed(KeyboardKey.D))
         {
             enableEffectDelay = !enableEffectDelay;
-            if (enableEffectDelay) AttachAudioStreamProcessor(music.Stream, &AudioProcessEffectDelay);
-            else DetachAudioStreamProcessor(music.Stream, &AudioProcessEffectDelay);
+            if (enableEffectDelay)
+            {
+                AttachAudioStreamProcessor(music.Stream, &AudioProcessEffectDelay);
+            }
+            else
+            {
+                DetachAudioStreamProcessor(music.Stream, &AudioProcessEffectDelay);
+            }
         }
 
         // Get normalized time played for current music stream
         timePlayed = GetMusicTimePlayed(music) / GetMusicTimeLength(music);
 
-        if (timePlayed > 1.0f) timePlayed = 1.0f;   // Make sure time played is no longer than music
+        if (timePlayed > 1.0f)
+        {
+            timePlayed = 1.0f;   // Make sure time played is no longer than music
+        }
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -180,14 +200,20 @@ public unsafe partial class StreamEffects : IExample
                 float leftDelay = delay[delayReadIndex++];    // ERROR: Reading buffer -> WHY??? Maybe thread related???
                 float rightDelay = delay[delayReadIndex++];
 
-                if (delayReadIndex == delayBufferSize) delayReadIndex = 0;
+                if (delayReadIndex == delayBufferSize)
+                {
+                    delayReadIndex = 0;
+                }
 
                 bufferData[i] = 0.5f * bufferData[i] + 0.5f * leftDelay;
                 bufferData[i + 1] = 0.5f * bufferData[i + 1] + 0.5f * rightDelay;
 
                 delay[delayWriteIndex++] = bufferData[i];
                 delay[delayWriteIndex++] = bufferData[i + 1];
-                if (delayWriteIndex == delayBufferSize) delayWriteIndex = 0;
+                if (delayWriteIndex == delayBufferSize)
+                {
+                    delayWriteIndex = 0;
+                }
             }
         }
     }

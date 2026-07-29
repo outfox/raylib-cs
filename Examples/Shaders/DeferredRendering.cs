@@ -17,9 +17,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using Examples.Shared;
 
 namespace Examples.Shaders;
@@ -218,13 +215,31 @@ public partial class DeferredRendering : IExample
         if (IsKeyPressed(KeyboardKey.B)) { lights[3].Enabled = !lights[3].Enabled; }
 
         // Check key inputs to switch between G-buffer textures
-        if (IsKeyPressed(KeyboardKey.One)) mode = DeferredMode.Position;
-        if (IsKeyPressed(KeyboardKey.Two)) mode = DeferredMode.Normal;
-        if (IsKeyPressed(KeyboardKey.Three)) mode = DeferredMode.Albedo;
-        if (IsKeyPressed(KeyboardKey.Four)) mode = DeferredMode.Shading;
+        if (IsKeyPressed(KeyboardKey.One))
+        {
+            mode = DeferredMode.Position;
+        }
+
+        if (IsKeyPressed(KeyboardKey.Two))
+        {
+            mode = DeferredMode.Normal;
+        }
+
+        if (IsKeyPressed(KeyboardKey.Three))
+        {
+            mode = DeferredMode.Albedo;
+        }
+
+        if (IsKeyPressed(KeyboardKey.Four))
+        {
+            mode = DeferredMode.Shading;
+        }
 
         // Update light values (actually, only enable/disable them)
-        for (var i = 0; i < MaxLights; i++) Rlights.UpdateLightValues(deferredShader, lights[i]);
+        for (var i = 0; i < MaxLights; i++)
+        {
+            Rlights.UpdateLightValues(deferredShader, lights[i]);
+        }
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -295,9 +310,15 @@ public partial class DeferredRendering : IExample
                 Rlgl.EnableShader(Rlgl.GetShaderIdDefault());
                 for (var i = 0; i < MaxLights; i++)
                 {
-                    if (lights[i].Enabled) DrawSphereEx(lights[i].Position, 0.2f, 8, 8, lights[i].Color);
-                    else DrawSphereWires(lights[i].Position, 0.2f, 8, 8, ColorAlpha(lights[i].Color, 0.3f));
-                }
+                    if (lights[i].Enabled)
+                        {
+                            DrawSphereEx(lights[i].Position, 0.2f, 8, 8, lights[i].Color);
+                        }
+                        else
+                        {
+                            DrawSphereWires(lights[i].Position, 0.2f, 8, 8, ColorAlpha(lights[i].Color, 0.3f));
+                        }
+                    }
                 Rlgl.DisableShader();
                 EndMode3D();
 

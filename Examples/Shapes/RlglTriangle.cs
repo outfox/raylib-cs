@@ -15,8 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Rlgl;
 
 namespace Examples.Shapes;
@@ -57,7 +55,10 @@ public partial class RlglTriangle : IExample
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyPressed(KeyboardKey.Space)) linesMode = !linesMode;
+        if (IsKeyPressed(KeyboardKey.Space))
+        {
+            linesMode = !linesMode;
+        }
 
         // Check selected vertex
         for (int i = 0; i < 3; i++)
@@ -80,11 +81,21 @@ public partial class RlglTriangle : IExample
         }
 
         // Reset index on release
-        if (IsMouseButtonReleased(MouseButton.Left)) triangleIndex = -1;
+        if (IsMouseButtonReleased(MouseButton.Left))
+        {
+            triangleIndex = -1;
+        }
 
         // Enable/disable backface culling (2-sided triangles, slower to render)
-        if (IsKeyPressed(KeyboardKey.Left)) EnableBackfaceCulling();
-        if (IsKeyPressed(KeyboardKey.Right)) DisableBackfaceCulling();
+        if (IsKeyPressed(KeyboardKey.Left))
+        {
+            EnableBackfaceCulling();
+        }
+
+        if (IsKeyPressed(KeyboardKey.Right))
+        {
+            DisableBackfaceCulling();
+        }
 
         // Reset triangle vertices to starting positions and reset backface culling
         if (IsKeyPressed(KeyboardKey.R))
@@ -147,10 +158,15 @@ public partial class RlglTriangle : IExample
         {
             // Draw handle fill focused by mouse
             if (CheckCollisionPointCircle(GetMousePosition(), trianglePositions[i], handleRadius))
+            {
                 DrawCircleV(trianglePositions[i], handleRadius, ColorAlpha(Color.DarkGray, 0.5f));
+            }
 
             // Draw handle fill selected
-            if (i == triangleIndex) DrawCircleV(trianglePositions[i], handleRadius, Color.DarkGray);
+            if (i == triangleIndex)
+            {
+                DrawCircleV(trianglePositions[i], handleRadius, Color.DarkGray);
+            }
 
             // Draw handle outline
             DrawCircleLinesV(trianglePositions[i], handleRadius, Color.Black);

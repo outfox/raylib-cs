@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;
 
 namespace Examples.Shapes;
@@ -146,7 +143,10 @@ public partial class BallPhysics : IExample
         {
             for (int i = 0; i < ballCount; i++)
             {
-                if (!balls[i].grabbed) balls[i].speed = Vector2Add(balls[i].speed, Vector2Scale(windowPositionDelta, 10.0f));
+                if (!balls[i].grabbed)
+                {
+                    balls[i].speed = Vector2Add(balls[i].speed, Vector2Scale(windowPositionDelta, 10.0f));
+                }
             }
         }
 
@@ -155,7 +155,10 @@ public partial class BallPhysics : IExample
         {
             for (int i = 0; i < ballCount; i++)
             {
-                if (!balls[i].grabbed) balls[i].speed = new Vector2(GetRandomValue(-2000, 2000), GetRandomValue(-2000, 2000));
+                if (!balls[i].grabbed)
+                {
+                    balls[i].speed = new Vector2(GetRandomValue(-2000, 2000), GetRandomValue(-2000, 2000));
+                }
             }
         }
 

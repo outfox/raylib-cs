@@ -17,9 +17,6 @@
 // raygui is not part of raylib-cs, so the required controls are reimplemented here with
 // basic raylib drawing primitives, preserving the original behaviour.
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Models;
 
 public partial class AnimationTiming : IExample

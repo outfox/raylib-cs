@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using Raylib_cs;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Text;
 
 public partial class UnicodeRanges : IExample
@@ -115,11 +111,26 @@ public partial class UnicodeRanges : IExample
             SetTextureFilter(font.Texture, TextureFilter.Bilinear); // Set font atlas scale filter
         }
 
-        if (IsKeyPressed(KeyboardKey.Zero)) unicodeRange = 0;
-        else if (IsKeyPressed(KeyboardKey.One)) unicodeRange = 1;
-        else if (IsKeyPressed(KeyboardKey.Two)) unicodeRange = 2;
-        else if (IsKeyPressed(KeyboardKey.Three)) unicodeRange = 3;
-        else if (IsKeyPressed(KeyboardKey.Four)) unicodeRange = 4;
+        if (IsKeyPressed(KeyboardKey.Zero))
+        {
+            unicodeRange = 0;
+        }
+        else if (IsKeyPressed(KeyboardKey.One))
+        {
+            unicodeRange = 1;
+        }
+        else if (IsKeyPressed(KeyboardKey.Two))
+        {
+            unicodeRange = 2;
+        }
+        else if (IsKeyPressed(KeyboardKey.Three))
+        {
+            unicodeRange = 3;
+        }
+        else if (IsKeyPressed(KeyboardKey.Four))
+        {
+            unicodeRange = 4;
+        }
         //else if (IsKeyPressed(KeyboardKey.Five)) unicodeRange = 5;
         //----------------------------------------------------------------------------------
 
@@ -185,11 +196,16 @@ public partial class UnicodeRanges : IExample
         int[] updatedCodepoints = new int[updatedCodepointCount];
 
         // Get current codepoint list
-        for (int i = 0; i < currentRangeSize; i++) updatedCodepoints[i] = font.Glyphs[i].Value;
+        for (int i = 0; i < currentRangeSize; i++)
+        {
+            updatedCodepoints[i] = font.Glyphs[i].Value;
+        }
 
         // Add new codepoints to list (provided range)
         for (int i = currentRangeSize; i < updatedCodepointCount; i++)
+        {
             updatedCodepoints[i] = start + (i - currentRangeSize);
+        }
 
         UnloadFont(font);
         font = LoadFontEx(fontPath, 32, updatedCodepoints, updatedCodepointCount);

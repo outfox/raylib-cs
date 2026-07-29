@@ -15,8 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Rlgl;
 
 namespace Examples.Shaders;

@@ -13,8 +13,6 @@
 ********************************************************************************************/
 
 using System.Diagnostics;
-using System.Threading;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Core;
 

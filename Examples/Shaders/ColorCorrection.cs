@@ -18,8 +18,6 @@
 *
 ********************************************************************************************/
 
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shaders;
 
 public partial class ColorCorrection : IExample
@@ -85,10 +83,22 @@ public partial class ColorCorrection : IExample
         // Update
         //----------------------------------------------------------------------------------
         // Select texture to draw
-        if (IsKeyPressed(KeyboardKey.One)) imageIndex = 0;
-        else if (IsKeyPressed(KeyboardKey.Two)) imageIndex = 1;
-        else if (IsKeyPressed(KeyboardKey.Three)) imageIndex = 2;
-        else if (IsKeyPressed(KeyboardKey.Four)) imageIndex = 3;
+        if (IsKeyPressed(KeyboardKey.One))
+        {
+            imageIndex = 0;
+        }
+        else if (IsKeyPressed(KeyboardKey.Two))
+        {
+            imageIndex = 1;
+        }
+        else if (IsKeyPressed(KeyboardKey.Three))
+        {
+            imageIndex = 2;
+        }
+        else if (IsKeyPressed(KeyboardKey.Four))
+        {
+            imageIndex = 3;
+        }
 
         // Reset values to 0
         if (IsKeyPressed(KeyboardKey.R) || resetButtonClicked != 0)

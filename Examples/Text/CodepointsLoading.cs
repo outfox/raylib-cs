@@ -13,11 +13,7 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using System.Linq;
 using System.Globalization;
-using System.Collections.Generic;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Text;
 

@@ -15,8 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;    // Required for: Lerp()
 
 namespace Examples.Text;
@@ -81,29 +79,47 @@ public partial class WordsAlignment : IExample
         //----------------------------------------------------------------------------------
         if (IsKeyPressed(KeyboardKey.Left))
         {
-            if (hAlign > 0) hAlign = hAlign - 1;
+            if (hAlign > 0)
+            {
+                hAlign = hAlign - 1;
+            }
         }
 
         if (IsKeyPressed(KeyboardKey.Right))
         {
             hAlign = hAlign + 1;
-            if (hAlign > 2) hAlign = 2;
+            if (hAlign > 2)
+            {
+                hAlign = 2;
+            }
         }
 
         if (IsKeyPressed(KeyboardKey.Up))
         {
-            if (vAlign > 0) vAlign = vAlign - 1;
+            if (vAlign > 0)
+            {
+                vAlign = vAlign - 1;
+            }
         }
 
         if (IsKeyPressed(KeyboardKey.Down))
         {
             vAlign = vAlign + 1;
-            if (vAlign > 2) vAlign = 2;
+            if (vAlign > 2)
+            {
+                vAlign = 2;
+            }
         }
 
         // One word per second
-        if (wordCount > 0) wordIndex = (int)GetTime() % wordCount;
-        else wordIndex = 0;
+        if (wordCount > 0)
+        {
+            wordIndex = (int)GetTime() % wordCount;
+        }
+        else
+        {
+            wordIndex = 0;
+        }
         //----------------------------------------------------------------------------------
 
         // Draw

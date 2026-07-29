@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class MathAngleRotation : IExample
@@ -59,7 +55,10 @@ public partial class MathAngleRotation : IExample
         // Update
         //----------------------------------------------------------------------------------
         totalAngle += 1.0f; // degrees per frame
-        if (totalAngle >= 360.0f) totalAngle -= 360.0f;
+        if (totalAngle >= 360.0f)
+        {
+            totalAngle -= 360.0f;
+        }
         //----------------------------------------------------------------------------------
 
         // Draw

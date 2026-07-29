@@ -15,8 +15,6 @@
 *
 ********************************************************************************************/
 
-using static Raylib_cs.Raylib;
-
 namespace Examples.Textures;
 
 public partial class ToImage : IExample

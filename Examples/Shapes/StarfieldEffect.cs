@@ -15,8 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;    // Required for: Lerp()
 
 namespace Examples.Shapes;
@@ -71,12 +69,25 @@ public partial class StarfieldEffect : IExample
         //----------------------------------------------------------------------------------
         // Change speed based on mouse
         float mouseMove = GetMouseWheelMove();
-        if ((int)mouseMove != 0) speed += 2.0f * mouseMove / 9.0f;
-        if (speed < 0.0f) speed = 0.1f;
-        else if (speed > 2.0f) speed = 2.0f;
+        if ((int)mouseMove != 0)
+        {
+            speed += 2.0f * mouseMove / 9.0f;
+        }
+
+        if (speed < 0.0f)
+        {
+            speed = 0.1f;
+        }
+        else if (speed > 2.0f)
+        {
+            speed = 2.0f;
+        }
 
         // Toggle lines / points with space bar
-        if (IsKeyPressed(KeyboardKey.Space)) drawLines = !drawLines;
+        if (IsKeyPressed(KeyboardKey.Space))
+        {
+            drawLines = !drawLines;
+        }
 
         float dt = GetFrameTime();
         for (int i = 0; i < STAR_COUNT; i++)

@@ -13,8 +13,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;        // Required for: Vector2LineAngle()
 
 namespace Examples.Shapes;
@@ -51,14 +49,27 @@ public partial class VectorAngle : IExample
         //----------------------------------------------------------------------------------
         float startangle = 0.0f;
 
-        if (angleMode == 0) startangle = -Vector2LineAngle(v0, v1) * RAD2DEG;
-        if (angleMode == 1) startangle = 0.0f;
+        if (angleMode == 0)
+        {
+            startangle = -Vector2LineAngle(v0, v1) * RAD2DEG;
+        }
+
+        if (angleMode == 1)
+        {
+            startangle = 0.0f;
+        }
 
         v2 = GetMousePosition();
 
-        if (IsKeyPressed(KeyboardKey.Space)) angleMode = (angleMode == 0) ? 1 : 0;
+        if (IsKeyPressed(KeyboardKey.Space))
+        {
+            angleMode = (angleMode == 0) ? 1 : 0;
+        }
 
-        if ((angleMode == 0) && IsMouseButtonDown(MouseButton.Right)) v1 = GetMousePosition();
+        if ((angleMode == 0) && IsMouseButtonDown(MouseButton.Right))
+        {
+            v1 = GetMousePosition();
+        }
 
         if (angleMode == 0)
         {
@@ -104,11 +115,21 @@ public partial class VectorAngle : IExample
         DrawText("v0", (int)v0.X, (int)v0.Y, 10, Color.DarkGray);
 
         // If the line from v0 to v1 would overlap the text, move it's position up 10
-        if (angleMode == 0 && Vector2Subtract(v0, v1).Y > 0.0f) DrawText("v1", (int)v1.X, (int)v1.Y - 10, 10, Color.DarkGray);
-        if (angleMode == 0 && Vector2Subtract(v0, v1).Y < 0.0f) DrawText("v1", (int)v1.X, (int)v1.Y, 10, Color.DarkGray);
+        if (angleMode == 0 && Vector2Subtract(v0, v1).Y > 0.0f)
+        {
+            DrawText("v1", (int)v1.X, (int)v1.Y - 10, 10, Color.DarkGray);
+        }
+
+        if (angleMode == 0 && Vector2Subtract(v0, v1).Y < 0.0f)
+        {
+            DrawText("v1", (int)v1.X, (int)v1.Y, 10, Color.DarkGray);
+        }
 
         // If angle mode 1, use v1 to emphasize the horizontal line
-        if (angleMode == 1) DrawText("v1", (int)v0.X + 40, (int)v0.Y, 10, Color.DarkGray);
+        if (angleMode == 1)
+        {
+            DrawText("v1", (int)v0.X + 40, (int)v0.Y, 10, Color.DarkGray);
+        }
 
         // position adjusted by -10 so it isn't hidden by cursor
         DrawText("v2", (int)v2.X - 10, (int)v2.Y - 10, 10, Color.DarkGray);

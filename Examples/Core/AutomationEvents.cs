@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 public partial class AutomationEvents : IExample
@@ -143,8 +139,16 @@ public partial class AutomationEvents : IExample
 
         // Update player
         //----------------------------------------------------------------------------------
-        if (IsKeyDown(KeyboardKey.Left)) player.Position.X -= PLAYER_HOR_SPD * deltaTime;
-        if (IsKeyDown(KeyboardKey.Right)) player.Position.X += PLAYER_HOR_SPD * deltaTime;
+        if (IsKeyDown(KeyboardKey.Left))
+        {
+            player.Position.X -= PLAYER_HOR_SPD * deltaTime;
+        }
+
+        if (IsKeyDown(KeyboardKey.Right))
+        {
+            player.Position.X += PLAYER_HOR_SPD * deltaTime;
+        }
+
         if (IsKeyDown(KeyboardKey.Space) && player.CanJump)
         {
             player.Speed = -PLAYER_JUMP_SPD;
@@ -173,7 +177,10 @@ public partial class AutomationEvents : IExample
             player.Speed += GRAVITY * deltaTime;
             player.CanJump = false;
         }
-        else player.CanJump = true;
+        else
+        {
+            player.CanJump = true;
+        }
 
         if (IsKeyPressed(KeyboardKey.R))
         {
@@ -224,8 +231,14 @@ public partial class AutomationEvents : IExample
 
         // WARNING: On event replay, mouse-wheel internal value is set
         camera.Zoom += ((float)GetMouseWheelMove() * 0.05f);
-        if (camera.Zoom > 3.0f) camera.Zoom = 3.0f;
-        else if (camera.Zoom < 0.25f) camera.Zoom = 0.25f;
+        if (camera.Zoom > 3.0f)
+        {
+            camera.Zoom = 3.0f;
+        }
+        else if (camera.Zoom < 0.25f)
+        {
+            camera.Zoom = 0.25f;
+        }
 
         for (int i = 0; i < MAX_ENVIRONMENT_ELEMENTS; i++)
         {
@@ -239,10 +252,25 @@ public partial class AutomationEvents : IExample
         Vector2 max = GetWorldToScreen2D(new Vector2(maxX, maxY), camera);
         Vector2 min = GetWorldToScreen2D(new Vector2(minX, minY), camera);
 
-        if (max.X < screenWidth) camera.Offset.X = screenWidth - (max.X - (float)screenWidth / 2);
-        if (max.Y < screenHeight) camera.Offset.Y = screenHeight - (max.Y - (float)screenHeight / 2);
-        if (min.X > 0) camera.Offset.X = (float)screenWidth / 2 - min.X;
-        if (min.Y > 0) camera.Offset.Y = (float)screenHeight / 2 - min.Y;
+        if (max.X < screenWidth)
+        {
+            camera.Offset.X = screenWidth - (max.X - (float)screenWidth / 2);
+        }
+
+        if (max.Y < screenHeight)
+        {
+            camera.Offset.Y = screenHeight - (max.Y - (float)screenHeight / 2);
+        }
+
+        if (min.X > 0)
+        {
+            camera.Offset.X = (float)screenWidth / 2 - min.X;
+        }
+
+        if (min.Y > 0)
+        {
+            camera.Offset.Y = (float)screenHeight / 2 - min.Y;
+        }
         //----------------------------------------------------------------------------------
 
         // Events management
@@ -287,8 +315,14 @@ public partial class AutomationEvents : IExample
             }
         }
 
-        if (eventRecording || eventPlaying) frameCounter++;
-        else frameCounter = 0;
+        if (eventRecording || eventPlaying)
+        {
+            frameCounter++;
+        }
+        else
+        {
+            frameCounter = 0;
+        }
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -329,7 +363,10 @@ public partial class AutomationEvents : IExample
             DrawRectangleLines(10, 160, 290, 30, Fade(Color.Maroon, 0.8f));
             DrawCircle(30, 175, 10, Color.Maroon);
 
-            if (((frameCounter / 15) % 2) == 1) DrawText($"RECORDING EVENTS... [{aelist.Count}]", 50, 170, 10, Color.Maroon);
+            if (((frameCounter / 15) % 2) == 1)
+            {
+                DrawText($"RECORDING EVENTS... [{aelist.Count}]", 50, 170, 10, Color.Maroon);
+            }
         }
         else if (eventPlaying)
         {
@@ -337,7 +374,10 @@ public partial class AutomationEvents : IExample
             DrawRectangleLines(10, 160, 290, 30, Fade(Color.DarkGreen, 0.8f));
             DrawTriangle(new Vector2(20, 155 + 10), new Vector2(20, 155 + 30), new Vector2(40, 155 + 20), Color.DarkGreen);
 
-            if (((frameCounter / 15) % 2) == 1) DrawText($"PLAYING RECORDED EVENTS... [{currentPlayFrame}]", 50, 170, 10, Color.DarkGreen);
+            if (((frameCounter / 15) % 2) == 1)
+            {
+                DrawText($"PLAYING RECORDED EVENTS... [{currentPlayFrame}]", 50, 170, 10, Color.DarkGreen);
+            }
         }
 
         EndDrawing();

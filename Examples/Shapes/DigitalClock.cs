@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class DigitalClock : IExample
@@ -92,8 +88,14 @@ public partial class DigitalClock : IExample
         if (IsKeyPressed(KeyboardKey.Space))
         {
             // Toggle clock mode
-            if (clockMode == CLOCK_DIGITAL) clockMode = CLOCK_ANALOG;
-            else if (clockMode == CLOCK_ANALOG) clockMode = CLOCK_DIGITAL;
+            if (clockMode == CLOCK_DIGITAL)
+            {
+                clockMode = CLOCK_ANALOG;
+            }
+            else if (clockMode == CLOCK_ANALOG)
+            {
+                clockMode = CLOCK_DIGITAL;
+            }
         }
 
         UpdateClock(); // Update clock required data: value and angle
@@ -106,7 +108,10 @@ public partial class DigitalClock : IExample
         ClearBackground(Color.RayWhite);
 
         // Draw clock in selected mode
-        if (clockMode == CLOCK_ANALOG) DrawClockAnalog(clock, new Vector2(400, 240));
+        if (clockMode == CLOCK_ANALOG)
+        {
+            DrawClockAnalog(clock, new Vector2(400, 240));
+        }
         else if (clockMode == CLOCK_DIGITAL)
         {
             DrawClockDigital(clock, new Vector2(30, 60));

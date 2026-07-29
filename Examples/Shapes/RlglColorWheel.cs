@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;
 using static Raylib_cs.Rlgl;
 
@@ -146,27 +143,48 @@ public partial class RlglColorWheel : IExample
         }
 
         // Update flag when mouse button is released
-        if (IsMouseButtonReleased(MouseButton.Left)) settingColor = false;
+        if (IsMouseButtonReleased(MouseButton.Left))
+        {
+            settingColor = false;
+        }
 
         // Check if the user clicked/released the slider for the color's value
-        if (sliderHover && IsMouseButtonPressed(MouseButton.Left)) sliderClicked = true;
+        if (sliderHover && IsMouseButtonPressed(MouseButton.Left))
+        {
+            sliderClicked = true;
+        }
 
-        if (sliderClicked && IsMouseButtonReleased(MouseButton.Left)) sliderClicked = false;
+        if (sliderClicked && IsMouseButtonReleased(MouseButton.Left))
+        {
+            sliderClicked = false;
+        }
 
         // Update render mode accordingly
-        if (IsKeyPressed(KeyboardKey.Space)) renderType = DrawMode.Lines;
+        if (IsKeyPressed(KeyboardKey.Space))
+        {
+            renderType = DrawMode.Lines;
+        }
 
-        if (IsKeyReleased(KeyboardKey.Space)) renderType = DrawMode.Triangles;
+        if (IsKeyReleased(KeyboardKey.Space))
+        {
+            renderType = DrawMode.Triangles;
+        }
 
         // If the slider or the wheel was clicked, update the current color
         if (settingColor || sliderClicked)
         {
-            if (settingColor) circlePosition = GetMousePosition();
+            if (settingColor)
+            {
+                circlePosition = GetMousePosition();
+            }
 
             float distance = Vector2Distance(center, circlePosition) / pointScale;
 
             float angle = ((Vector2Angle(new Vector2(0.0f, -pointScale), Vector2Subtract(center, circlePosition)) / MathF.PI + 1.0f) / 2.0f);
-            if (settingColor && distance > 1.0f) circlePosition = Vector2Add(new Vector2(MathF.Sin(angle * (MathF.PI * 2.0f)) * pointScale, -MathF.Cos(angle * (MathF.PI * 2.0f)) * pointScale), center);
+            if (settingColor && distance > 1.0f)
+            {
+                circlePosition = Vector2Add(new Vector2(MathF.Sin(angle * (MathF.PI * 2.0f)) * pointScale, -MathF.Cos(angle * (MathF.PI * 2.0f)) * pointScale), center);
+            }
 
             float angle360 = angle * 360.0f;
             float valueActual = Clamp(distance, 0.0f, 1.0f);
@@ -288,16 +306,30 @@ public partial class RlglColorWheel : IExample
         if (hover && IsMouseButtonDown(MouseButton.Left))
         {
             value = minValue + ((mouse.X - bounds.X) / bounds.Width) * (maxValue - minValue);
-            if (value < minValue) value = minValue;
-            if (value > maxValue) value = maxValue;
+            if (value < minValue)
+            {
+                value = minValue;
+            }
+
+            if (value > maxValue)
+            {
+                value = maxValue;
+            }
         }
 
         DrawRectangleRec(bounds, Color.LightGray);
         float pct = (value - minValue) / (maxValue - minValue);
         DrawRectangleRec(new Rectangle(bounds.X, bounds.Y, bounds.Width * pct, bounds.Height), Color.SkyBlue);
         DrawRectangleLinesEx(bounds, 1, Color.Gray);
-        if (!string.IsNullOrEmpty(textLeft)) DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
-        if (!string.IsNullOrEmpty(textRight)) DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (!string.IsNullOrEmpty(textLeft))
+        {
+            DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
+
+        if (!string.IsNullOrEmpty(textRight))
+        {
+            DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     public static int Main()

@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Rlgl;
 
 namespace Examples.Shapes;
@@ -88,18 +85,35 @@ public partial class RectangleAdvanced : IExample
             return;
         }
 
-        if (roundnessLeft >= 1.0f) roundnessLeft = 1.0f;
-        if (roundnessRight >= 1.0f) roundnessRight = 1.0f;
+        if (roundnessLeft >= 1.0f)
+        {
+            roundnessLeft = 1.0f;
+        }
+
+        if (roundnessRight >= 1.0f)
+        {
+            roundnessRight = 1.0f;
+        }
 
         // Calculate corner radius both from right and left
         float recSize = rec.Width > rec.Height ? rec.Height : rec.Width;
         float radiusLeft = (recSize * roundnessLeft) / 2;
         float radiusRight = (recSize * roundnessRight) / 2;
 
-        if (radiusLeft <= 0.0f) radiusLeft = 0.0f;
-        if (radiusRight <= 0.0f) radiusRight = 0.0f;
+        if (radiusLeft <= 0.0f)
+        {
+            radiusLeft = 0.0f;
+        }
 
-        if (radiusRight <= 0.0f && radiusLeft <= 0.0f) return;
+        if (radiusRight <= 0.0f)
+        {
+            radiusRight = 0.0f;
+        }
+
+        if (radiusRight <= 0.0f && radiusLeft <= 0.0f)
+        {
+            return;
+        }
 
         float stepLength = 90.0f / (float)segments;
 

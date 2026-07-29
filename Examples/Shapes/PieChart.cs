@@ -15,10 +15,7 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
 using System.Text;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Shapes;
 
@@ -71,7 +68,10 @@ public partial class PieChart : IExample
         labels = new StringBuilder[MAX_PIE_SLICES];
         editingLabel = new bool[MAX_PIE_SLICES];
 
-        for (int i = 0; i < MAX_PIE_SLICES; i++) labels[i] = new StringBuilder($"Slice {i + 1:D2}");
+        for (int i = 0; i < MAX_PIE_SLICES; i++)
+        {
+            labels[i] = new StringBuilder($"Slice {i + 1:D2}");
+        }
 
         showValues = true;
         showPercentages = false;
@@ -110,7 +110,10 @@ public partial class PieChart : IExample
         //----------------------------------------------------------------------------------
         // Calculate total value for percentage calculations
         totalValue = 0.0f;
-        for (int i = 0; i < sliceCount; i++) totalValue += values[i];
+        for (int i = 0; i < sliceCount; i++)
+        {
+            totalValue += values[i];
+        }
 
         // Check for mouse hover over slices
         hoveredSlice = -1; // Reset hovered slice
@@ -124,7 +127,10 @@ public partial class PieChart : IExample
             if (distance <= radius) // Inside the pie radius
             {
                 float angle = MathF.Atan2(dy, dx) * RAD2DEG;
-                if (angle < 0) angle += 360;
+                if (angle < 0)
+                {
+                    angle += 360;
+                }
 
                 float currentAngle = 0.0f;
                 for (int i = 0; i < sliceCount; i++)
@@ -159,7 +165,10 @@ public partial class PieChart : IExample
             float currentRadius = radius;
 
             // Make the hovered slice pop out by adding pixels to its radius
-            if (i == hoveredSlice) currentRadius += 20.0f;
+            if (i == hoveredSlice)
+            {
+                currentRadius += 20.0f;
+            }
 
             // Draw the pie slice using raylib's DrawCircleSector function
             DrawCircleSector(center, currentRadius, startAngle, startAngle + sweepAngle, 120, color);
@@ -168,10 +177,22 @@ public partial class PieChart : IExample
             if (values[i] > 0)
             {
                 string labelText;
-                if (showValues && showPercentages) labelText = $"{values[i]:F1} ({(values[i] / totalValue) * 100.0f:F0}%)";
-                else if (showValues) labelText = $"{values[i]:F1}";
-                else if (showPercentages) labelText = $"{(values[i] / totalValue) * 100.0f:F0}%";
-                else labelText = "";
+                if (showValues && showPercentages)
+                {
+                    labelText = $"{values[i]:F1} ({(values[i] / totalValue) * 100.0f:F0}%)";
+                }
+                else if (showValues)
+                {
+                    labelText = $"{values[i]:F1}";
+                }
+                else if (showPercentages)
+                {
+                    labelText = $"{(values[i] / totalValue) * 100.0f:F0}%";
+                }
+                else
+                {
+                    labelText = "";
+                }
 
                 Vector2 textSize = MeasureTextEx(GetFontDefault(), labelText, 20, 1);
                 float labelRadius = radius * 0.7f;
@@ -182,7 +203,10 @@ public partial class PieChart : IExample
 
             // Draw inner circle to create donut effect
             // TODO: This is a hacky solution, better use DrawRing()
-            if (showDonut) DrawCircleV(center, donutInnerRadius, Color.RayWhite);
+            if (showDonut)
+            {
+                DrawCircleV(center, donutInnerRadius, Color.RayWhite);
+            }
 
             startAngle += sweepAngle;
         }
@@ -196,7 +220,11 @@ public partial class PieChart : IExample
         GuiCheckBox(new Rectangle(panelPos.X + 20, (float)panelPos.Y + 12 + 70, 20, 20), "Show Percentages", ref showPercentages);
         GuiCheckBox(new Rectangle(panelPos.X + 20, (float)panelPos.Y + 12 + 100, 20, 20), "Make Donut", ref showDonut);
 
-        if (showDonut) GuiDisable();
+        if (showDonut)
+        {
+            GuiDisable();
+        }
+
         GuiSliderBar(new Rectangle(panelPos.X + 80, (float)panelPos.Y + 12 + 130, panelRect.Width - 100, 30),
                         "Inner Radius", null, ref donutInnerRadius, 5.0f, radius - 10.0f);
         GuiEnable();
@@ -217,8 +245,15 @@ public partial class PieChart : IExample
         {
             scrollContentOffset.Y += GetMouseWheelMove() * 20.0f;
             float minOffset = MathF.Min(0.0f, scrollPanelBounds.Height - contentHeight);
-            if (scrollContentOffset.Y < minOffset) scrollContentOffset.Y = minOffset;
-            if (scrollContentOffset.Y > 0.0f) scrollContentOffset.Y = 0.0f;
+            if (scrollContentOffset.Y < minOffset)
+            {
+                scrollContentOffset.Y = minOffset;
+            }
+
+            if (scrollContentOffset.Y > 0.0f)
+            {
+                scrollContentOffset.Y = 0.0f;
+            }
         }
 
         Rectangle view = scrollPanelBounds;
@@ -236,7 +271,10 @@ public partial class PieChart : IExample
             DrawRectangle((int)(contentX + 15), rowY + 5, 20, 20, color);
 
             // Label textbox
-            if (GuiTextBox(new Rectangle(contentX + 45, (float)rowY, 75, 30), labels[i], 32, editingLabel[i])) editingLabel[i] = !editingLabel[i];
+            if (GuiTextBox(new Rectangle(contentX + 45, (float)rowY, 75, 30), labels[i], 32, editingLabel[i]))
+            {
+                editingLabel[i] = !editingLabel[i];
+            }
 
             GuiSliderBar(new Rectangle(contentX + 130, (float)rowY, 110, 30), null, null, ref values[i], 0.0f, 1000.0f);
         }
@@ -267,11 +305,21 @@ public partial class PieChart : IExample
     {
         Vector2 mouse = GetMousePosition();
         bool hover = CheckCollisionPointRec(mouse, bounds);
-        if (!guiDisabled && hover && IsMouseButtonPressed(MouseButton.Left)) active = !active;
+        if (!guiDisabled && hover && IsMouseButtonPressed(MouseButton.Left))
+        {
+            active = !active;
+        }
 
         DrawRectangleLinesEx(bounds, 1, hover ? Color.DarkBlue : Color.Gray);
-        if (active) DrawRectangle((int)bounds.X + 4, (int)bounds.Y + 4, (int)bounds.Width - 8, (int)bounds.Height - 8, Color.DarkGray);
-        if (text != null) DrawText(text, (int)(bounds.X + bounds.Width + 8), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (active)
+        {
+            DrawRectangle((int)bounds.X + 4, (int)bounds.Y + 4, (int)bounds.Width - 8, (int)bounds.Height - 8, Color.DarkGray);
+        }
+
+        if (text != null)
+        {
+            DrawText(text, (int)(bounds.X + bounds.Width + 8), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     private static void GuiSpinner(Rectangle bounds, string text, ref int value, int minValue, int maxValue)
@@ -281,8 +329,15 @@ public partial class PieChart : IExample
         Rectangle right = new Rectangle(bounds.X + bounds.Width - bounds.Height, bounds.Y, bounds.Height, bounds.Height);
         Rectangle mid = new Rectangle(bounds.X + bounds.Height, bounds.Y, bounds.Width - 2 * bounds.Height, bounds.Height);
 
-        if (!guiDisabled && CheckCollisionPointRec(mouse, left) && IsMouseButtonPressed(MouseButton.Left) && value > minValue) value--;
-        if (!guiDisabled && CheckCollisionPointRec(mouse, right) && IsMouseButtonPressed(MouseButton.Left) && value < maxValue) value++;
+        if (!guiDisabled && CheckCollisionPointRec(mouse, left) && IsMouseButtonPressed(MouseButton.Left) && value > minValue)
+        {
+            value--;
+        }
+
+        if (!guiDisabled && CheckCollisionPointRec(mouse, right) && IsMouseButtonPressed(MouseButton.Left) && value < maxValue)
+        {
+            value++;
+        }
 
         DrawRectangleRec(mid, Color.RayWhite);
         DrawRectangleLinesEx(mid, 1, Color.Gray);
@@ -294,7 +349,10 @@ public partial class PieChart : IExample
         DrawText("+", (int)(right.X + right.Width / 2 - 3), (int)(right.Y + right.Height / 2 - 5), 10, Color.DarkGray);
         string vs = value.ToString();
         DrawText(vs, (int)(mid.X + mid.Width / 2 - MeasureText(vs, 10) / 2), (int)(mid.Y + mid.Height / 2 - 5), 10, Color.DarkGray);
-        if (text != null) DrawText(text, (int)bounds.X - MeasureText(text, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (text != null)
+        {
+            DrawText(text, (int)bounds.X - MeasureText(text, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     private static void GuiSliderBar(Rectangle bounds, string textLeft, string textRight, ref float value, float minValue, float maxValue)
@@ -304,16 +362,30 @@ public partial class PieChart : IExample
         if (!guiDisabled && hover && IsMouseButtonDown(MouseButton.Left))
         {
             value = minValue + ((mouse.X - bounds.X) / bounds.Width) * (maxValue - minValue);
-            if (value < minValue) value = minValue;
-            if (value > maxValue) value = maxValue;
+            if (value < minValue)
+            {
+                value = minValue;
+            }
+
+            if (value > maxValue)
+            {
+                value = maxValue;
+            }
         }
 
         DrawRectangleRec(bounds, guiDisabled ? Color.Gray : Color.LightGray);
         float pct = (value - minValue) / (maxValue - minValue);
         DrawRectangleRec(new Rectangle(bounds.X, bounds.Y, bounds.Width * pct, bounds.Height), guiDisabled ? Color.DarkGray : Color.SkyBlue);
         DrawRectangleLinesEx(bounds, 1, Color.Gray);
-        if (!string.IsNullOrEmpty(textLeft)) DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
-        if (!string.IsNullOrEmpty(textRight)) DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (!string.IsNullOrEmpty(textLeft))
+        {
+            DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
+
+        if (!string.IsNullOrEmpty(textRight))
+        {
+            DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     private bool GuiTextBox(Rectangle bounds, StringBuilder text, int maxChars, bool editMode)
@@ -335,7 +407,10 @@ public partial class PieChart : IExample
                 key = GetCharPressed();
             }
 
-            if (IsKeyPressed(KeyboardKey.Backspace) && (text.Length > 0)) text.Remove(text.Length - 1, 1);
+            if (IsKeyPressed(KeyboardKey.Backspace) && (text.Length > 0))
+            {
+                text.Remove(text.Length - 1, 1);
+            }
         }
 
         DrawRectangleRec(bounds, Color.RayWhite);
@@ -349,7 +424,10 @@ public partial class PieChart : IExample
             DrawText("_", (int)bounds.X + 4 + MeasureText(content, 10), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
         }
 
-        if (hover && IsMouseButtonPressed(MouseButton.Left)) pressed = true;
+        if (hover && IsMouseButtonPressed(MouseButton.Left))
+        {
+            pressed = true;
+        }
 
         return pressed;
     }

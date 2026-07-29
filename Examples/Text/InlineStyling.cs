@@ -15,11 +15,7 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
 using System.Text;
-using Raylib_cs;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Text;
 
@@ -170,7 +166,10 @@ public partial class InlineStyling : IExample
                                 colHexText.Append(ch);
                                 colHexCount++;
                             }
-                            else break; // Only affects while loop
+                            else
+                            {
+                                break; // Only affects while loop
+                            }
                         }
 
                         // Convert hex color text into actual Color
@@ -192,11 +191,20 @@ public partial class InlineStyling : IExample
                 int index = GetGlyphIndex(font, codepoint);
                 float increaseX = 0.0f;
 
-                if (font.Glyphs[index].AdvanceX == 0) increaseX = (font.Recs[index].Width * scaleFactor + spacing);
-                else increaseX += (font.Glyphs[index].AdvanceX * scaleFactor + spacing);
+                if (font.Glyphs[index].AdvanceX == 0)
+                {
+                    increaseX = (font.Recs[index].Width * scaleFactor + spacing);
+                }
+                else
+                {
+                    increaseX += (font.Glyphs[index].AdvanceX * scaleFactor + spacing);
+                }
 
                 // Draw background rectangle color (if required)
-                if (colBack.A > 0) DrawRectangleRec(new Rectangle(position.X + textOffsetX, position.Y + textOffsetY - backRecPadding, increaseX, fontSize + 2 * backRecPadding), colBack);
+                if (colBack.A > 0)
+                {
+                    DrawRectangleRec(new Rectangle(position.X + textOffsetX, position.Y + textOffsetY - backRecPadding, increaseX, fontSize + 2 * backRecPadding), colBack);
+                }
 
                 if ((codepoint != ' ') && (codepoint != '\t'))
                 {
@@ -217,7 +225,10 @@ public partial class InlineStyling : IExample
     {
         Vector2 textSize = new(0, 0);
 
-        if ((font.Texture.Id == 0) || (text == null) || (text.Length == 0)) return textSize; // Security check
+        if ((font.Texture.Id == 0) || (text == null) || (text.Length == 0))
+        {
+            return textSize; // Security check
+        }
 
         using var textNative = new Utf8Buffer(text);
         sbyte* t = textNative.AsPointer();
@@ -257,7 +268,10 @@ public partial class InlineStyling : IExample
                         {
                             colHexCount++;
                         }
-                        else break; // Only affects while loop
+                        else
+                        {
+                            break; // Only affects while loop
+                        }
                     }
 
                     i += (colHexCount + 1); // Skip color value retrieved and ']'
@@ -268,8 +282,14 @@ public partial class InlineStyling : IExample
             {
                 index = GetGlyphIndex(font, codepoint);
 
-                if (font.Glyphs[index].AdvanceX > 0) textWidth += font.Glyphs[index].AdvanceX;
-                else textWidth += (font.Recs[index].Width + font.Glyphs[index].OffsetX);
+                if (font.Glyphs[index].AdvanceX > 0)
+                {
+                    textWidth += font.Glyphs[index].AdvanceX;
+                }
+                else
+                {
+                    textWidth += (font.Recs[index].Width + font.Glyphs[index].OffsetX);
+                }
 
                 validCodepointCounter++;
                 i += codepointByteCount;

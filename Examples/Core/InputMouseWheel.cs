@@ -13,8 +13,6 @@
 *
 ********************************************************************************************/
 
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 public partial class InputMouseWheel : IExample

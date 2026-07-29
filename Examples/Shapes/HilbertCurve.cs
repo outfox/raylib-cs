@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class HilbertCurve : IExample
@@ -64,8 +61,14 @@ public partial class HilbertCurve : IExample
         {
             hilbertPath = LoadHilbertPath(order, size, out strokeCount);
 
-            if (animate) counter = 0;
-            else counter = strokeCount;
+            if (animate)
+            {
+                counter = 0;
+            }
+            else
+            {
+                counter = strokeCount;
+            }
 
             prevOrder = order;
             prevSize = (int)size;
@@ -190,11 +193,21 @@ public partial class HilbertCurve : IExample
     {
         Vector2 mouse = GetMousePosition();
         bool hover = CheckCollisionPointRec(mouse, bounds);
-        if (hover && IsMouseButtonPressed(MouseButton.Left)) active = !active;
+        if (hover && IsMouseButtonPressed(MouseButton.Left))
+        {
+            active = !active;
+        }
 
         DrawRectangleLinesEx(bounds, 1, hover ? Color.DarkBlue : Color.Gray);
-        if (active) DrawRectangle((int)bounds.X + 4, (int)bounds.Y + 4, (int)bounds.Width - 8, (int)bounds.Height - 8, Color.DarkGray);
-        if (text != null) DrawText(text, (int)(bounds.X + bounds.Width + 8), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (active)
+        {
+            DrawRectangle((int)bounds.X + 4, (int)bounds.Y + 4, (int)bounds.Width - 8, (int)bounds.Height - 8, Color.DarkGray);
+        }
+
+        if (text != null)
+        {
+            DrawText(text, (int)(bounds.X + bounds.Width + 8), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     private static void GuiSpinner(Rectangle bounds, string text, ref int value, int minValue, int maxValue)
@@ -204,8 +217,15 @@ public partial class HilbertCurve : IExample
         Rectangle right = new Rectangle(bounds.X + bounds.Width - bounds.Height, bounds.Y, bounds.Height, bounds.Height);
         Rectangle mid = new Rectangle(bounds.X + bounds.Height, bounds.Y, bounds.Width - 2 * bounds.Height, bounds.Height);
 
-        if (CheckCollisionPointRec(mouse, left) && IsMouseButtonPressed(MouseButton.Left) && value > minValue) value--;
-        if (CheckCollisionPointRec(mouse, right) && IsMouseButtonPressed(MouseButton.Left) && value < maxValue) value++;
+        if (CheckCollisionPointRec(mouse, left) && IsMouseButtonPressed(MouseButton.Left) && value > minValue)
+        {
+            value--;
+        }
+
+        if (CheckCollisionPointRec(mouse, right) && IsMouseButtonPressed(MouseButton.Left) && value < maxValue)
+        {
+            value++;
+        }
 
         DrawRectangleRec(mid, Color.RayWhite);
         DrawRectangleLinesEx(mid, 1, Color.Gray);
@@ -217,7 +237,10 @@ public partial class HilbertCurve : IExample
         DrawText("+", (int)(right.X + right.Width / 2 - 3), (int)(right.Y + right.Height / 2 - 5), 10, Color.DarkGray);
         string vs = value.ToString();
         DrawText(vs, (int)(mid.X + mid.Width / 2 - MeasureText(vs, 10) / 2), (int)(mid.Y + mid.Height / 2 - 5), 10, Color.DarkGray);
-        if (text != null) DrawText(text, (int)bounds.X - MeasureText(text, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (text != null)
+        {
+            DrawText(text, (int)bounds.X - MeasureText(text, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     private static void GuiSlider(Rectangle bounds, string textLeft, string textRight, ref float value, float minValue, float maxValue)
@@ -227,8 +250,15 @@ public partial class HilbertCurve : IExample
         if (hover && IsMouseButtonDown(MouseButton.Left))
         {
             value = minValue + ((mouse.X - bounds.X) / bounds.Width) * (maxValue - minValue);
-            if (value < minValue) value = minValue;
-            if (value > maxValue) value = maxValue;
+            if (value < minValue)
+            {
+                value = minValue;
+            }
+
+            if (value > maxValue)
+            {
+                value = maxValue;
+            }
         }
 
         DrawRectangleRec(bounds, Color.LightGray);
@@ -236,8 +266,15 @@ public partial class HilbertCurve : IExample
         float handleX = bounds.X + pct * bounds.Width;
         DrawRectangle((int)(handleX - 5), (int)bounds.Y, 10, (int)bounds.Height, Color.DarkGray);
         DrawRectangleLinesEx(bounds, 1, Color.Gray);
-        if (textLeft != null) DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
-        if (textRight != null) DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (textLeft != null)
+        {
+            DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
+
+        if (textRight != null)
+        {
+            DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     public static int Main()

@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;    // Required for: Lerp(), Clamp()
 
 namespace Examples.Shapes;
@@ -113,9 +110,20 @@ public partial class ClockOfClocks : IExample
                     dstAngles[digit, cell] = digitAngles[clockDigits[digit] - '0', cell];
 
                     // Quick exception for 12h mode
-                    if ((digit == 0) && (hourMode == 12) && (clockDigits[0] == '0')) dstAngles[digit, cell] = ZZ;
-                    if (srcAngles[digit, cell].X > dstAngles[digit, cell].X) srcAngles[digit, cell].X -= 360.0f;
-                    if (srcAngles[digit, cell].Y > dstAngles[digit, cell].Y) srcAngles[digit, cell].Y -= 360.0f;
+                    if ((digit == 0) && (hourMode == 12) && (clockDigits[0] == '0'))
+                    {
+                        dstAngles[digit, cell] = ZZ;
+                    }
+
+                    if (srcAngles[digit, cell].X > dstAngles[digit, cell].X)
+                    {
+                        srcAngles[digit, cell].X -= 360.0f;
+                    }
+
+                    if (srcAngles[digit, cell].Y > dstAngles[digit, cell].Y)
+                    {
+                        srcAngles[digit, cell].Y -= 360.0f;
+                    }
                 }
             }
 
@@ -146,7 +154,10 @@ public partial class ClockOfClocks : IExample
         }
 
         // Handle input
-        if (IsKeyPressed(KeyboardKey.Space)) hourMode = 36 - hourMode; // Toggle between 12 and 24 hour mode with space
+        if (IsKeyPressed(KeyboardKey.Space))
+        {
+            hourMode = 36 - hourMode; // Toggle between 12 and 24 hour mode with space
+        }
         //----------------------------------------------------------------------------------
 
         // Draw

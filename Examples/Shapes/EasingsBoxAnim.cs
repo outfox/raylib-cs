@@ -13,8 +13,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using Examples.Shared;
 
 namespace Examples.Shapes;

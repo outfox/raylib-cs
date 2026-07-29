@@ -13,11 +13,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using System.Runtime.InteropServices;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Text;
 
 public partial class FontSdf : IExample

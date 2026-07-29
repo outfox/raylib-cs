@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Collections.Generic;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 [ExcludeFromBrowser]

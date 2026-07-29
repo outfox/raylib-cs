@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Text;
 
 public partial class RectangleBounds : IExample

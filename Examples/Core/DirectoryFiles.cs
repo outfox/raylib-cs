@@ -20,10 +20,6 @@
 // list view are reimplemented here with plain raylib primitives. The directory navigation
 // behaviour (enter directories, go back) is preserved.
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 public partial class DirectoryFiles : IExample

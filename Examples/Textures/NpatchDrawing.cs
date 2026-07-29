@@ -17,10 +17,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Textures;
 
 public partial class NpatchDrawing : IExample

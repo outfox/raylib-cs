@@ -1,6 +1,3 @@
-using static Raylib_cs.Raylib;
-using System.Numerics;
-
 namespace Examples.Shared;
 
 public struct PbrLight

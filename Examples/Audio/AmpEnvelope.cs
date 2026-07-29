@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Audio;
 
 public unsafe partial class AmpEnvelope : IExample
@@ -89,9 +85,15 @@ public unsafe partial class AmpEnvelope : IExample
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyPressed(KeyboardKey.Space)) env.State = ADSRState.Attack;
+        if (IsKeyPressed(KeyboardKey.Space))
+        {
+            env.State = ADSRState.Attack;
+        }
 
-        if (IsKeyReleased(KeyboardKey.Space) && (env.State != ADSRState.Idle)) env.State = ADSRState.Release;
+        if (IsKeyReleased(KeyboardKey.Space) && (env.State != ADSRState.Idle))
+        {
+            env.State = ADSRState.Release;
+        }
 
         if (IsAudioStreamProcessed(stream))
         {
@@ -106,7 +108,11 @@ public unsafe partial class AmpEnvelope : IExample
             else
             {
                 // Clear buffer if silent to avoid looping noise
-                for (int i = 0; i < BUFFER_SIZE; i++) buffer[i] = 0;
+                for (int i = 0; i < BUFFER_SIZE; i++)
+                {
+                    buffer[i] = 0;
+                }
+
                 audioTime = 0.0f;
             }
 
@@ -116,7 +122,10 @@ public unsafe partial class AmpEnvelope : IExample
             }
         }
 
-        if (!IsAudioStreamPlaying(stream)) PlayAudioStream(stream);
+        if (!IsAudioStreamPlaying(stream))
+        {
+            PlayAudioStream(stream);
+        }
         //----------------------------------------------------------------------------------
 
         // Draw

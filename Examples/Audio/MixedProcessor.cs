@@ -15,10 +15,8 @@
 *
 ********************************************************************************************/
 
-using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Audio;
 
@@ -60,7 +58,10 @@ public unsafe partial class MixedProcessor : IExample
         }
 
         // Moving history to the left
-        for (int i = 0; i < 399; i++) averageVolume[i] = averageVolume[i + 1];
+        for (int i = 0; i < 399; i++)
+        {
+            averageVolume[i] = averageVolume[i + 1];
+        }
 
         averageVolume[399] = average;       // Adding last average value
     }
@@ -88,13 +89,30 @@ public unsafe partial class MixedProcessor : IExample
 
         // Modify processing variables
         //----------------------------------------------------------------------------------
-        if (IsKeyPressed(KeyboardKey.Left)) exponent -= 0.05f;
-        if (IsKeyPressed(KeyboardKey.Right)) exponent += 0.05f;
+        if (IsKeyPressed(KeyboardKey.Left))
+        {
+            exponent -= 0.05f;
+        }
 
-        if (exponent <= 0.5f) exponent = 0.5f;
-        if (exponent >= 3.0f) exponent = 3.0f;
+        if (IsKeyPressed(KeyboardKey.Right))
+        {
+            exponent += 0.05f;
+        }
 
-        if (IsKeyPressed(KeyboardKey.Space)) PlaySound(sound);
+        if (exponent <= 0.5f)
+        {
+            exponent = 0.5f;
+        }
+
+        if (exponent >= 3.0f)
+        {
+            exponent = 3.0f;
+        }
+
+        if (IsKeyPressed(KeyboardKey.Space))
+        {
+            PlaySound(sound);
+        }
 
         // Draw
         //----------------------------------------------------------------------------------

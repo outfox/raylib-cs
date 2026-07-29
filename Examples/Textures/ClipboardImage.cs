@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Textures;
 
 [ExcludeFromBrowser("GetClipboardImage() is a desktop-only OS clipboard feature")]

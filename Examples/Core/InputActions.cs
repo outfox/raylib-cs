@@ -19,9 +19,6 @@
 // For example instead of using `IsKeyDown(KEY_LEFT)`, you can use `IsActionDown(ACTION_LEFT)`
 // which can be reassigned to e.g. KEY_A and also assigned to a gamepad button. the action will trigger with either gamepad or keys
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 public partial class InputActions : IExample
@@ -82,10 +79,26 @@ public partial class InputActions : IExample
         //----------------------------------------------------------------------------------
         gamepadIndex = 0; //  Set gamepad being checked
 
-        if (IsActionDown(ActionType.ActionUp)) position.Y -= 2;
-        if (IsActionDown(ActionType.ActionDown)) position.Y += 2;
-        if (IsActionDown(ActionType.ActionLeft)) position.X -= 2;
-        if (IsActionDown(ActionType.ActionRight)) position.X += 2;
+        if (IsActionDown(ActionType.ActionUp))
+        {
+            position.Y -= 2;
+        }
+
+        if (IsActionDown(ActionType.ActionDown))
+        {
+            position.Y += 2;
+        }
+
+        if (IsActionDown(ActionType.ActionLeft))
+        {
+            position.X -= 2;
+        }
+
+        if (IsActionDown(ActionType.ActionRight))
+        {
+            position.X += 2;
+        }
+
         if (IsActionPressed(ActionType.ActionFire))
         {
             position.X = (screenWidth - size.X) / 2;
@@ -94,14 +107,23 @@ public partial class InputActions : IExample
 
         // Register release action for one frame
         releaseAction = false;
-        if (IsActionReleased(ActionType.ActionFire)) releaseAction = true;
+        if (IsActionReleased(ActionType.ActionFire))
+        {
+            releaseAction = true;
+        }
 
         // Switch control scheme by pressing TAB
         if (IsKeyPressed(KeyboardKey.Tab))
         {
             actionSet = (actionSet == 0) ? 1 : 0;
-            if (actionSet == 0) SetActionsDefault();
-            else SetActionsCursor();
+            if (actionSet == 0)
+            {
+                SetActionsDefault();
+            }
+            else
+            {
+                SetActionsCursor();
+            }
         }
         //----------------------------------------------------------------------------------
 
@@ -133,7 +155,10 @@ public partial class InputActions : IExample
     {
         bool result = false;
 
-        if (action < ActionType.MaxAction) result = (IsKeyPressed(actionInputs[(int)action].Key) || IsGamepadButtonPressed(gamepadIndex, actionInputs[(int)action].Button));
+        if (action < ActionType.MaxAction)
+        {
+            result = (IsKeyPressed(actionInputs[(int)action].Key) || IsGamepadButtonPressed(gamepadIndex, actionInputs[(int)action].Button));
+        }
 
         return result;
     }
@@ -144,7 +169,10 @@ public partial class InputActions : IExample
     {
         bool result = false;
 
-        if (action < ActionType.MaxAction) result = (IsKeyReleased(actionInputs[(int)action].Key) || IsGamepadButtonReleased(gamepadIndex, actionInputs[(int)action].Button));
+        if (action < ActionType.MaxAction)
+        {
+            result = (IsKeyReleased(actionInputs[(int)action].Key) || IsGamepadButtonReleased(gamepadIndex, actionInputs[(int)action].Button));
+        }
 
         return result;
     }
@@ -155,7 +183,10 @@ public partial class InputActions : IExample
     {
         bool result = false;
 
-        if (action < ActionType.MaxAction) result = (IsKeyDown(actionInputs[(int)action].Key) || IsGamepadButtonDown(gamepadIndex, actionInputs[(int)action].Button));
+        if (action < ActionType.MaxAction)
+        {
+            result = (IsKeyDown(actionInputs[(int)action].Key) || IsGamepadButtonDown(gamepadIndex, actionInputs[(int)action].Button));
+        }
 
         return result;
     }

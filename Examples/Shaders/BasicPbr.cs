@@ -19,9 +19,7 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
 using Examples.Shared;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Shaders;
 

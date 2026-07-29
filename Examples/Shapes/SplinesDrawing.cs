@@ -13,9 +13,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class SplinesDrawing : IExample
@@ -131,14 +128,20 @@ public partial class SplinesDrawing : IExample
                     break;
                 }
             }
-            if (IsMouseButtonPressed(MouseButton.Left)) selectedPoint = focusedPoint;
+            if (IsMouseButtonPressed(MouseButton.Left))
+            {
+                selectedPoint = focusedPoint;
+            }
         }
 
         // Spline point movement logic
         if (selectedPoint >= 0)
         {
             points[selectedPoint] = GetMousePosition();
-            if (IsMouseButtonReleased(MouseButton.Left)) selectedPoint = -1;
+            if (IsMouseButtonReleased(MouseButton.Left))
+            {
+                selectedPoint = -1;
+            }
         }
 
         // Cubic Bezier spline control points logic
@@ -173,20 +176,45 @@ public partial class SplinesDrawing : IExample
             // Spline control point movement logic
             if (selectedControlIndex != -1)
             {
-                if (selectedControlStart) control[selectedControlIndex].start = GetMousePosition();
-                else control[selectedControlIndex].end = GetMousePosition();
-                if (IsMouseButtonReleased(MouseButton.Left)) selectedControlIndex = -1;
+                if (selectedControlStart)
+                {
+                    control[selectedControlIndex].start = GetMousePosition();
+                }
+                else
+                {
+                    control[selectedControlIndex].end = GetMousePosition();
+                }
+
+                if (IsMouseButtonReleased(MouseButton.Left))
+                {
+                    selectedControlIndex = -1;
+                }
             }
         }
 
         // Spline selection logic
-        if (IsKeyPressed(KeyboardKey.One)) splineTypeActive = 0;
-        else if (IsKeyPressed(KeyboardKey.Two)) splineTypeActive = 1;
-        else if (IsKeyPressed(KeyboardKey.Three)) splineTypeActive = 2;
-        else if (IsKeyPressed(KeyboardKey.Four)) splineTypeActive = 3;
+        if (IsKeyPressed(KeyboardKey.One))
+        {
+            splineTypeActive = 0;
+        }
+        else if (IsKeyPressed(KeyboardKey.Two))
+        {
+            splineTypeActive = 1;
+        }
+        else if (IsKeyPressed(KeyboardKey.Three))
+        {
+            splineTypeActive = 2;
+        }
+        else if (IsKeyPressed(KeyboardKey.Four))
+        {
+            splineTypeActive = 3;
+        }
 
         // Clear selection when changing to a spline without control points
-        if (IsKeyPressed(KeyboardKey.One) || IsKeyPressed(KeyboardKey.Two) || IsKeyPressed(KeyboardKey.Three)) selectedControlIndex = -1;
+        if (IsKeyPressed(KeyboardKey.One) || IsKeyPressed(KeyboardKey.Two) || IsKeyPressed(KeyboardKey.Three))
+        {
+            selectedControlIndex = -1;
+        }
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -232,8 +260,15 @@ public partial class SplinesDrawing : IExample
                 // Every cubic bezier point have two control points
                 DrawCircleV(control[i].start, 6, Color.Gold);
                 DrawCircleV(control[i].end, 6, Color.Gold);
-                if (focusedControlIndex == i && focusedControlStart) DrawCircleV(control[i].start, 8, Color.Green);
-                else if (focusedControlIndex == i && !focusedControlStart) DrawCircleV(control[i].end, 8, Color.Green);
+                if (focusedControlIndex == i && focusedControlStart)
+                {
+                    DrawCircleV(control[i].start, 8, Color.Green);
+                }
+                else if (focusedControlIndex == i && !focusedControlStart)
+                {
+                    DrawCircleV(control[i].end, 8, Color.Green);
+                }
+
                 DrawLineEx(points[i], control[i].start, 1.0f, Color.LightGray);
                 DrawLineEx(points[i + 1], control[i].end, 1.0f, Color.LightGray);
 
@@ -251,14 +286,20 @@ public partial class SplinesDrawing : IExample
                 DrawCircleLinesV(points[i], (focusedPoint == i) ? 12.0f : 8.0f, (focusedPoint == i) ? Color.Blue : Color.DarkBlue);
                 if ((splineTypeActive != SPLINE_LINEAR) &&
                     (splineTypeActive != SPLINE_BEZIER) &&
-                    (i < pointCount - 1)) DrawLineV(points[i], points[i + 1], Color.Gray);
+                    (i < pointCount - 1))
+                {
+                    DrawLineV(points[i], points[i + 1], Color.Gray);
+                }
 
                 DrawText($"[{points[i].X:F0}, {points[i].Y:F0}]", (int)points[i].X, (int)points[i].Y + 10, 10, Color.Black);
             }
         }
 
         // Check all possible UI states that require controls lock
-        if (splineTypeEditMode || (selectedPoint != -1) || (selectedControlIndex != -1)) GuiLock();
+        if (splineTypeEditMode || (selectedPoint != -1) || (selectedControlIndex != -1))
+        {
+            GuiLock();
+        }
 
         // Draw spline config
         GuiLabel(new Rectangle(12, 62, 140, 24), $"Spline thickness: {(int)splineThickness}");
@@ -266,10 +307,16 @@ public partial class SplinesDrawing : IExample
 
         GuiCheckBox(new Rectangle(12, 110, 20, 20), "Show point helpers", ref splineHelpersActive);
 
-        if (splineTypeEditMode) GuiUnlock();
+        if (splineTypeEditMode)
+        {
+            GuiUnlock();
+        }
 
         GuiLabel(new Rectangle(12, 10, 140, 24), "Spline type:");
-        if (GuiDropdownBox(new Rectangle(12, 8 + 24, 140, 28), "LINEAR;BSPLINE;CATMULLROM;BEZIER", ref splineTypeActive, splineTypeEditMode)) splineTypeEditMode = !splineTypeEditMode;
+        if (GuiDropdownBox(new Rectangle(12, 8 + 24, 140, 28), "LINEAR;BSPLINE;CATMULLROM;BEZIER", ref splineTypeActive, splineTypeEditMode))
+        {
+            splineTypeEditMode = !splineTypeEditMode;
+        }
 
         GuiUnlock();
 
@@ -299,27 +346,51 @@ public partial class SplinesDrawing : IExample
         if (!guiLocked && hover && IsMouseButtonDown(MouseButton.Left))
         {
             value = minValue + ((mouse.X - bounds.X) / bounds.Width) * (maxValue - minValue);
-            if (value < minValue) value = minValue;
-            if (value > maxValue) value = maxValue;
+            if (value < minValue)
+            {
+                value = minValue;
+            }
+
+            if (value > maxValue)
+            {
+                value = maxValue;
+            }
         }
 
         DrawRectangleRec(bounds, Color.LightGray);
         float pct = (value - minValue) / (maxValue - minValue);
         DrawRectangleRec(new Rectangle(bounds.X, bounds.Y, bounds.Width * pct, bounds.Height), Color.SkyBlue);
         DrawRectangleLinesEx(bounds, 1, Color.Gray);
-        if (!string.IsNullOrEmpty(textLeft)) DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
-        if (!string.IsNullOrEmpty(textRight)) DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (!string.IsNullOrEmpty(textLeft))
+        {
+            DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
+
+        if (!string.IsNullOrEmpty(textRight))
+        {
+            DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     private static void GuiCheckBox(Rectangle bounds, string text, ref bool active)
     {
         Vector2 mouse = GetMousePosition();
         bool hover = CheckCollisionPointRec(mouse, bounds);
-        if (!guiLocked && hover && IsMouseButtonPressed(MouseButton.Left)) active = !active;
+        if (!guiLocked && hover && IsMouseButtonPressed(MouseButton.Left))
+        {
+            active = !active;
+        }
 
         DrawRectangleLinesEx(bounds, 1, hover ? Color.DarkBlue : Color.Gray);
-        if (active) DrawRectangle((int)bounds.X + 4, (int)bounds.Y + 4, (int)bounds.Width - 8, (int)bounds.Height - 8, Color.DarkGray);
-        if (text != null) DrawText(text, (int)(bounds.X + bounds.Width + 8), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (active)
+        {
+            DrawRectangle((int)bounds.X + 4, (int)bounds.Y + 4, (int)bounds.Width - 8, (int)bounds.Height - 8, Color.DarkGray);
+        }
+
+        if (text != null)
+        {
+            DrawText(text, (int)(bounds.X + bounds.Width + 8), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     private static bool GuiDropdownBox(Rectangle bounds, string text, ref int active, bool editMode)
@@ -351,7 +422,10 @@ public partial class SplinesDrawing : IExample
             }
         }
 
-        if (clickable && hoverMain && IsMouseButtonPressed(MouseButton.Left)) pressed = true;
+        if (clickable && hoverMain && IsMouseButtonPressed(MouseButton.Left))
+        {
+            pressed = true;
+        }
 
         return pressed;
     }

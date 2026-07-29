@@ -17,9 +17,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;
 
 namespace Examples.Models;
@@ -120,7 +117,10 @@ public partial class TesseractView : IExample
                 int diff = (v1.X == v2.X ? 1 : 0) + (v1.Y == v2.Y ? 1 : 0) + (v1.Z == v2.Z ? 1 : 0) + (v1.W == v2.W ? 1 : 0);
 
                 // Draw only differing by 1 coordinate and the lower index only (duplicate lines)
-                if (diff == 3 && i < j) DrawLine3D(transformed[i], transformed[j], Color.Maroon);
+                if (diff == 3 && i < j)
+                {
+                    DrawLine3D(transformed[i], transformed[j], Color.Maroon);
+                }
             }
         }
         EndMode3D();

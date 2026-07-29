@@ -21,10 +21,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shaders;
 
 public partial class MandelbrotSet : IExample
@@ -122,12 +118,30 @@ public partial class MandelbrotSet : IExample
             IsKeyPressed(KeyboardKey.Six))
         {
             var interestIndex = 0;
-            if (IsKeyPressed(KeyboardKey.One)) interestIndex = 0;
-            else if (IsKeyPressed(KeyboardKey.Two)) interestIndex = 1;
-            else if (IsKeyPressed(KeyboardKey.Three)) interestIndex = 2;
-            else if (IsKeyPressed(KeyboardKey.Four)) interestIndex = 3;
-            else if (IsKeyPressed(KeyboardKey.Five)) interestIndex = 4;
-            else if (IsKeyPressed(KeyboardKey.Six)) interestIndex = 5;
+            if (IsKeyPressed(KeyboardKey.One))
+            {
+                interestIndex = 0;
+            }
+            else if (IsKeyPressed(KeyboardKey.Two))
+            {
+                interestIndex = 1;
+            }
+            else if (IsKeyPressed(KeyboardKey.Three))
+            {
+                interestIndex = 2;
+            }
+            else if (IsKeyPressed(KeyboardKey.Four))
+            {
+                interestIndex = 3;
+            }
+            else if (IsKeyPressed(KeyboardKey.Five))
+            {
+                interestIndex = 4;
+            }
+            else if (IsKeyPressed(KeyboardKey.Six))
+            {
+                interestIndex = 5;
+            }
 
             offset[0] = pointsOfInterest[interestIndex][0];
             offset[1] = pointsOfInterest[interestIndex][1];
@@ -144,7 +158,10 @@ public partial class MandelbrotSet : IExample
             updateShader = true;
         }
 
-        if (IsKeyPressed(KeyboardKey.F1)) showControls = !showControls;  // Toggle whether or not to show controls
+        if (IsKeyPressed(KeyboardKey.F1))
+        {
+            showControls = !showControls;  // Toggle whether or not to show controls
+        }
 
         // Change number of max iterations with UP and DOWN keys
         // WARNING: Increasing the number of max iterations greatly impacts performance

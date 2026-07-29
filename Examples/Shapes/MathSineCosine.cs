@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
 using static Raylib_cs.Raymath;
 
 namespace Examples.Shapes;
@@ -122,14 +119,20 @@ public partial class MathSineCosine : IExample
         DrawLineDashed(new Vector2(point.X, center.Y), new Vector2(point.X, point.Y), 10, 4, Color.Red);
         DrawText($"Sine {sinRad:0.00}", 640, 190, 6, Color.Red);
         DrawCircleV(new Vector2(start.X + (angle / 360.0f) * start.Width, start.Y + ((-sinRad + 1) * start.Height / 2.0f)), 4.0f, Color.Red);
-        fixed (Vector2* p = sinePoints) DrawSplineLinear(p, WAVE_POINTS, 1.0f, Color.Red);
+        fixed (Vector2* p = sinePoints)
+        {
+            DrawSplineLinear(p, WAVE_POINTS, 1.0f, Color.Red);
+        }
 
         // Cosine (blue - horizontal)
         DrawLineEx(new Vector2(center.X, center.Y), new Vector2(point.X, center.Y), 2.0f, Color.Blue);
         DrawLineDashed(new Vector2(center.X, point.Y), new Vector2(point.X, point.Y), 10, 4, Color.Blue);
         DrawText($"Cosine {cosRad:0.00}", 640, 210, 6, Color.Blue);
         DrawCircleV(new Vector2(start.X + (angle / 360.0f) * start.Width, start.Y + ((-cosRad + 1) * start.Height / 2.0f)), 4.0f, Color.Blue);
-        fixed (Vector2* p = cosPoints) DrawSplineLinear(p, WAVE_POINTS, 1.0f, Color.Blue);
+        fixed (Vector2* p = cosPoints)
+        {
+            DrawSplineLinear(p, WAVE_POINTS, 1.0f, Color.Blue);
+        }
 
         // Tangent (purple)
         DrawLineEx(new Vector2(limitMax.X, center.Y), new Vector2(limitMax.X, tangentPoint.Y), 2.0f, Color.Purple);

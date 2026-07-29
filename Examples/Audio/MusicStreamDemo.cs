@@ -13,8 +13,6 @@
 *
 ********************************************************************************************/
 
-using static Raylib_cs.Raylib;
-
 namespace Examples.Audio;
 
 public partial class MusicStreamDemo : IExample

@@ -16,11 +16,7 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using System.Collections.Generic;
 using System.Text;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Shapes;
 
@@ -79,7 +75,10 @@ public partial class PenroseTile : IExample
 
         // Initialize new penrose tile
         ls = CreatePenroseLSystem(drawLength * (generations / (float)maxGenerations));
-        for (int i = 0; i < generations; i++) BuildProductionStep(ls);
+        for (int i = 0; i < generations; i++)
+        {
+            BuildProductionStep(ls);
+        }
     }
 
     public void Update()
@@ -100,14 +99,20 @@ public partial class PenroseTile : IExample
             if (generations > minGenerations)
             {
                 generations--;
-                if (generations > 0) rebuild = true;
+                if (generations > 0)
+                {
+                    rebuild = true;
+                }
             }
         }
 
         if (rebuild)
         {
             ls = CreatePenroseLSystem(drawLength * (generations / (float)maxGenerations));
-            for (int i = 0; i < generations; i++) BuildProductionStep(ls);
+            for (int i = 0; i < generations; i++)
+            {
+                BuildProductionStep(ls);
+            }
         }
         //----------------------------------------------------------------------------------
 
@@ -117,7 +122,10 @@ public partial class PenroseTile : IExample
 
         ClearBackground(Color.RayWhite);
 
-        if (generations > 0) DrawPenroseLSystem(ls);
+        if (generations > 0)
+        {
+            DrawPenroseLSystem(ls);
+        }
 
         DrawText("penrose l-system", 10, 10, 20, Color.DarkGray);
         DrawText("press up or down to change generations", 10, 30, 20, Color.DarkGray);
@@ -143,8 +151,14 @@ public partial class PenroseTile : IExample
     // Pop turtle state step
     private TurtleState PopTurtleState()
     {
-        if (turtleStack.Count > 0) return turtleStack.Pop();
-        else TraceLog(TraceLogLevel.Warning, "TURTLE STACK UNDERFLOW!");
+        if (turtleStack.Count > 0)
+        {
+            return turtleStack.Pop();
+        }
+        else
+        {
+            TraceLog(TraceLogLevel.Warning, "TURTLE STACK UNDERFLOW!");
+        }
 
         return new TurtleState();
     }
@@ -186,8 +200,11 @@ public partial class PenroseTile : IExample
                 case 'Z': newProduction.Append(ls.ruleZ); break;
                 default:
                 {
-                    if (step != 'F') newProduction.Append(step);
-                } break;
+                    if (step != 'F')
+                        {
+                            newProduction.Append(step);
+                        }
+                    } break;
             }
         }
 
@@ -211,7 +228,10 @@ public partial class PenroseTile : IExample
         int productionLength = production.Length;
         ls.steps += 12;
 
-        if (ls.steps > productionLength) ls.steps = productionLength;
+        if (ls.steps > productionLength)
+        {
+            ls.steps = productionLength;
+        }
 
         for (int i = 0; i < ls.steps; i++)
         {
@@ -234,19 +254,34 @@ public partial class PenroseTile : IExample
             }
             else if (step == '+')
             {
-                for (int j = 0; j < repeats; j++) turtle.angle += ls.theta;
+                for (int j = 0; j < repeats; j++)
+                {
+                    turtle.angle += ls.theta;
+                }
 
                 repeats = 1;
             }
             else if (step == '-')
             {
-                for (int j = 0; j < repeats; j++) turtle.angle += -ls.theta;
+                for (int j = 0; j < repeats; j++)
+                {
+                    turtle.angle += -ls.theta;
+                }
 
                 repeats = 1;
             }
-            else if (step == '[') PushTurtleState(turtle);
-            else if (step == ']') turtle = PopTurtleState();
-            else if ((step >= 48) && (step <= 57)) repeats = (int)step - 48;
+            else if (step == '[')
+            {
+                PushTurtleState(turtle);
+            }
+            else if (step == ']')
+            {
+                turtle = PopTurtleState();
+            }
+            else if ((step >= 48) && (step <= 57))
+            {
+                repeats = (int)step - 48;
+            }
         }
 
         turtleStack.Clear();

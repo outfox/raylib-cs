@@ -15,9 +15,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 public partial class UndoRedo : IExample
@@ -87,7 +84,10 @@ public partial class UndoRedo : IExample
         // Init undo buffer to store MAX_UNDO_STATES states
         states = new PlayerState[MAX_UNDO_STATES];
         // Init all undo states to current state
-        for (int i = 0; i < MAX_UNDO_STATES; i++) states[i] = player;
+        for (int i = 0; i < MAX_UNDO_STATES; i++)
+        {
+            states[i] = player;
+        }
 
         // Grid variables
         gridPosition = new Vector2(40, 60);
@@ -98,16 +98,41 @@ public partial class UndoRedo : IExample
         // Update
         //----------------------------------------------------------------------------------
         // Player movement logic
-        if (IsKeyPressed(KeyboardKey.Right)) player.Cell.X++;
-        else if (IsKeyPressed(KeyboardKey.Left)) player.Cell.X--;
-        else if (IsKeyPressed(KeyboardKey.Up)) player.Cell.Y--;
-        else if (IsKeyPressed(KeyboardKey.Down)) player.Cell.Y++;
+        if (IsKeyPressed(KeyboardKey.Right))
+        {
+            player.Cell.X++;
+        }
+        else if (IsKeyPressed(KeyboardKey.Left))
+        {
+            player.Cell.X--;
+        }
+        else if (IsKeyPressed(KeyboardKey.Up))
+        {
+            player.Cell.Y--;
+        }
+        else if (IsKeyPressed(KeyboardKey.Down))
+        {
+            player.Cell.Y++;
+        }
 
         // Make sure player does not go out of bounds
-        if (player.Cell.X < 0) player.Cell.X = 0;
-        else if (player.Cell.X >= MAX_GRID_CELLS_X) player.Cell.X = MAX_GRID_CELLS_X - 1;
-        if (player.Cell.Y < 0) player.Cell.Y = 0;
-        else if (player.Cell.Y >= MAX_GRID_CELLS_Y) player.Cell.Y = MAX_GRID_CELLS_Y - 1;
+        if (player.Cell.X < 0)
+        {
+            player.Cell.X = 0;
+        }
+        else if (player.Cell.X >= MAX_GRID_CELLS_X)
+        {
+            player.Cell.X = MAX_GRID_CELLS_X - 1;
+        }
+
+        if (player.Cell.Y < 0)
+        {
+            player.Cell.Y = 0;
+        }
+        else if (player.Cell.Y >= MAX_GRID_CELLS_Y)
+        {
+            player.Cell.Y = MAX_GRID_CELLS_Y - 1;
+        }
 
         // Player color change logic
         if (IsKeyPressed(KeyboardKey.Space))
@@ -127,9 +152,20 @@ public partial class UndoRedo : IExample
             {
                 // Move cursor to next available position of the undo ring buffer to record state
                 currentUndoIndex++;
-                if (currentUndoIndex >= MAX_UNDO_STATES) currentUndoIndex = 0;
-                if (currentUndoIndex == firstUndoIndex) firstUndoIndex++;
-                if (firstUndoIndex >= MAX_UNDO_STATES) firstUndoIndex = 0;
+                if (currentUndoIndex >= MAX_UNDO_STATES)
+                {
+                    currentUndoIndex = 0;
+                }
+
+                if (currentUndoIndex == firstUndoIndex)
+                {
+                    firstUndoIndex++;
+                }
+
+                if (firstUndoIndex >= MAX_UNDO_STATES)
+                {
+                    firstUndoIndex = 0;
+                }
 
                 states[currentUndoIndex] = player;
                 lastUndoIndex = currentUndoIndex;
@@ -144,7 +180,10 @@ public partial class UndoRedo : IExample
             if (currentUndoIndex != firstUndoIndex)
             {
                 currentUndoIndex--;
-                if (currentUndoIndex < 0) currentUndoIndex = MAX_UNDO_STATES - 1;
+                if (currentUndoIndex < 0)
+                {
+                    currentUndoIndex = MAX_UNDO_STATES - 1;
+                }
 
                 if (!SameState(states[currentUndoIndex], player))
                 {
@@ -159,7 +198,10 @@ public partial class UndoRedo : IExample
             if (currentUndoIndex != lastUndoIndex)
             {
                 int nextUndoIndex = currentUndoIndex + 1;
-                if (nextUndoIndex >= MAX_UNDO_STATES) nextUndoIndex = 0;
+                if (nextUndoIndex >= MAX_UNDO_STATES)
+                {
+                    nextUndoIndex = 0;
+                }
 
                 if (nextUndoIndex != firstUndoIndex)
                 {
@@ -188,35 +230,49 @@ public partial class UndoRedo : IExample
         if (lastUndoIndex > firstUndoIndex)
         {
             for (int i = firstUndoIndex; i < currentUndoIndex; i++)
+            {
                 DrawRectangleRec(new Rectangle(gridPosition.X + states[i].Cell.X * GRID_CELL_SIZE, gridPosition.Y + states[i].Cell.Y * GRID_CELL_SIZE,
                     GRID_CELL_SIZE, GRID_CELL_SIZE), Color.LightGray);
+            }
         }
         else if (firstUndoIndex > lastUndoIndex)
         {
             if ((currentUndoIndex < MAX_UNDO_STATES) && (currentUndoIndex > lastUndoIndex))
             {
                 for (int i = firstUndoIndex; i < currentUndoIndex; i++)
+                {
                     DrawRectangleRec(new Rectangle(gridPosition.X + states[i].Cell.X * GRID_CELL_SIZE, gridPosition.Y + states[i].Cell.Y * GRID_CELL_SIZE,
                         GRID_CELL_SIZE, GRID_CELL_SIZE), Color.LightGray);
+                }
             }
             else
             {
                 for (int i = firstUndoIndex; i < MAX_UNDO_STATES; i++)
+                {
                     DrawRectangle((int)gridPosition.X + states[i].Cell.X * GRID_CELL_SIZE, (int)gridPosition.Y + states[i].Cell.Y * GRID_CELL_SIZE,
                         GRID_CELL_SIZE, GRID_CELL_SIZE, Color.LightGray);
+                }
+
                 for (int i = 0; i < currentUndoIndex; i++)
+                {
                     DrawRectangle((int)gridPosition.X + states[i].Cell.X * GRID_CELL_SIZE, (int)gridPosition.Y + states[i].Cell.Y * GRID_CELL_SIZE,
                         GRID_CELL_SIZE, GRID_CELL_SIZE, Color.LightGray);
+                }
             }
         }
 
         // Draw game grid
         for (int y = 0; y <= MAX_GRID_CELLS_Y; y++)
+        {
             DrawLine((int)gridPosition.X, (int)gridPosition.Y + y * GRID_CELL_SIZE,
                 (int)gridPosition.X + MAX_GRID_CELLS_X * GRID_CELL_SIZE, (int)gridPosition.Y + y * GRID_CELL_SIZE, Color.Gray);
+        }
+
         for (int x = 0; x <= MAX_GRID_CELLS_X; x++)
+        {
             DrawLine((int)gridPosition.X + x * GRID_CELL_SIZE, (int)gridPosition.Y,
                 (int)gridPosition.X + x * GRID_CELL_SIZE, (int)gridPosition.Y + MAX_GRID_CELLS_Y * GRID_CELL_SIZE, Color.Gray);
+        }
 
         // Draw player
         DrawRectangle((int)gridPosition.X + player.Cell.X * GRID_CELL_SIZE, (int)gridPosition.Y + player.Cell.Y * GRID_CELL_SIZE,

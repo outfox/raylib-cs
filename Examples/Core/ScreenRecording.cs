@@ -13,11 +13,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Collections.Generic;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 // NOTE: The upstream C example records frames into an animated GIF using the bundled msf_gif.h
@@ -251,7 +246,10 @@ public partial class ScreenRecording : IExample
 
         public unsafe void AddFrame(byte* data, int w, int h, int stride, int delayCs)
         {
-            if (output == null) return;
+            if (output == null)
+            {
+                return;
+            }
 
             // Graphic Control Extension
             output.Add(0x21);
@@ -317,7 +315,10 @@ public partial class ScreenRecording : IExample
                     nkeys++;
                     if (nkeys == (1 << keySize))
                     {
-                        if (keySize < 12) keySize++;
+                        if (keySize < 12)
+                        {
+                            keySize++;
+                        }
                     }
                     if (nkeys == 0x1000)
                     {
@@ -340,13 +341,21 @@ public partial class ScreenRecording : IExample
                 bitBuffer = 0;
                 bitCount = 0;
             }
-            if (subBlock.Count > 0) FlushSubBlock();
+            if (subBlock.Count > 0)
+            {
+                FlushSubBlock();
+            }
+
             output.Add(0x00);   // Image data block terminator
         }
 
         public byte[] End()
         {
-            if (output == null) return Array.Empty<byte>();
+            if (output == null)
+            {
+                return Array.Empty<byte>();
+            }
+
             output.Add(0x3B);   // Trailer
             byte[] result = output.ToArray();
             output = null;
@@ -362,7 +371,10 @@ public partial class ScreenRecording : IExample
                 subBlock.Add((byte)(bitBuffer & 0xFF));
                 bitBuffer >>= 8;
                 bitCount -= 8;
-                if (subBlock.Count == 255) FlushSubBlock();
+                if (subBlock.Count == 255)
+                {
+                    FlushSubBlock();
+                }
             }
         }
 

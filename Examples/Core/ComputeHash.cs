@@ -17,10 +17,7 @@
 // raygui is not bound in raylib-cs, so the widgets below are minimal re-implementations
 // using plain raylib drawing/input. The hashing/Base64 logic is a faithful port.
 
-using System;
-using System.Numerics;
 using System.Text;
-using static Raylib_cs.Raylib;
 
 namespace Examples.Core;
 
@@ -101,7 +98,10 @@ public unsafe partial class ComputeHash : IExample
 
         GuiLabel(new Rectangle(40, 26, 720, 32), "INPUT DATA (TEXT):", 20);
 
-        if (GuiTextBox(new Rectangle(40, 64, 720, 32), textInput, 95, textBoxEditMode, 10)) textBoxEditMode = !textBoxEditMode;
+        if (GuiTextBox(new Rectangle(40, 64, 720, 32), textInput, 95, textBoxEditMode, 10))
+        {
+            textBoxEditMode = !textBoxEditMode;
+        }
 
         btnComputeHashes = GuiButton(new Rectangle(40, 64 + 40, 720, 32), "COMPUTE INPUT DATA HASHES", 10);
 
@@ -133,10 +133,17 @@ public unsafe partial class ComputeHash : IExample
     //----------------------------------------------------------------------------------
     private static uint[] CopyHash(uint* data, int count)
     {
-        if (data == null) return null;
+        if (data == null)
+        {
+            return null;
+        }
 
         uint[] result = new uint[count];
-        for (int i = 0; i < count; i++) result[i] = data[i];
+        for (int i = 0; i < count; i++)
+        {
+            result[i] = data[i];
+        }
+
         return result;
     }
 
@@ -145,7 +152,11 @@ public unsafe partial class ComputeHash : IExample
         if ((data != null) && (dataSize > 0) && (dataSize < ((128 / 8) - 1)))
         {
             StringBuilder text = new StringBuilder();
-            for (int i = 0; i < dataSize; i++) text.Append(data[i].ToString("X8"));
+            for (int i = 0; i < dataSize; i++)
+            {
+                text.Append(data[i].ToString("X8"));
+            }
+
             return text.ToString();
         }
 
@@ -173,7 +184,10 @@ public unsafe partial class ComputeHash : IExample
         int textWidth = MeasureText(text, fontSize);
         DrawText(text, (int)(bounds.X + (bounds.Width - textWidth) / 2), (int)(bounds.Y + (bounds.Height - fontSize) / 2), fontSize, Color.DarkGray);
 
-        if (hover && IsMouseButtonReleased(MouseButton.Left)) pressed = true;
+        if (hover && IsMouseButtonReleased(MouseButton.Left))
+        {
+            pressed = true;
+        }
 
         return pressed;
     }
@@ -197,7 +211,10 @@ public unsafe partial class ComputeHash : IExample
                 key = GetCharPressed();
             }
 
-            if (IsKeyPressed(KeyboardKey.Backspace) && (text.Length > 0)) text.Remove(text.Length - 1, 1);
+            if (IsKeyPressed(KeyboardKey.Backspace) && (text.Length > 0))
+            {
+                text.Remove(text.Length - 1, 1);
+            }
         }
 
         DrawRectangleRec(bounds, Color.RayWhite);
@@ -211,7 +228,10 @@ public unsafe partial class ComputeHash : IExample
             DrawText("_", (int)bounds.X + 4 + MeasureText(content, fontSize), (int)(bounds.Y + (bounds.Height - fontSize) / 2), fontSize, Color.DarkGray);
         }
 
-        if (hover && IsMouseButtonPressed(MouseButton.Left)) pressed = true;
+        if (hover && IsMouseButtonPressed(MouseButton.Left))
+        {
+            pressed = true;
+        }
 
         return pressed;
     }
@@ -220,7 +240,10 @@ public unsafe partial class ComputeHash : IExample
     {
         DrawRectangleRec(bounds, Color.LightGray);
         DrawRectangleLinesEx(bounds, 1, Color.Gray);
-        if (text != null) DrawText(text, (int)bounds.X + 4, (int)(bounds.Y + (bounds.Height - fontSize) / 2), fontSize, Color.Gray);
+        if (text != null)
+        {
+            DrawText(text, (int)bounds.X + 4, (int)(bounds.Y + (bounds.Height - fontSize) / 2), fontSize, Color.Gray);
+        }
     }
 
     public static int Main()

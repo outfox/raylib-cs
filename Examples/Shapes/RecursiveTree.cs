@@ -15,10 +15,6 @@
 *
 ********************************************************************************************/
 
-using System;
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Shapes;
 
 public partial class RecursiveTree : IExample
@@ -78,7 +74,10 @@ public partial class RecursiveTree : IExample
         for (int i = 0; i < count; i++)
         {
             Branch branch = branches[i];
-            if (branch.length < 2) continue;
+            if (branch.length < 2)
+            {
+                continue;
+            }
 
             float nextLength = branch.length * branchDecay;
 
@@ -108,8 +107,14 @@ public partial class RecursiveTree : IExample
             Branch branch = branches[i];
             if (branch.length >= 2)
             {
-                if (bezier) DrawLineBezier(branch.start, branch.end, thick, Color.Red);
-                else DrawLineEx(branch.start, branch.end, thick, Color.Red);
+                if (bezier)
+                {
+                    DrawLineBezier(branch.start, branch.end, thick, Color.Red);
+                }
+                else
+                {
+                    DrawLineEx(branch.start, branch.end, thick, Color.Red);
+                }
             }
         }
 
@@ -146,27 +151,51 @@ public partial class RecursiveTree : IExample
         if (hover && IsMouseButtonDown(MouseButton.Left))
         {
             value = minValue + ((mouse.X - bounds.X) / bounds.Width) * (maxValue - minValue);
-            if (value < minValue) value = minValue;
-            if (value > maxValue) value = maxValue;
+            if (value < minValue)
+            {
+                value = minValue;
+            }
+
+            if (value > maxValue)
+            {
+                value = maxValue;
+            }
         }
 
         DrawRectangleRec(bounds, Color.LightGray);
         float pct = (value - minValue) / (maxValue - minValue);
         DrawRectangleRec(new Rectangle(bounds.X, bounds.Y, bounds.Width * pct, bounds.Height), Color.SkyBlue);
         DrawRectangleLinesEx(bounds, 1, Color.Gray);
-        if (textLeft != null) DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
-        if (textRight != null) DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (textLeft != null)
+        {
+            DrawText(textLeft, (int)bounds.X - MeasureText(textLeft, 10) - 5, (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
+
+        if (textRight != null)
+        {
+            DrawText(textRight, (int)(bounds.X + bounds.Width + 5), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     private static void GuiCheckBox(Rectangle bounds, string text, ref bool active)
     {
         Vector2 mouse = GetMousePosition();
         bool hover = CheckCollisionPointRec(mouse, bounds);
-        if (hover && IsMouseButtonPressed(MouseButton.Left)) active = !active;
+        if (hover && IsMouseButtonPressed(MouseButton.Left))
+        {
+            active = !active;
+        }
 
         DrawRectangleLinesEx(bounds, 1, hover ? Color.DarkBlue : Color.Gray);
-        if (active) DrawRectangle((int)bounds.X + 4, (int)bounds.Y + 4, (int)bounds.Width - 8, (int)bounds.Height - 8, Color.DarkGray);
-        if (text != null) DrawText(text, (int)(bounds.X + bounds.Width + 8), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        if (active)
+        {
+            DrawRectangle((int)bounds.X + 4, (int)bounds.Y + 4, (int)bounds.Width - 8, (int)bounds.Height - 8, Color.DarkGray);
+        }
+
+        if (text != null)
+        {
+            DrawText(text, (int)(bounds.X + bounds.Width + 8), (int)(bounds.Y + bounds.Height / 2 - 5), 10, Color.DarkGray);
+        }
     }
 
     public static int Main()

@@ -16,9 +16,6 @@
 *
 ********************************************************************************************/
 
-using System.Numerics;
-using static Raylib_cs.Raylib;
-
 namespace Examples.Core;
 
 public partial class KeyboardTestbed : IExample
@@ -53,7 +50,11 @@ public partial class KeyboardTestbed : IExample
 
         // Keyboard line 01
         line01KeyWidths = new int[15];
-        for (int i = 0; i < 15; i++) line01KeyWidths[i] = 45;
+        for (int i = 0; i < 15; i++)
+        {
+            line01KeyWidths[i] = 45;
+        }
+
         line01KeyWidths[13] = 62;   // PRINTSCREEN
         line01Keys = new int[]
         {
@@ -64,7 +65,11 @@ public partial class KeyboardTestbed : IExample
 
         // Keyboard line 02
         line02KeyWidths = new int[15];
-        for (int i = 0; i < 15; i++) line02KeyWidths[i] = 45;
+        for (int i = 0; i < 15; i++)
+        {
+            line02KeyWidths[i] = 45;
+        }
+
         line02KeyWidths[0] = 25;    // GRAVE
         line02KeyWidths[13] = 82;   // BACKSPACE
         line02Keys = new int[]
@@ -76,7 +81,11 @@ public partial class KeyboardTestbed : IExample
 
         // Keyboard line 03
         line03KeyWidths = new int[15];
-        for (int i = 0; i < 15; i++) line03KeyWidths[i] = 45;
+        for (int i = 0; i < 15; i++)
+        {
+            line03KeyWidths[i] = 45;
+        }
+
         line03KeyWidths[0] = 50;    // TAB
         line03KeyWidths[13] = 57;   // BACKSLASH
         line03Keys = new int[]
@@ -88,7 +97,11 @@ public partial class KeyboardTestbed : IExample
 
         // Keyboard line 04
         line04KeyWidths = new int[14];
-        for (int i = 0; i < 14; i++) line04KeyWidths[i] = 45;
+        for (int i = 0; i < 14; i++)
+        {
+            line04KeyWidths[i] = 45;
+        }
+
         line04KeyWidths[0] = 68;    // CAPS
         line04KeyWidths[12] = 88;   // ENTER
         line04Keys = new int[]
@@ -100,7 +113,11 @@ public partial class KeyboardTestbed : IExample
 
         // Keyboard line 05
         line05KeyWidths = new int[14];
-        for (int i = 0; i < 14; i++) line05KeyWidths[i] = 45;
+        for (int i = 0; i < 14; i++)
+        {
+            line05KeyWidths[i] = 45;
+        }
+
         line05KeyWidths[0] = 80;    // LSHIFT
         line05KeyWidths[11] = 76;   // RSHIFT
         line05Keys = new int[]
@@ -112,7 +129,11 @@ public partial class KeyboardTestbed : IExample
 
         // Keyboard line 06
         line06KeyWidths = new int[11];
-        for (int i = 0; i < 11; i++) line06KeyWidths[i] = 45;
+        for (int i = 0; i < 11; i++)
+        {
+            line06KeyWidths[i] = 45;
+        }
+
         line06KeyWidths[0] = 80;    // LCTRL
         line06KeyWidths[3] = 208;   // SPACE
         line06KeyWidths[7] = 60;    // RCTRL
@@ -131,10 +152,16 @@ public partial class KeyboardTestbed : IExample
         // Update
         //----------------------------------------------------------------------------------
         int key = GetKeyPressed(); // Get pressed keycode
-        if (key > 0) TraceLog(TraceLogLevel.Info, $"KEYBOARD TESTBED: KEY PRESSED:    {key}");
+        if (key > 0)
+        {
+            TraceLog(TraceLogLevel.Info, $"KEYBOARD TESTBED: KEY PRESSED:    {key}");
+        }
 
         int ch = GetCharPressed(); // Get pressed char for text input, using OS mapping
-        if (ch > 0) TraceLog(TraceLogLevel.Info, $"KEYBOARD TESTBED: CHAR PRESSED:   {(char)ch} ({ch})");
+        if (ch > 0)
+        {
+            TraceLog(TraceLogLevel.Info, $"KEYBOARD TESTBED: CHAR PRESSED:   {(char)ch} ({ch})");
+        }
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -322,7 +349,10 @@ public partial class KeyboardTestbed : IExample
     // Draw keyboard key
     private static void GuiKeyboardKey(Rectangle bounds, int key)
     {
-        if (key == (int)KeyboardKey.Null) DrawRectangleLinesEx(bounds, 2.0f, Color.LightGray);
+        if (key == (int)KeyboardKey.Null)
+        {
+            DrawRectangleLinesEx(bounds, 2.0f, Color.LightGray);
+        }
         else
         {
             if (IsKeyDown((KeyboardKey)key))
