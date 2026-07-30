@@ -9,6 +9,8 @@ import {
 const status = document.getElementById('status');
 const errorBanner = document.getElementById('error');
 const select = document.getElementById('examples');
+const previousExampleButton = document.getElementById('previousExample');
+const nextExampleButton = document.getElementById('nextExample');
 const canvas = document.getElementById('canvas');
 const viewport = document.getElementById('viewport');
 const scaleModeSelect = document.getElementById('scaleMode');
@@ -142,6 +144,7 @@ function selectExample(name) {
     const ok = Host.SetExample(name);
     targetFps = Host.GetCurrentTargetFps();
     errorBanner.hidden = ok;
+    canvas.focus();
 }
 
 select.innerHTML = '';
@@ -153,12 +156,9 @@ for (const name of Host.GetExampleNames().split('\n').filter(n => n.length > 0))
 }
 select.addEventListener('change', () => {
     selectExample(select.value);
-    canvas.focus();
 });
 selectExample(select.value);
 
-// J/K step through examples instead of arrow keys on the focused dropdown,
-// which would otherwise fight with examples that read the arrow keys.
 function stepExample(delta) {
     const count = select.options.length;
     if (count === 0) {
@@ -167,20 +167,10 @@ function stepExample(delta) {
 
     select.selectedIndex = (select.selectedIndex + delta + count) % count;
     selectExample(select.value);
-    canvas.focus();
 }
 
-document.addEventListener('keydown', (event) => {
-    if (event.repeat || event.target instanceof HTMLSelectElement) {
-        return;
-    }
-
-    if (event.code === 'KeyJ') {
-        stepExample(1);
-    } else if (event.code === 'KeyK') {
-        stepExample(-1);
-    }
-});
+previousExampleButton.addEventListener('click', () => stepExample(-1));
+nextExampleButton.addEventListener('click', () => stepExample(1));
 
 setScaleMode(scaleMode, false);
 

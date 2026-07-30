@@ -1,6 +1,7 @@
 # Examples/Web — raylib-cs in the browser (WebAssembly)
 
-Runs the raylib examples in the browser via WebAssembly, with a dropdown to switch between them.
+Runs the raylib examples in the browser via WebAssembly, with a dropdown and Prev/Next buttons
+to switch between them.
 It proves the `Raylib-cs` NuGet package's `browser-wasm` support end-to-end: the package's
 `buildTransitive` targets link the shipped `raylib.a` into the .NET wasm runtime.
 
@@ -37,7 +38,7 @@ dotnet serve -d Examples/bin/Release/net10.0/browser-wasm/AppBundle    # dotnet 
 # or:  npx http-server Examples/bin/Release/net10.0/browser-wasm/AppBundle
 ```
 
-Open the printed URL and use the **Example** dropdown to switch examples.
+Open the printed URL and use the **Example** dropdown or **Prev**/**Next** buttons to switch examples.
 
 ## Canvas scaling modes
 
