@@ -209,10 +209,22 @@ public partial class DeferredRendering : IExample
         );
 
         // Check key inputs to enable/disable lights
-        if (IsKeyPressed(KeyboardKey.Y)) { lights[0].Enabled = !lights[0].Enabled; }
-        if (IsKeyPressed(KeyboardKey.R)) { lights[1].Enabled = !lights[1].Enabled; }
-        if (IsKeyPressed(KeyboardKey.G)) { lights[2].Enabled = !lights[2].Enabled; }
-        if (IsKeyPressed(KeyboardKey.B)) { lights[3].Enabled = !lights[3].Enabled; }
+        if (IsKeyPressed(KeyboardKey.Y))
+        {
+            lights[0].Enabled = !lights[0].Enabled;
+        }
+        if (IsKeyPressed(KeyboardKey.R))
+        {
+            lights[1].Enabled = !lights[1].Enabled;
+        }
+        if (IsKeyPressed(KeyboardKey.G))
+        {
+            lights[2].Enabled = !lights[2].Enabled;
+        }
+        if (IsKeyPressed(KeyboardKey.B))
+        {
+            lights[3].Enabled = !lights[3].Enabled;
+        }
 
         // Check key inputs to switch between G-buffer textures
         if (IsKeyPressed(KeyboardKey.One))
@@ -277,40 +289,40 @@ public partial class DeferredRendering : IExample
         switch (mode)
         {
             case DeferredMode.Shading:
-            {
-                BeginMode3D(camera);
-                Rlgl.DisableColorBlend();
-                Rlgl.EnableShader(deferredShader.Id);
-                // Bind our g-buffer textures
-                // We are binding them to locations that we earlier set in sampler2D uniforms `gPosition`, `gNormal`,
-                // and `gAlbedoSpec`
-                Rlgl.ActiveTextureSlot(TexUnitPosition);
-                Rlgl.EnableTexture(gBuffer.PositionTextureId);
-                Rlgl.ActiveTextureSlot(TexUnitNormal);
-                Rlgl.EnableTexture(gBuffer.NormalTextureId);
-                Rlgl.ActiveTextureSlot(TexUnitAlbedoSpec);
-                Rlgl.EnableTexture(gBuffer.AlbedoSpecTextureId);
-
-                // Finally, we draw a fullscreen quad to our default framebufferId
-                // This will now be shaded using our deferred shader
-                Rlgl.LoadDrawQuad();
-                Rlgl.DisableShader();
-                Rlgl.EnableColorBlend();
-                EndMode3D();
-
-                // As a last step, we now copy over the depth buffer from our g-buffer to the default framebufferId
-                Rlgl.BindFramebuffer(RlReadFramebuffer, gBuffer.FramebufferId);
-                Rlgl.BindFramebuffer(RlDrawFramebuffer, 0);
-                Rlgl.BlitFramebuffer(0, 0, screenWidth, screenHeight, 0, 0, screenWidth, screenHeight, GlDepthBufferBit);
-                Rlgl.DisableFramebuffer();
-
-                // Since our shader is now done and disabled, we can draw spheres
-                // that represent light positions in default forward rendering
-                BeginMode3D(camera);
-                Rlgl.EnableShader(Rlgl.GetShaderIdDefault());
-                for (var i = 0; i < MaxLights; i++)
                 {
-                    if (lights[i].Enabled)
+                    BeginMode3D(camera);
+                    Rlgl.DisableColorBlend();
+                    Rlgl.EnableShader(deferredShader.Id);
+                    // Bind our g-buffer textures
+                    // We are binding them to locations that we earlier set in sampler2D uniforms `gPosition`, `gNormal`,
+                    // and `gAlbedoSpec`
+                    Rlgl.ActiveTextureSlot(TexUnitPosition);
+                    Rlgl.EnableTexture(gBuffer.PositionTextureId);
+                    Rlgl.ActiveTextureSlot(TexUnitNormal);
+                    Rlgl.EnableTexture(gBuffer.NormalTextureId);
+                    Rlgl.ActiveTextureSlot(TexUnitAlbedoSpec);
+                    Rlgl.EnableTexture(gBuffer.AlbedoSpecTextureId);
+
+                    // Finally, we draw a fullscreen quad to our default framebufferId
+                    // This will now be shaded using our deferred shader
+                    Rlgl.LoadDrawQuad();
+                    Rlgl.DisableShader();
+                    Rlgl.EnableColorBlend();
+                    EndMode3D();
+
+                    // As a last step, we now copy over the depth buffer from our g-buffer to the default framebufferId
+                    Rlgl.BindFramebuffer(RlReadFramebuffer, gBuffer.FramebufferId);
+                    Rlgl.BindFramebuffer(RlDrawFramebuffer, 0);
+                    Rlgl.BlitFramebuffer(0, 0, screenWidth, screenHeight, 0, 0, screenWidth, screenHeight, GlDepthBufferBit);
+                    Rlgl.DisableFramebuffer();
+
+                    // Since our shader is now done and disabled, we can draw spheres
+                    // that represent light positions in default forward rendering
+                    BeginMode3D(camera);
+                    Rlgl.EnableShader(Rlgl.GetShaderIdDefault());
+                    for (var i = 0; i < MaxLights; i++)
+                    {
+                        if (lights[i].Enabled)
                         {
                             DrawSphereEx(lights[i].Position, 0.2f, 8, 8, lights[i].Color);
                         }
@@ -319,49 +331,50 @@ public partial class DeferredRendering : IExample
                             DrawSphereWires(lights[i].Position, 0.2f, 8, 8, ColorAlpha(lights[i].Color, 0.3f));
                         }
                     }
-                Rlgl.DisableShader();
-                EndMode3D();
+                    Rlgl.DisableShader();
+                    EndMode3D();
 
-                DrawText("FINAL RESULT", 10, screenHeight - 30, 20, Color.DarkGreen);
-            }
-            break;
+                    DrawText("FINAL RESULT", 10, screenHeight - 30, 20, Color.DarkGreen);
+                }
+                break;
             case DeferredMode.Position:
-            {
-                DrawTextureRec(
-                    new Texture2D { Id = gBuffer.PositionTextureId, Width = screenWidth, Height = screenHeight },
-                    new Rectangle(0, 0, screenWidth, -screenHeight),
-                    Vector2.Zero,
-                    Color.RayWhite
-                );
+                {
+                    DrawTextureRec(
+                        new Texture2D { Id = gBuffer.PositionTextureId, Width = screenWidth, Height = screenHeight },
+                        new Rectangle(0, 0, screenWidth, -screenHeight),
+                        Vector2.Zero,
+                        Color.RayWhite
+                    );
 
-                DrawText("POSITION TEXTURE", 10, screenHeight - 30, 20, Color.DarkGreen);
-            }
-            break;
+                    DrawText("POSITION TEXTURE", 10, screenHeight - 30, 20, Color.DarkGreen);
+                }
+                break;
             case DeferredMode.Normal:
-            {
-                DrawTextureRec(
-                    new Texture2D { Id = gBuffer.NormalTextureId, Width = screenWidth, Height = screenHeight },
-                    new Rectangle(0, 0, screenWidth, -screenHeight),
-                    Vector2.Zero,
-                    Color.RayWhite
-                );
+                {
+                    DrawTextureRec(
+                        new Texture2D { Id = gBuffer.NormalTextureId, Width = screenWidth, Height = screenHeight },
+                        new Rectangle(0, 0, screenWidth, -screenHeight),
+                        Vector2.Zero,
+                        Color.RayWhite
+                    );
 
-                DrawText("NORMAL TEXTURE", 10, screenHeight - 30, 20, Color.DarkGreen);
-            }
-            break;
+                    DrawText("NORMAL TEXTURE", 10, screenHeight - 30, 20, Color.DarkGreen);
+                }
+                break;
             case DeferredMode.Albedo:
-            {
-                DrawTextureRec(
-                    new Texture2D { Id = gBuffer.AlbedoSpecTextureId, Width = screenWidth, Height = screenHeight },
-                    new Rectangle(0, 0, screenWidth, -screenHeight),
-                    Vector2.Zero,
-                    Color.RayWhite
-                );
+                {
+                    DrawTextureRec(
+                        new Texture2D { Id = gBuffer.AlbedoSpecTextureId, Width = screenWidth, Height = screenHeight },
+                        new Rectangle(0, 0, screenWidth, -screenHeight),
+                        Vector2.Zero,
+                        Color.RayWhite
+                    );
 
-                DrawText("ALBEDO TEXTURE", 10, screenHeight - 30, 20, Color.DarkGreen);
-            }
-            break;
-            default: break;
+                    DrawText("ALBEDO TEXTURE", 10, screenHeight - 30, 20, Color.DarkGreen);
+                }
+                break;
+            default:
+                break;
         }
 
         DrawText("Toggle lights keys: [Y][R][G][B]", 10, 40, 20, Color.DarkGray);

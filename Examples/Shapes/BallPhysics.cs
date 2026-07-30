@@ -62,7 +62,7 @@ public partial class BallPhysics : IExample
         // Init first ball in the array
         balls[0] = new Ball
         {
-            position = new Vector2(GetScreenWidth()/2.0f, GetScreenHeight()/2.0f),
+            position = new Vector2(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f),
             speed = new Vector2(200, 200),
             prevPosition = new Vector2(0, 0),
             radius = 40,
@@ -98,7 +98,7 @@ public partial class BallPhysics : IExample
 
                 // If the distance between the ball position and the mouse press position
                 // is less than or equal to the ball radius, the event occurred inside the ball
-                if (MathF.Sqrt(pressOffset.X*pressOffset.X + pressOffset.Y*pressOffset.Y) <= balls[i].radius)
+                if (MathF.Sqrt(pressOffset.X * pressOffset.X + pressOffset.Y * pressOffset.Y) <= balls[i].radius)
                 {
                     balls[i].grabbed = true;
                     grabbedBallIndex = i;
@@ -163,7 +163,7 @@ public partial class BallPhysics : IExample
         }
 
         // Changes gravity
-        gravity += GetMouseWheelMove()*5;
+        gravity += GetMouseWheelMove() * 5;
 
         // Updates each ball state
         for (int i = 0; i < ballCount; i++)
@@ -179,31 +179,31 @@ public partial class BallPhysics : IExample
                 if ((balls[i].position.X + balls[i].radius) >= screenWidth)
                 {
                     balls[i].position.X = screenWidth - balls[i].radius; // Ball repositioning
-                    balls[i].speed.X = -balls[i].speed.X*balls[i].elasticity;  // Elasticity makes the ball lose 10% of its velocity on hit
+                    balls[i].speed.X = -balls[i].speed.X * balls[i].elasticity;  // Elasticity makes the ball lose 10% of its velocity on hit
                 }
                 // Does the ball hit the screen left boundary?
                 else if ((balls[i].position.X - balls[i].radius) <= 0)
                 {
                     balls[i].position.X = balls[i].radius;
-                    balls[i].speed.X = -balls[i].speed.X*balls[i].elasticity;
+                    balls[i].speed.X = -balls[i].speed.X * balls[i].elasticity;
                 }
 
                 // The same for y axis
                 if ((balls[i].position.Y + balls[i].radius) >= screenHeight)
                 {
                     balls[i].position.Y = screenHeight - balls[i].radius;
-                    balls[i].speed.Y = -balls[i].speed.Y*balls[i].elasticity;
+                    balls[i].speed.Y = -balls[i].speed.Y * balls[i].elasticity;
                 }
                 else if ((balls[i].position.Y - balls[i].radius) <= 0)
                 {
                     balls[i].position.Y = balls[i].radius;
-                    balls[i].speed.Y = -balls[i].speed.Y*balls[i].elasticity;
+                    balls[i].speed.Y = -balls[i].speed.Y * balls[i].elasticity;
                 }
 
                 // Friction makes the ball lose 1% of its velocity each frame
-                balls[i].speed.X = balls[i].speed.X*balls[i].friction;
+                balls[i].speed.X = balls[i].speed.X * balls[i].friction;
                 // Gravity affects only the y axis
-                balls[i].speed.Y = balls[i].speed.Y*balls[i].friction + gravity;
+                balls[i].speed.Y = balls[i].speed.Y * balls[i].friction + gravity;
             }
             else
             {
@@ -212,8 +212,8 @@ public partial class BallPhysics : IExample
                 balls[i].position.Y = mousePos.Y - pressOffset.Y;
 
                 // While the ball is grabbed, recalculates its velocity
-                balls[i].speed.X = (balls[i].position.X - balls[i].prevPosition.X)/delta;
-                balls[i].speed.Y = (balls[i].position.Y - balls[i].prevPosition.Y)/delta;
+                balls[i].speed.X = (balls[i].position.X - balls[i].prevPosition.X) / delta;
+                balls[i].speed.Y = (balls[i].position.Y - balls[i].prevPosition.Y) / delta;
                 balls[i].prevPosition = balls[i].position;
             }
         }
@@ -225,20 +225,20 @@ public partial class BallPhysics : IExample
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-            ClearBackground(Color.RayWhite);
+        ClearBackground(Color.RayWhite);
 
-            for (int i = 0; i < ballCount; i++)
-            {
-                DrawCircleV(balls[i].position, balls[i].radius, balls[i].color);
-                DrawCircleLinesV(balls[i].position, balls[i].radius, Color.Black);
-            }
+        for (int i = 0; i < ballCount; i++)
+        {
+            DrawCircleV(balls[i].position, balls[i].radius, balls[i].color);
+            DrawCircleLinesV(balls[i].position, balls[i].radius, Color.Black);
+        }
 
-            DrawText("grab a ball by pressing with the mouse and throw it by releasing", 10, 10, 10, Color.DarkGray);
-            DrawText("right click to create new balls (keep left control pressed to create a lot)", 10, 30, 10, Color.DarkGray);
-            DrawText("use mouse wheel to change gravity", 10, 50, 10, Color.DarkGray);
-            DrawText("middle click to shake", 10, 70, 10, Color.DarkGray);
-            DrawText($"BALL COUNT: {ballCount}", 10, GetScreenHeight() - 70, 20, Color.Black);
-            DrawText($"GRAVITY: {gravity:F2}", 10, GetScreenHeight() - 40, 20, Color.Black);
+        DrawText("grab a ball by pressing with the mouse and throw it by releasing", 10, 10, 10, Color.DarkGray);
+        DrawText("right click to create new balls (keep left control pressed to create a lot)", 10, 30, 10, Color.DarkGray);
+        DrawText("use mouse wheel to change gravity", 10, 50, 10, Color.DarkGray);
+        DrawText("middle click to shake", 10, 70, 10, Color.DarkGray);
+        DrawText($"BALL COUNT: {ballCount}", 10, GetScreenHeight() - 70, 20, Color.Black);
+        DrawText($"GRAVITY: {gravity:F2}", 10, GetScreenHeight() - 40, 20, Color.Black);
 
         EndDrawing();
         //----------------------------------------------------------------------------------

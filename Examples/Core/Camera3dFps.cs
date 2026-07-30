@@ -243,13 +243,19 @@ public partial class Camera3dFps : IExample
         // Clamp view up
         float maxAngleUp = Vector3Angle(up, yaw);
         maxAngleUp -= 0.001f; // Avoid numerical errors
-        if (-(lookRotation.Y) > maxAngleUp) { lookRotation.Y = -maxAngleUp; }
+        if (-(lookRotation.Y) > maxAngleUp)
+        {
+            lookRotation.Y = -maxAngleUp;
+        }
 
         // Clamp view down
         float maxAngleDown = Vector3Angle(Vector3Negate(up), yaw);
         maxAngleDown *= -1.0f; // Downwards angle is negative
         maxAngleDown += 0.001f; // Avoid numerical errors
-        if (-(lookRotation.Y) < maxAngleDown) { lookRotation.Y = -maxAngleDown; }
+        if (-(lookRotation.Y) < maxAngleDown)
+        {
+            lookRotation.Y = -maxAngleDown;
+        }
 
         // Up and down
         Vector3 right = Vector3Normalize(Vector3CrossProduct(yaw, up));

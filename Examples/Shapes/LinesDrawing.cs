@@ -60,7 +60,7 @@ public partial class LinesDrawing : IExample
 
         // Clear the canvas to the background color
         BeginTextureMode(canvas);
-            ClearBackground(Color.RayWhite);
+        ClearBackground(Color.RayWhite);
         EndTextureMode();
     }
 
@@ -78,7 +78,7 @@ public partial class LinesDrawing : IExample
         if (IsMouseButtonPressed(MouseButton.Middle))
         {
             BeginTextureMode(canvas);
-                ClearBackground(Color.RayWhite);
+            ClearBackground(Color.RayWhite);
             EndTextureMode();
         }
 
@@ -94,7 +94,7 @@ public partial class LinesDrawing : IExample
             if (leftButtonDown)
             {
                 // Increase the hue value by the distance our cursor has moved since the last frame (divided by 3)
-                lineHue += Vector2Distance(mousePositionPrevious, GetMousePosition())/3.0f;
+                lineHue += Vector2Distance(mousePositionPrevious, GetMousePosition()) / 3.0f;
 
                 // While the hue is >=360, subtract it to bring it down into the range 0-360
                 // This is more visually accurate than resetting to zero
@@ -113,10 +113,10 @@ public partial class LinesDrawing : IExample
 
             // Draw the line onto the canvas
             BeginTextureMode(canvas);
-                // Circles act as "caps", smoothing corners
-                DrawCircleV(mousePositionPrevious, lineThickness/2.0f, drawColor);
-                DrawCircleV(GetMousePosition(), lineThickness/2.0f, drawColor);
-                DrawLineEx(mousePositionPrevious, GetMousePosition(), lineThickness, drawColor);
+            // Circles act as "caps", smoothing corners
+            DrawCircleV(mousePositionPrevious, lineThickness / 2.0f, drawColor);
+            DrawCircleV(GetMousePosition(), lineThickness / 2.0f, drawColor);
+            DrawLineEx(mousePositionPrevious, GetMousePosition(), lineThickness, drawColor);
             EndTextureMode();
         }
 
@@ -132,13 +132,13 @@ public partial class LinesDrawing : IExample
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-            // Draw the render texture to the screen, flipped vertically to make it appear top-side up
-            DrawTextureRec(canvas.Texture, new Rectangle(0.0f, 0.0f, (float)canvas.Texture.Width, (float)-canvas.Texture.Height), Vector2Zero(), Color.White);
+        // Draw the render texture to the screen, flipped vertically to make it appear top-side up
+        DrawTextureRec(canvas.Texture, new Rectangle(0.0f, 0.0f, (float)canvas.Texture.Width, (float)-canvas.Texture.Height), Vector2Zero(), Color.White);
 
-            // Draw the preview circle
-            if (!leftButtonDown)
+        // Draw the preview circle
+        if (!leftButtonDown)
         {
-            DrawCircleLinesV(GetMousePosition(), lineThickness/2.0f, new Color(127, 127, 127, 127));
+            DrawCircleLinesV(GetMousePosition(), lineThickness / 2.0f, new Color(127, 127, 127, 127));
         }
 
         // Draw the hint text

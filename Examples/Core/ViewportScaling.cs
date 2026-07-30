@@ -314,13 +314,26 @@ public partial class ViewportScaling : IExample
 
         switch (viewportType)
         {
-            case ViewportType.KeepAspectInteger: KeepAspectCenteredInteger(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect); break;
-            case ViewportType.KeepHeightInteger: KeepHeightCenteredInteger(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect); break;
-            case ViewportType.KeepWidthInteger: KeepWidthCenteredInteger(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect); break;
-            case ViewportType.KeepAspect: KeepAspectCentered(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect); break;
-            case ViewportType.KeepHeight: KeepHeightCentered(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect); break;
-            case ViewportType.KeepWidth: KeepWidthCentered(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect); break;
-            default: break;
+            case ViewportType.KeepAspectInteger:
+                KeepAspectCenteredInteger(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect);
+                break;
+            case ViewportType.KeepHeightInteger:
+                KeepHeightCenteredInteger(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect);
+                break;
+            case ViewportType.KeepWidthInteger:
+                KeepWidthCenteredInteger(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect);
+                break;
+            case ViewportType.KeepAspect:
+                KeepAspectCentered(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect);
+                break;
+            case ViewportType.KeepHeight:
+                KeepHeightCentered(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect);
+                break;
+            case ViewportType.KeepWidth:
+                KeepWidthCentered(screenWidth, screenHeight, gameWidth, gameHeight, ref sourceRect, ref destRect);
+                break;
+            default:
+                break;
         }
 
         UnloadRenderTexture(target);

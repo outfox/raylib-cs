@@ -135,7 +135,8 @@ public partial class Text3D : IExample
         layerDistance = 0.01f;
 
         wcfg = new WaveTextConfig();
-        wcfg.WaveSpeed.X = wcfg.WaveSpeed.Y = 3.0f; wcfg.WaveSpeed.Z = 0.5f;
+        wcfg.WaveSpeed.X = wcfg.WaveSpeed.Y = 3.0f;
+        wcfg.WaveSpeed.Z = 0.5f;
         wcfg.WaveOffset.X = wcfg.WaveOffset.Y = wcfg.WaveOffset.Z = 0.35f;
         wcfg.WaveRange.X = wcfg.WaveRange.Y = wcfg.WaveRange.Z = 0.45f;
 
@@ -230,12 +231,16 @@ public partial class Text3D : IExample
         }
 
         // Handle text layers changes
-        if (IsKeyPressed(KeyboardKey.Home)) { if (layers > 1)
+        if (IsKeyPressed(KeyboardKey.Home))
+        {
+            if (layers > 1)
             {
                 --layers;
             }
         }
-        else if (IsKeyPressed(KeyboardKey.End)) { if (layers < TextMaxLayers)
+        else if (IsKeyPressed(KeyboardKey.End))
+        {
+            if (layers < TextMaxLayers)
             {
                 ++layers;
             }
@@ -559,19 +564,27 @@ public partial class Text3D : IExample
 
             // Front Face
             Rlgl.Normal3f(0.0f, 1.0f, 0.0f);                                   // Normal Pointing Up
-            Rlgl.TexCoord2f(tx, ty); Rlgl.Vertex3f(x, y, z);                   // Top Left Of The Texture and Quad
-            Rlgl.TexCoord2f(tx, th); Rlgl.Vertex3f(x, y, z + height);          // Bottom Left Of The Texture and Quad
-            Rlgl.TexCoord2f(tw, th); Rlgl.Vertex3f(x + width, y, z + height);  // Bottom Right Of The Texture and Quad
-            Rlgl.TexCoord2f(tw, ty); Rlgl.Vertex3f(x + width, y, z);           // Top Right Of The Texture and Quad
+            Rlgl.TexCoord2f(tx, ty);
+            Rlgl.Vertex3f(x, y, z);                   // Top Left Of The Texture and Quad
+            Rlgl.TexCoord2f(tx, th);
+            Rlgl.Vertex3f(x, y, z + height);          // Bottom Left Of The Texture and Quad
+            Rlgl.TexCoord2f(tw, th);
+            Rlgl.Vertex3f(x + width, y, z + height);  // Bottom Right Of The Texture and Quad
+            Rlgl.TexCoord2f(tw, ty);
+            Rlgl.Vertex3f(x + width, y, z);           // Top Right Of The Texture and Quad
 
             if (backface)
             {
                 // Back Face
                 Rlgl.Normal3f(0.0f, -1.0f, 0.0f);                              // Normal Pointing Down
-                Rlgl.TexCoord2f(tx, ty); Rlgl.Vertex3f(x, y, z);              // Top Right Of The Texture and Quad
-                Rlgl.TexCoord2f(tw, ty); Rlgl.Vertex3f(x + width, y, z);      // Top Left Of The Texture and Quad
-                Rlgl.TexCoord2f(tw, th); Rlgl.Vertex3f(x + width, y, z + height); // Bottom Left Of The Texture and Quad
-                Rlgl.TexCoord2f(tx, th); Rlgl.Vertex3f(x, y, z + height);     // Bottom Right Of The Texture and Quad
+                Rlgl.TexCoord2f(tx, ty);
+                Rlgl.Vertex3f(x, y, z);              // Top Right Of The Texture and Quad
+                Rlgl.TexCoord2f(tw, ty);
+                Rlgl.Vertex3f(x + width, y, z);      // Top Left Of The Texture and Quad
+                Rlgl.TexCoord2f(tw, th);
+                Rlgl.Vertex3f(x + width, y, z + height); // Bottom Left Of The Texture and Quad
+                Rlgl.TexCoord2f(tx, th);
+                Rlgl.Vertex3f(x, y, z + height);     // Bottom Right Of The Texture and Quad
             }
             Rlgl.End();
             Rlgl.PopMatrix();

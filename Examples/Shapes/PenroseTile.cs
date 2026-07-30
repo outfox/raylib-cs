@@ -194,17 +194,26 @@ public partial class PenroseTile : IExample
             char step = production[i];
             switch (step)
             {
-                case 'W': newProduction.Append(ls.ruleW); break;
-                case 'X': newProduction.Append(ls.ruleX); break;
-                case 'Y': newProduction.Append(ls.ruleY); break;
-                case 'Z': newProduction.Append(ls.ruleZ); break;
+                case 'W':
+                    newProduction.Append(ls.ruleW);
+                    break;
+                case 'X':
+                    newProduction.Append(ls.ruleX);
+                    break;
+                case 'Y':
+                    newProduction.Append(ls.ruleY);
+                    break;
+                case 'Z':
+                    newProduction.Append(ls.ruleZ);
+                    break;
                 default:
-                {
-                    if (step != 'F')
+                    {
+                        if (step != 'F')
                         {
                             newProduction.Append(step);
                         }
-                    } break;
+                    }
+                    break;
             }
         }
 

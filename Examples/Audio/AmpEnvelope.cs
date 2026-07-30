@@ -176,41 +176,42 @@ public unsafe partial class AmpEnvelope : IExample
         switch (env.State)
         {
             case ADSRState.Attack:
-            {
-                env.CurrentValue += (1.0f / env.AttackTime) * sampleTime;
-                if (env.CurrentValue >= 1.0f)
                 {
-                    env.CurrentValue = 1.0f;
-                    env.State = ADSRState.Decay;
+                    env.CurrentValue += (1.0f / env.AttackTime) * sampleTime;
+                    if (env.CurrentValue >= 1.0f)
+                    {
+                        env.CurrentValue = 1.0f;
+                        env.State = ADSRState.Decay;
+                    }
                 }
-            }
-            break;
+                break;
             case ADSRState.Decay:
-            {
-                env.CurrentValue -= ((1.0f - env.SustainLevel) / env.DecayTime) * sampleTime;
-                if (env.CurrentValue <= env.SustainLevel)
+                {
+                    env.CurrentValue -= ((1.0f - env.SustainLevel) / env.DecayTime) * sampleTime;
+                    if (env.CurrentValue <= env.SustainLevel)
+                    {
+                        env.CurrentValue = env.SustainLevel;
+                        env.State = ADSRState.Sustain;
+                    }
+                }
+                break;
+            case ADSRState.Sustain:
                 {
                     env.CurrentValue = env.SustainLevel;
-                    env.State = ADSRState.Sustain;
                 }
-            }
-            break;
-            case ADSRState.Sustain:
-            {
-                env.CurrentValue = env.SustainLevel;
-            }
-            break;
+                break;
             case ADSRState.Release:
-            {
-                env.CurrentValue -= (env.SustainLevel / env.ReleaseTime) * sampleTime;
-                if (env.CurrentValue <= 0.001f) // Use a small threshold to avoid infinite tail
                 {
-                    env.CurrentValue = 0.0f;
-                    env.State = ADSRState.Idle;
+                    env.CurrentValue -= (env.SustainLevel / env.ReleaseTime) * sampleTime;
+                    if (env.CurrentValue <= 0.001f) // Use a small threshold to avoid infinite tail
+                    {
+                        env.CurrentValue = 0.0f;
+                        env.State = ADSRState.Idle;
+                    }
                 }
-            }
-            break;
-            default: break;
+                break;
+            default:
+                break;
         }
     }
 

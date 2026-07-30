@@ -59,32 +59,32 @@ public partial class MouseTrail : IExample
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-            ClearBackground(Color.Black);
+        ClearBackground(Color.Black);
 
-            // Draw the trail by looping through the history array
-            for (int i = 0; i < MAX_TRAIL_LENGTH; i++)
+        // Draw the trail by looping through the history array
+        for (int i = 0; i < MAX_TRAIL_LENGTH; i++)
+        {
+            // Ensure we skip drawing if the array hasn't been fully filled on startup
+            if ((trailPositions[i].X != 0.0f) || (trailPositions[i].Y != 0.0f))
             {
-                // Ensure we skip drawing if the array hasn't been fully filled on startup
-                if ((trailPositions[i].X != 0.0f) || (trailPositions[i].Y != 0.0f))
-                {
-                    // Calculate relative trail strength (ratio is near 1.0 for new, near 0.0 for old)
-                    float ratio = (float)(MAX_TRAIL_LENGTH - i)/MAX_TRAIL_LENGTH;
+                // Calculate relative trail strength (ratio is near 1.0 for new, near 0.0 for old)
+                float ratio = (float)(MAX_TRAIL_LENGTH - i) / MAX_TRAIL_LENGTH;
 
-                    // Fade effect: oldest positions are more transparent
-                    // Fade (color, alpha) - alpha is 0.5 to 1.0 based on ratio
-                    Color trailColor = Fade(Color.SkyBlue, ratio*0.5f + 0.5f);
+                // Fade effect: oldest positions are more transparent
+                // Fade (color, alpha) - alpha is 0.5 to 1.0 based on ratio
+                Color trailColor = Fade(Color.SkyBlue, ratio * 0.5f + 0.5f);
 
-                    // Size effect: oldest positions are smaller
-                    float trailRadius = 15.0f*ratio;
+                // Size effect: oldest positions are smaller
+                float trailRadius = 15.0f * ratio;
 
-                    DrawCircleV(trailPositions[i], trailRadius, trailColor);
-                }
+                DrawCircleV(trailPositions[i], trailRadius, trailColor);
             }
+        }
 
-            // Draw a distinct white circle for the current mouse position (Index 0)
-            DrawCircleV(mousePosition, 15.0f, Color.White);
+        // Draw a distinct white circle for the current mouse position (Index 0)
+        DrawCircleV(mousePosition, 15.0f, Color.White);
 
-            DrawText("Move the mouse to see the trail effect!", 10, screenHeight - 30, 20, Color.LightGray);
+        DrawText("Move the mouse to see the trail effect!", 10, screenHeight - 30, 20, Color.LightGray);
 
         EndDrawing();
         //----------------------------------------------------------------------------------

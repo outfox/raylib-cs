@@ -237,112 +237,218 @@ public partial class KeyboardTestbed : IExample
     {
         switch ((KeyboardKey)key)
         {
-            case KeyboardKey.Apostrophe: return "'";          // Key: '
-            case KeyboardKey.Comma: return ",";          // Key: ,
-            case KeyboardKey.Minus: return "-";          // Key: -
-            case KeyboardKey.Period: return ".";          // Key: .
-            case KeyboardKey.Slash: return "/";          // Key: /
-            case KeyboardKey.Zero: return "0";          // Key: 0
-            case KeyboardKey.One: return "1";          // Key: 1
-            case KeyboardKey.Two: return "2";          // Key: 2
-            case KeyboardKey.Three: return "3";          // Key: 3
-            case KeyboardKey.Four: return "4";          // Key: 4
-            case KeyboardKey.Five: return "5";          // Key: 5
-            case KeyboardKey.Six: return "6";          // Key: 6
-            case KeyboardKey.Seven: return "7";          // Key: 7
-            case KeyboardKey.Eight: return "8";          // Key: 8
-            case KeyboardKey.Nine: return "9";          // Key: 9
-            case KeyboardKey.Semicolon: return ";";          // Key: ;
-            case KeyboardKey.Equal: return "=";          // Key: =
-            case KeyboardKey.A: return "A";          // Key: A | a
-            case KeyboardKey.B: return "B";          // Key: B | b
-            case KeyboardKey.C: return "C";          // Key: C | c
-            case KeyboardKey.D: return "D";          // Key: D | d
-            case KeyboardKey.E: return "E";          // Key: E | e
-            case KeyboardKey.F: return "F";          // Key: F | f
-            case KeyboardKey.G: return "G";          // Key: G | g
-            case KeyboardKey.H: return "H";          // Key: H | h
-            case KeyboardKey.I: return "I";          // Key: I | i
-            case KeyboardKey.J: return "J";          // Key: J | j
-            case KeyboardKey.K: return "K";          // Key: K | k
-            case KeyboardKey.L: return "L";          // Key: L | l
-            case KeyboardKey.M: return "M";          // Key: M | m
-            case KeyboardKey.N: return "N";          // Key: N | n
-            case KeyboardKey.O: return "O";          // Key: O | o
-            case KeyboardKey.P: return "P";          // Key: P | p
-            case KeyboardKey.Q: return "Q";          // Key: Q | q
-            case KeyboardKey.R: return "R";          // Key: R | r
-            case KeyboardKey.S: return "S";          // Key: S | s
-            case KeyboardKey.T: return "T";          // Key: T | t
-            case KeyboardKey.U: return "U";          // Key: U | u
-            case KeyboardKey.V: return "V";          // Key: V | v
-            case KeyboardKey.W: return "W";          // Key: W | w
-            case KeyboardKey.X: return "X";          // Key: X | x
-            case KeyboardKey.Y: return "Y";          // Key: Y | y
-            case KeyboardKey.Z: return "Z";          // Key: Z | z
-            case KeyboardKey.LeftBracket: return "[";          // Key: [
-            case KeyboardKey.Backslash: return "\\";         // Key: '\'
-            case KeyboardKey.RightBracket: return "]";          // Key: ]
-            case KeyboardKey.Grave: return "`";          // Key: `
-            case KeyboardKey.Space: return "SPACE";      // Key: Space
-            case KeyboardKey.Escape: return "ESC";        // Key: Esc
-            case KeyboardKey.Enter: return "ENTER";      // Key: Enter
-            case KeyboardKey.Tab: return "TAB";        // Key: Tab
-            case KeyboardKey.Backspace: return "BACK";       // Key: Backspace
-            case KeyboardKey.Insert: return "INS";        // Key: Ins
-            case KeyboardKey.Delete: return "DEL";        // Key: Del
-            case KeyboardKey.Right: return "RIGHT";      // Key: Cursor right
-            case KeyboardKey.Left: return "LEFT";       // Key: Cursor left
-            case KeyboardKey.Down: return "DOWN";       // Key: Cursor down
-            case KeyboardKey.Up: return "UP";         // Key: Cursor up
-            case KeyboardKey.PageUp: return "PGUP";       // Key: Page up
-            case KeyboardKey.PageDown: return "PGDOWN";     // Key: Page down
-            case KeyboardKey.Home: return "HOME";       // Key: Home
-            case KeyboardKey.End: return "END";        // Key: End
-            case KeyboardKey.CapsLock: return "CAPS";       // Key: Caps lock
-            case KeyboardKey.ScrollLock: return "LOCK";       // Key: Scroll down
-            case KeyboardKey.NumLock: return "NUMLOCK";    // Key: Num lock
-            case KeyboardKey.PrintScreen: return "PRINTSCR";   // Key: Print screen
-            case KeyboardKey.Pause: return "PAUSE";      // Key: Pause
-            case KeyboardKey.F1: return "F1";         // Key: F1
-            case KeyboardKey.F2: return "F2";         // Key: F2
-            case KeyboardKey.F3: return "F3";         // Key: F3
-            case KeyboardKey.F4: return "F4";         // Key: F4
-            case KeyboardKey.F5: return "F5";         // Key: F5
-            case KeyboardKey.F6: return "F6";         // Key: F6
-            case KeyboardKey.F7: return "F7";         // Key: F7
-            case KeyboardKey.F8: return "F8";         // Key: F8
-            case KeyboardKey.F9: return "F9";         // Key: F9
-            case KeyboardKey.F10: return "F10";        // Key: F10
-            case KeyboardKey.F11: return "F11";        // Key: F11
-            case KeyboardKey.F12: return "F12";        // Key: F12
-            case KeyboardKey.LeftShift: return "LSHIFT";     // Key: Shift left
-            case KeyboardKey.LeftControl: return "LCTRL";      // Key: Control left
-            case KeyboardKey.LeftAlt: return "LALT";       // Key: Alt left
-            case KeyboardKey.LeftSuper: return "WIN";        // Key: Super left
-            case KeyboardKey.RightShift: return "RSHIFT";     // Key: Shift right
-            case KeyboardKey.RightControl: return "RCTRL";      // Key: Control right
-            case KeyboardKey.RightAlt: return "ALTGR";      // Key: Alt right
-            case KeyboardKey.RightSuper: return "RSUPER";     // Key: Super right
-            case KeyboardKey.KeyboardMenu: return "KBMENU";     // Key: KB menu
-            case KeyboardKey.Kp0: return "KP0";        // Key: Keypad 0
-            case KeyboardKey.Kp1: return "KP1";        // Key: Keypad 1
-            case KeyboardKey.Kp2: return "KP2";        // Key: Keypad 2
-            case KeyboardKey.Kp3: return "KP3";        // Key: Keypad 3
-            case KeyboardKey.Kp4: return "KP4";        // Key: Keypad 4
-            case KeyboardKey.Kp5: return "KP5";        // Key: Keypad 5
-            case KeyboardKey.Kp6: return "KP6";        // Key: Keypad 6
-            case KeyboardKey.Kp7: return "KP7";        // Key: Keypad 7
-            case KeyboardKey.Kp8: return "KP8";        // Key: Keypad 8
-            case KeyboardKey.Kp9: return "KP9";        // Key: Keypad 9
-            case KeyboardKey.KpDecimal: return "KPDEC";      // Key: Keypad .
-            case KeyboardKey.KpDivide: return "KPDIV";      // Key: Keypad /
-            case KeyboardKey.KpMultiply: return "KPMUL";      // Key: Keypad *
-            case KeyboardKey.KpSubtract: return "KPSUB";      // Key: Keypad -
-            case KeyboardKey.KpAdd: return "KPADD";      // Key: Keypad +
-            case KeyboardKey.KpEnter: return "KPENTER";    // Key: Keypad Enter
-            case KeyboardKey.KpEqual: return "KPEQU";      // Key: Keypad =
-            default: return "";
+            case KeyboardKey.Apostrophe:
+                return "'";          // Key: '
+            case KeyboardKey.Comma:
+                return ",";          // Key: ,
+            case KeyboardKey.Minus:
+                return "-";          // Key: -
+            case KeyboardKey.Period:
+                return ".";          // Key: .
+            case KeyboardKey.Slash:
+                return "/";          // Key: /
+            case KeyboardKey.Zero:
+                return "0";          // Key: 0
+            case KeyboardKey.One:
+                return "1";          // Key: 1
+            case KeyboardKey.Two:
+                return "2";          // Key: 2
+            case KeyboardKey.Three:
+                return "3";          // Key: 3
+            case KeyboardKey.Four:
+                return "4";          // Key: 4
+            case KeyboardKey.Five:
+                return "5";          // Key: 5
+            case KeyboardKey.Six:
+                return "6";          // Key: 6
+            case KeyboardKey.Seven:
+                return "7";          // Key: 7
+            case KeyboardKey.Eight:
+                return "8";          // Key: 8
+            case KeyboardKey.Nine:
+                return "9";          // Key: 9
+            case KeyboardKey.Semicolon:
+                return ";";          // Key: ;
+            case KeyboardKey.Equal:
+                return "=";          // Key: =
+            case KeyboardKey.A:
+                return "A";          // Key: A | a
+            case KeyboardKey.B:
+                return "B";          // Key: B | b
+            case KeyboardKey.C:
+                return "C";          // Key: C | c
+            case KeyboardKey.D:
+                return "D";          // Key: D | d
+            case KeyboardKey.E:
+                return "E";          // Key: E | e
+            case KeyboardKey.F:
+                return "F";          // Key: F | f
+            case KeyboardKey.G:
+                return "G";          // Key: G | g
+            case KeyboardKey.H:
+                return "H";          // Key: H | h
+            case KeyboardKey.I:
+                return "I";          // Key: I | i
+            case KeyboardKey.J:
+                return "J";          // Key: J | j
+            case KeyboardKey.K:
+                return "K";          // Key: K | k
+            case KeyboardKey.L:
+                return "L";          // Key: L | l
+            case KeyboardKey.M:
+                return "M";          // Key: M | m
+            case KeyboardKey.N:
+                return "N";          // Key: N | n
+            case KeyboardKey.O:
+                return "O";          // Key: O | o
+            case KeyboardKey.P:
+                return "P";          // Key: P | p
+            case KeyboardKey.Q:
+                return "Q";          // Key: Q | q
+            case KeyboardKey.R:
+                return "R";          // Key: R | r
+            case KeyboardKey.S:
+                return "S";          // Key: S | s
+            case KeyboardKey.T:
+                return "T";          // Key: T | t
+            case KeyboardKey.U:
+                return "U";          // Key: U | u
+            case KeyboardKey.V:
+                return "V";          // Key: V | v
+            case KeyboardKey.W:
+                return "W";          // Key: W | w
+            case KeyboardKey.X:
+                return "X";          // Key: X | x
+            case KeyboardKey.Y:
+                return "Y";          // Key: Y | y
+            case KeyboardKey.Z:
+                return "Z";          // Key: Z | z
+            case KeyboardKey.LeftBracket:
+                return "[";          // Key: [
+            case KeyboardKey.Backslash:
+                return "\\";         // Key: '\'
+            case KeyboardKey.RightBracket:
+                return "]";          // Key: ]
+            case KeyboardKey.Grave:
+                return "`";          // Key: `
+            case KeyboardKey.Space:
+                return "SPACE";      // Key: Space
+            case KeyboardKey.Escape:
+                return "ESC";        // Key: Esc
+            case KeyboardKey.Enter:
+                return "ENTER";      // Key: Enter
+            case KeyboardKey.Tab:
+                return "TAB";        // Key: Tab
+            case KeyboardKey.Backspace:
+                return "BACK";       // Key: Backspace
+            case KeyboardKey.Insert:
+                return "INS";        // Key: Ins
+            case KeyboardKey.Delete:
+                return "DEL";        // Key: Del
+            case KeyboardKey.Right:
+                return "RIGHT";      // Key: Cursor right
+            case KeyboardKey.Left:
+                return "LEFT";       // Key: Cursor left
+            case KeyboardKey.Down:
+                return "DOWN";       // Key: Cursor down
+            case KeyboardKey.Up:
+                return "UP";         // Key: Cursor up
+            case KeyboardKey.PageUp:
+                return "PGUP";       // Key: Page up
+            case KeyboardKey.PageDown:
+                return "PGDOWN";     // Key: Page down
+            case KeyboardKey.Home:
+                return "HOME";       // Key: Home
+            case KeyboardKey.End:
+                return "END";        // Key: End
+            case KeyboardKey.CapsLock:
+                return "CAPS";       // Key: Caps lock
+            case KeyboardKey.ScrollLock:
+                return "LOCK";       // Key: Scroll down
+            case KeyboardKey.NumLock:
+                return "NUMLOCK";    // Key: Num lock
+            case KeyboardKey.PrintScreen:
+                return "PRINTSCR";   // Key: Print screen
+            case KeyboardKey.Pause:
+                return "PAUSE";      // Key: Pause
+            case KeyboardKey.F1:
+                return "F1";         // Key: F1
+            case KeyboardKey.F2:
+                return "F2";         // Key: F2
+            case KeyboardKey.F3:
+                return "F3";         // Key: F3
+            case KeyboardKey.F4:
+                return "F4";         // Key: F4
+            case KeyboardKey.F5:
+                return "F5";         // Key: F5
+            case KeyboardKey.F6:
+                return "F6";         // Key: F6
+            case KeyboardKey.F7:
+                return "F7";         // Key: F7
+            case KeyboardKey.F8:
+                return "F8";         // Key: F8
+            case KeyboardKey.F9:
+                return "F9";         // Key: F9
+            case KeyboardKey.F10:
+                return "F10";        // Key: F10
+            case KeyboardKey.F11:
+                return "F11";        // Key: F11
+            case KeyboardKey.F12:
+                return "F12";        // Key: F12
+            case KeyboardKey.LeftShift:
+                return "LSHIFT";     // Key: Shift left
+            case KeyboardKey.LeftControl:
+                return "LCTRL";      // Key: Control left
+            case KeyboardKey.LeftAlt:
+                return "LALT";       // Key: Alt left
+            case KeyboardKey.LeftSuper:
+                return "WIN";        // Key: Super left
+            case KeyboardKey.RightShift:
+                return "RSHIFT";     // Key: Shift right
+            case KeyboardKey.RightControl:
+                return "RCTRL";      // Key: Control right
+            case KeyboardKey.RightAlt:
+                return "ALTGR";      // Key: Alt right
+            case KeyboardKey.RightSuper:
+                return "RSUPER";     // Key: Super right
+            case KeyboardKey.KeyboardMenu:
+                return "KBMENU";     // Key: KB menu
+            case KeyboardKey.Kp0:
+                return "KP0";        // Key: Keypad 0
+            case KeyboardKey.Kp1:
+                return "KP1";        // Key: Keypad 1
+            case KeyboardKey.Kp2:
+                return "KP2";        // Key: Keypad 2
+            case KeyboardKey.Kp3:
+                return "KP3";        // Key: Keypad 3
+            case KeyboardKey.Kp4:
+                return "KP4";        // Key: Keypad 4
+            case KeyboardKey.Kp5:
+                return "KP5";        // Key: Keypad 5
+            case KeyboardKey.Kp6:
+                return "KP6";        // Key: Keypad 6
+            case KeyboardKey.Kp7:
+                return "KP7";        // Key: Keypad 7
+            case KeyboardKey.Kp8:
+                return "KP8";        // Key: Keypad 8
+            case KeyboardKey.Kp9:
+                return "KP9";        // Key: Keypad 9
+            case KeyboardKey.KpDecimal:
+                return "KPDEC";      // Key: Keypad .
+            case KeyboardKey.KpDivide:
+                return "KPDIV";      // Key: Keypad /
+            case KeyboardKey.KpMultiply:
+                return "KPMUL";      // Key: Keypad *
+            case KeyboardKey.KpSubtract:
+                return "KPSUB";      // Key: Keypad -
+            case KeyboardKey.KpAdd:
+                return "KPADD";      // Key: Keypad +
+            case KeyboardKey.KpEnter:
+                return "KPENTER";    // Key: Keypad Enter
+            case KeyboardKey.KpEqual:
+                return "KPEQU";      // Key: Keypad =
+            default:
+                return "";
         }
     }
 

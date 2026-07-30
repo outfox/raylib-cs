@@ -190,22 +190,26 @@ public partial class SimpleParticles : IExample
             switch (type)
             {
                 case ParticleType.Water:
-                {
-                    newParticle.radius = 5.0f;
-                    newParticle.color = Color.Blue;
-                } break;
+                    {
+                        newParticle.radius = 5.0f;
+                        newParticle.color = Color.Blue;
+                    }
+                    break;
                 case ParticleType.Smoke:
-                {
-                    newParticle.radius = 7.0f;
-                    newParticle.color = Color.Gray;
-                } break;
+                    {
+                        newParticle.radius = 7.0f;
+                        newParticle.color = Color.Gray;
+                    }
+                    break;
                 case ParticleType.Fire:
-                {
-                    newParticle.radius = 10.0f;
-                    newParticle.color = Color.Yellow;
-                    speed /= 10.0f;
-                } break;
-                default: break;
+                    {
+                        newParticle.radius = 10.0f;
+                        newParticle.color = Color.Yellow;
+                        speed /= 10.0f;
+                    }
+                    break;
+                default:
+                    break;
             }
 
             float direction = (float)(random.Next(360));
@@ -238,41 +242,45 @@ public partial class SimpleParticles : IExample
             switch (buffer[i].type)
             {
                 case ParticleType.Water:
-                {
-                    buffer[i].position.X += buffer[i].velocity.X;
-                    buffer[i].velocity.Y += 0.2f;   // Gravity
-                    buffer[i].position.Y += buffer[i].velocity.Y;
-                } break;
+                    {
+                        buffer[i].position.X += buffer[i].velocity.X;
+                        buffer[i].velocity.Y += 0.2f;   // Gravity
+                        buffer[i].position.Y += buffer[i].velocity.Y;
+                    }
+                    break;
                 case ParticleType.Smoke:
-                {
-                    buffer[i].position.X += buffer[i].velocity.X;
-                    buffer[i].velocity.Y -= 0.05f;  // Upwards
-                    buffer[i].position.Y += buffer[i].velocity.Y;
-                    buffer[i].radius += 0.5f;       // Increment radius: smoke expands
-                    buffer[i].color.A -= 4;         // Decrement alpha: smoke fades
+                    {
+                        buffer[i].position.X += buffer[i].velocity.X;
+                        buffer[i].velocity.Y -= 0.05f;  // Upwards
+                        buffer[i].position.Y += buffer[i].velocity.Y;
+                        buffer[i].radius += 0.5f;       // Increment radius: smoke expands
+                        buffer[i].color.A -= 4;         // Decrement alpha: smoke fades
 
-                    // If alpha transparent, particle dies
-                    if (buffer[i].color.A < 4)
+                        // If alpha transparent, particle dies
+                        if (buffer[i].color.A < 4)
                         {
                             buffer[i].alive = false;
                         }
-                    } break;
+                    }
+                    break;
                 case ParticleType.Fire:
-                {
-                    // Add a little horizontal oscillation to fire particles
-                    buffer[i].position.X += buffer[i].velocity.X + MathF.Cos(buffer[i].lifeTime * 215.0f);
-                    buffer[i].velocity.Y -= 0.05f;  // Upwards
-                    buffer[i].position.Y += buffer[i].velocity.Y;
-                    buffer[i].radius -= 0.15f;      // Decrement radius: fire shrinks
-                    buffer[i].color.G -= 3;         // Decrement green: fire turns reddish starting from yellow
+                    {
+                        // Add a little horizontal oscillation to fire particles
+                        buffer[i].position.X += buffer[i].velocity.X + MathF.Cos(buffer[i].lifeTime * 215.0f);
+                        buffer[i].velocity.Y -= 0.05f;  // Upwards
+                        buffer[i].position.Y += buffer[i].velocity.Y;
+                        buffer[i].radius -= 0.15f;      // Decrement radius: fire shrinks
+                        buffer[i].color.G -= 3;         // Decrement green: fire turns reddish starting from yellow
 
-                    // If radius too small, particle dies
-                    if (buffer[i].radius <= 0.02f)
+                        // If radius too small, particle dies
+                        if (buffer[i].radius <= 0.02f)
                         {
                             buffer[i].alive = false;
                         }
-                    } break;
-                default: break;
+                    }
+                    break;
+                default:
+                    break;
             }
 
             // Disable particle when out of screen

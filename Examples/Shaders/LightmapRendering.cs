@@ -67,10 +67,14 @@ public partial class LightmapRendering : IExample
         mesh.AllocTexCoords2();
 
         // X                          // Y
-        mesh.TexCoords2[0] = 0.0f;    mesh.TexCoords2[1] = 0.0f;
-        mesh.TexCoords2[2] = 1.0f;    mesh.TexCoords2[3] = 0.0f;
-        mesh.TexCoords2[4] = 0.0f;    mesh.TexCoords2[5] = 1.0f;
-        mesh.TexCoords2[6] = 1.0f;    mesh.TexCoords2[7] = 1.0f;
+        mesh.TexCoords2[0] = 0.0f;
+        mesh.TexCoords2[1] = 0.0f;
+        mesh.TexCoords2[2] = 1.0f;
+        mesh.TexCoords2[3] = 0.0f;
+        mesh.TexCoords2[4] = 0.0f;
+        mesh.TexCoords2[5] = 1.0f;
+        mesh.TexCoords2[6] = 1.0f;
+        mesh.TexCoords2[7] = 1.0f;
 
         // Load a new texcoords2 attributes buffer
         mesh.VboId[(int)ShaderLocationIndex.VertexTexcoord02] =

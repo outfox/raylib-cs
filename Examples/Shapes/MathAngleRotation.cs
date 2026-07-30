@@ -41,7 +41,7 @@ public partial class MathAngleRotation : IExample
 
     public void Init()
     {
-        center = new Vector2(screenWidth/2.0f, screenHeight/2.0f);
+        center = new Vector2(screenWidth / 2.0f, screenHeight / 2.0f);
 
         // Predefined angles for fixed lines
         angles = new[] { 0, 30, 60, 90 };
@@ -64,44 +64,54 @@ public partial class MathAngleRotation : IExample
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
-            ClearBackground(Color.White);
+        ClearBackground(Color.White);
 
-            DrawText("Fixed angles + rotating line", 10, 10, 20, Color.LightGray);
+        DrawText("Fixed angles + rotating line", 10, 10, 20, Color.LightGray);
 
-            // Draw fixed-angle lines with colorful gradient
-            for (int i = 0; i < numAngles; i++)
+        // Draw fixed-angle lines with colorful gradient
+        for (int i = 0; i < numAngles; i++)
+        {
+            float rad = angles[i] * DEG2RAD;
+            Vector2 end = new Vector2(center.X + MathF.Cos(rad) * lineLength,
+                                      center.Y + MathF.Sin(rad) * lineLength);
+
+            // Gradient color from green → cyan → blue → magenta
+            Color col;
+            switch (i)
             {
-                float rad = angles[i]*DEG2RAD;
-                Vector2 end = new Vector2(center.X + MathF.Cos(rad)*lineLength,
-                                          center.Y + MathF.Sin(rad)*lineLength);
-
-                // Gradient color from green → cyan → blue → magenta
-                Color col;
-                switch(i)
-                {
-                    case 0: col = Color.Green; break;
-                    case 1: col = Color.Orange; break;
-                    case 2: col = Color.Blue; break;
-                    case 3: col = Color.Magenta; break;
-                    default: col = Color.White; break;
-                }
-
-                DrawLineEx(center, end, 5.0f, col);
-
-                // Draw angle label slightly offset along the line
-                Vector2 textPos = new Vector2(center.X + MathF.Cos(rad)*(lineLength + 20),
-                                              center.Y + MathF.Sin(rad)*(lineLength + 20));
-                DrawText($"{angles[i]}°", (int)textPos.X, (int)textPos.Y, 20, col);
+                case 0:
+                    col = Color.Green;
+                    break;
+                case 1:
+                    col = Color.Orange;
+                    break;
+                case 2:
+                    col = Color.Blue;
+                    break;
+                case 3:
+                    col = Color.Magenta;
+                    break;
+                default:
+                    col = Color.White;
+                    break;
             }
 
-            // Draw animated rotating line with changing color
-            float animRad = totalAngle*DEG2RAD;
-            Vector2 animEnd = new Vector2(center.X + MathF.Cos(animRad)*lineLength,
-                                          center.Y + MathF.Sin(animRad)*lineLength);
+            DrawLineEx(center, end, 5.0f, col);
 
-            // Cycle through HSV colors for animated line
-            Color animCol = ColorFromHSV(totalAngle % 360.0f, 0.8f, 0.9f);
-            DrawLineEx(center, animEnd, 5.0f, animCol);
+            // Draw angle label slightly offset along the line
+            Vector2 textPos = new Vector2(center.X + MathF.Cos(rad) * (lineLength + 20),
+                                          center.Y + MathF.Sin(rad) * (lineLength + 20));
+            DrawText($"{angles[i]}°", (int)textPos.X, (int)textPos.Y, 20, col);
+        }
+
+        // Draw animated rotating line with changing color
+        float animRad = totalAngle * DEG2RAD;
+        Vector2 animEnd = new Vector2(center.X + MathF.Cos(animRad) * lineLength,
+                                      center.Y + MathF.Sin(animRad) * lineLength);
+
+        // Cycle through HSV colors for animated line
+        Color animCol = ColorFromHSV(totalAngle % 360.0f, 0.8f, 0.9f);
+        DrawLineEx(center, animEnd, 5.0f, animCol);
 
         EndDrawing();
         //----------------------------------------------------------------------------------

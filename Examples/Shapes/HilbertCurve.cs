@@ -162,24 +162,30 @@ public partial class HilbertCurve : IExample
             switch (hilbertIndex)
             {
                 case 0:
-                {
-                    temp = vect.X;
-                    vect.X = vect.Y;
-                    vect.Y = temp;
-                } break;
+                    {
+                        temp = vect.X;
+                        vect.X = vect.Y;
+                        vect.Y = temp;
+                    }
+                    break;
                 case 2:
-                {
-                    vect.X += len;
+                    {
+                        vect.X += len;
+                        vect.Y += len;
+                    }
+                    break;
+                case 1:
                     vect.Y += len;
-                } break;
-                case 1: vect.Y += len; break;
+                    break;
                 case 3:
-                {
-                    temp = len - 1 - vect.X;
-                    vect.X = 2 * len - 1 - vect.Y;
-                    vect.Y = temp;
-                } break;
-                default: break;
+                    {
+                        temp = len - 1 - vect.X;
+                        vect.X = 2 * len - 1 - vect.Y;
+                        vect.Y = temp;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 

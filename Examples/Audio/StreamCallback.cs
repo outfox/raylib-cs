@@ -88,10 +88,18 @@ public unsafe partial class StreamCallback : IExample
     {
         switch (waveType)
         {
-            case WaveType.Sine: SetAudioStreamCallback(stream, &SineCallback); break;
-            case WaveType.Square: SetAudioStreamCallback(stream, &SquareCallback); break;
-            case WaveType.Triangle: SetAudioStreamCallback(stream, &TriangleCallback); break;
-            case WaveType.Sawtooth: SetAudioStreamCallback(stream, &SawtoothCallback); break;
+            case WaveType.Sine:
+                SetAudioStreamCallback(stream, &SineCallback);
+                break;
+            case WaveType.Square:
+                SetAudioStreamCallback(stream, &SquareCallback);
+                break;
+            case WaveType.Triangle:
+                SetAudioStreamCallback(stream, &TriangleCallback);
+                break;
+            case WaveType.Sawtooth:
+                SetAudioStreamCallback(stream, &SawtoothCallback);
+                break;
         }
     }
 

@@ -423,8 +423,12 @@ public partial class Decals : IExample
                             nV3 = ClipSegment(inMesh[i + 1], nV1, planes[face], s);
                             nV4 = ClipSegment(inMesh[i + 1], nV2, planes[face], s);
 
-                            outMesh.Add(nV3); outMesh.Add(nV2); outMesh.Add(nV1);
-                            outMesh.Add(nV2); outMesh.Add(nV3); outMesh.Add(nV4);
+                            outMesh.Add(nV3);
+                            outMesh.Add(nV2);
+                            outMesh.Add(nV1);
+                            outMesh.Add(nV2);
+                            outMesh.Add(nV3);
+                            outMesh.Add(nV4);
                         }
                         else
                         {
@@ -443,8 +447,12 @@ public partial class Decals : IExample
                                 nV4 = ClipSegment(inMesh[i + 2], nV2, planes[face], s);
                             }
 
-                            outMesh.Add(nV1); outMesh.Add(nV2); outMesh.Add(nV3);
-                            outMesh.Add(nV4); outMesh.Add(nV3); outMesh.Add(nV2);
+                            outMesh.Add(nV1);
+                            outMesh.Add(nV2);
+                            outMesh.Add(nV3);
+                            outMesh.Add(nV4);
+                            outMesh.Add(nV3);
+                            outMesh.Add(nV2);
                         }
                         break;
                     case 2:
@@ -454,7 +462,9 @@ public partial class Decals : IExample
                             nV1 = inMesh[i];
                             nV2 = ClipSegment(nV1, inMesh[i + 1], planes[face], s);
                             nV3 = ClipSegment(nV1, inMesh[i + 2], planes[face], s);
-                            outMesh.Add(nV1); outMesh.Add(nV2); outMesh.Add(nV3);
+                            outMesh.Add(nV1);
+                            outMesh.Add(nV2);
+                            outMesh.Add(nV3);
                         }
 
                         if (!v2Out)
@@ -462,7 +472,9 @@ public partial class Decals : IExample
                             nV1 = inMesh[i + 1];
                             nV2 = ClipSegment(nV1, inMesh[i + 2], planes[face], s);
                             nV3 = ClipSegment(nV1, inMesh[i], planes[face], s);
-                            outMesh.Add(nV1); outMesh.Add(nV2); outMesh.Add(nV3);
+                            outMesh.Add(nV1);
+                            outMesh.Add(nV2);
+                            outMesh.Add(nV3);
                         }
 
                         if (!v3Out)
@@ -470,7 +482,9 @@ public partial class Decals : IExample
                             nV1 = inMesh[i + 2];
                             nV2 = ClipSegment(nV1, inMesh[i], planes[face], s);
                             nV3 = ClipSegment(nV1, inMesh[i + 1], planes[face], s);
-                            outMesh.Add(nV1); outMesh.Add(nV2); outMesh.Add(nV3);
+                            outMesh.Add(nV1);
+                            outMesh.Add(nV2);
+                            outMesh.Add(nV3);
                         }
                         break;
                     default: // The entire face lies outside of the plane, so let's discard the corresponding vertices

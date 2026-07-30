@@ -68,8 +68,14 @@ public partial class DoublePendulum : IExample
     public void Init()
     {
         // Simulation Parameters
-        l1 = 15.0f; m1 = 0.2f; theta1 = DEG2RAD * 170; w1 = 0;
-        l2 = 15.0f; m2 = 0.1f; theta2 = DEG2RAD * 0; w2 = 0;
+        l1 = 15.0f;
+        m1 = 0.2f;
+        theta1 = DEG2RAD * 170;
+        w1 = 0;
+        l2 = 15.0f;
+        m2 = 0.1f;
+        theta2 = DEG2RAD * 0;
+        w2 = 0;
         lengthScaler = 0.1f;
         totalM = m1 + m2;
 
@@ -82,7 +88,8 @@ public partial class DoublePendulum : IExample
         L2 = l2 * lengthScaler;
 
         // Draw parameters
-        lineThick = 20; trailThick = 2;
+        lineThick = 20;
+        trailThick = 2;
         fateAlpha = 0.01f;
 
         // Create framebuffer

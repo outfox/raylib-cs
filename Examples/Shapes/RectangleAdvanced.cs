@@ -162,10 +162,26 @@ public partial class RectangleAdvanced : IExample
         {
             Color color = new Color(0, 0, 0, 0);
             float radius = 0.0f;
-            if (k == 0) { color = left; radius = radiusLeft; }     // [1] Upper Left Corner
-            if (k == 1) { color = right; radius = radiusRight; }   // [3] Upper Right Corner
-            if (k == 2) { color = right; radius = radiusRight; }   // [5] Lower Right Corner
-            if (k == 3) { color = left; radius = radiusLeft; }     // [7] Lower Left Corner
+            if (k == 0)
+            {
+                color = left;
+                radius = radiusLeft;
+            }     // [1] Upper Left Corner
+            if (k == 1)
+            {
+                color = right;
+                radius = radiusRight;
+            }   // [3] Upper Right Corner
+            if (k == 2)
+            {
+                color = right;
+                radius = radiusRight;
+            }   // [5] Lower Right Corner
+            if (k == 3)
+            {
+                color = left;
+                radius = radiusLeft;
+            }     // [7] Lower Left Corner
 
             float angle = angles[k];
             Vector2 center = centers[k];

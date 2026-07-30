@@ -213,17 +213,38 @@ public partial class DigitalClock : IExample
     {
         switch (value)
         {
-            case 0: Draw7SDisplay(position, 0b00111111, colorOn, colorOff); break;
-            case 1: Draw7SDisplay(position, 0b00000110, colorOn, colorOff); break;
-            case 2: Draw7SDisplay(position, 0b01011011, colorOn, colorOff); break;
-            case 3: Draw7SDisplay(position, 0b01001111, colorOn, colorOff); break;
-            case 4: Draw7SDisplay(position, 0b01100110, colorOn, colorOff); break;
-            case 5: Draw7SDisplay(position, 0b01101101, colorOn, colorOff); break;
-            case 6: Draw7SDisplay(position, 0b01111101, colorOn, colorOff); break;
-            case 7: Draw7SDisplay(position, 0b00000111, colorOn, colorOff); break;
-            case 8: Draw7SDisplay(position, 0b01111111, colorOn, colorOff); break;
-            case 9: Draw7SDisplay(position, 0b01101111, colorOn, colorOff); break;
-            default: break;
+            case 0:
+                Draw7SDisplay(position, 0b00111111, colorOn, colorOff);
+                break;
+            case 1:
+                Draw7SDisplay(position, 0b00000110, colorOn, colorOff);
+                break;
+            case 2:
+                Draw7SDisplay(position, 0b01011011, colorOn, colorOff);
+                break;
+            case 3:
+                Draw7SDisplay(position, 0b01001111, colorOn, colorOff);
+                break;
+            case 4:
+                Draw7SDisplay(position, 0b01100110, colorOn, colorOff);
+                break;
+            case 5:
+                Draw7SDisplay(position, 0b01101101, colorOn, colorOff);
+                break;
+            case 6:
+                Draw7SDisplay(position, 0b01111101, colorOn, colorOff);
+                break;
+            case 7:
+                Draw7SDisplay(position, 0b00000111, colorOn, colorOff);
+                break;
+            case 8:
+                Draw7SDisplay(position, 0b01111111, colorOn, colorOff);
+                break;
+            case 9:
+                Draw7SDisplay(position, 0b01101111, colorOn, colorOff);
+                break;
+            default:
+                break;
         }
     }
 

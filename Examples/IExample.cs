@@ -14,10 +14,16 @@ namespace Examples;
 public interface IExample
 {
     /// <summary>Display name shown in the navigation dropdown.</summary>
-    string Name { get; }
+    string Name
+    {
+        get;
+    }
 
     /// <summary>Window title, matching the example's standalone <c>Main()</c>.</summary>
-    string Title { get; }
+    string Title
+    {
+        get;
+    }
 
     /// <summary>Desktop window size, matching the standalone <c>Main()</c>. The browser canvas is fixed at 800x450.</summary>
     int Width => 800;

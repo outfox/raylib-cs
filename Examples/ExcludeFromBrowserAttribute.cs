@@ -8,7 +8,10 @@ namespace Examples;
 public sealed class ExcludeFromBrowserAttribute : Attribute
 {
     /// <summary>Why the example cannot run in the browser.</summary>
-    public string Reason { get; }
+    public string Reason
+    {
+        get;
+    }
 
     public ExcludeFromBrowserAttribute(string reason = null)
     {

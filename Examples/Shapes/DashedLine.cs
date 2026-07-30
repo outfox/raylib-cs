@@ -80,7 +80,7 @@ public partial class DashedLine : IExample
         // Cycle through colors ('C' key)
         if (IsKeyPressed(KeyboardKey.C))
         {
-            colorIndex = (colorIndex + 1)%lineColors.Length;
+            colorIndex = (colorIndex + 1) % lineColors.Length;
         }
         //----------------------------------------------------------------------------------
 
@@ -88,23 +88,23 @@ public partial class DashedLine : IExample
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-            ClearBackground(Color.RayWhite);
+        ClearBackground(Color.RayWhite);
 
-            // Draw the dashed line with the current properties
-            DrawLineDashed(lineStartPosition, lineEndPosition, (int)dashLength, (int)blankLength, lineColors[colorIndex]);
+        // Draw the dashed line with the current properties
+        DrawLineDashed(lineStartPosition, lineEndPosition, (int)dashLength, (int)blankLength, lineColors[colorIndex]);
 
-            // Draw UI and Instructions
-            DrawRectangle(5, 5, 265, 95, Fade(Color.SkyBlue, 0.5f));
-            DrawRectangleLines(5, 5, 265, 95, Color.Blue);
+        // Draw UI and Instructions
+        DrawRectangle(5, 5, 265, 95, Fade(Color.SkyBlue, 0.5f));
+        DrawRectangleLines(5, 5, 265, 95, Color.Blue);
 
-            DrawText("CONTROLS:", 15, 15, 10, Color.Black);
-            DrawText("UP/DOWN: Change Dash Length", 15, 35, 10, Color.Black);
-            DrawText("LEFT/RIGHT: Change Space Length", 15, 55, 10, Color.Black);
-            DrawText("C: Cycle Color", 15, 75, 10, Color.Black);
+        DrawText("CONTROLS:", 15, 15, 10, Color.Black);
+        DrawText("UP/DOWN: Change Dash Length", 15, 35, 10, Color.Black);
+        DrawText("LEFT/RIGHT: Change Space Length", 15, 55, 10, Color.Black);
+        DrawText("C: Cycle Color", 15, 75, 10, Color.Black);
 
-            DrawText($"Dash: {dashLength:F0} | Space: {blankLength:F0}", 15, 115, 10, Color.DarkGray);
+        DrawText($"Dash: {dashLength:F0} | Space: {blankLength:F0}", 15, 115, 10, Color.DarkGray);
 
-            DrawFPS(screenWidth - 80, 10);
+        DrawFPS(screenWidth - 80, 10);
 
         EndDrawing();
         //----------------------------------------------------------------------------------

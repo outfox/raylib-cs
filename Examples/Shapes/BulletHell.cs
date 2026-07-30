@@ -88,8 +88,8 @@ public partial class BulletHell : IExample
         // Draw circle to bullet texture, then draw bullet using DrawTexture()
         // NOTE: This is done to improve the performance, since DrawCircle() is very slow
         BeginTextureMode(bulletTexture);
-            DrawCircle(12, 12, (float)bulletRadius, Color.White);
-            DrawCircleLines(12, 12, (float)bulletRadius, Color.Black);
+        DrawCircle(12, 12, (float)bulletRadius, Color.White);
+        DrawCircleLines(12, 12, (float)bulletRadius, Color.Black);
         EndTextureMode();
 
         drawInPerformanceMode = true;
@@ -113,16 +113,16 @@ public partial class BulletHell : IExample
             spawnCooldownTimer = spawnCooldown;
 
             // Spawn bullets
-            float degreesPerRow = 360.0f/bulletRows;
+            float degreesPerRow = 360.0f / bulletRows;
             for (int row = 0; row < bulletRows; row++)
             {
                 if (bulletCount < MAX_BULLETS)
                 {
-                    bullets[bulletCount].position = new Vector2((float)screenWidth/2, (float)screenHeight/2);
+                    bullets[bulletCount].position = new Vector2((float)screenWidth / 2, (float)screenHeight / 2);
                     bullets[bulletCount].disabled = false;
-                    bullets[bulletCount].color = bulletColor[row%2];
+                    bullets[bulletCount].color = bulletColor[row % 2];
 
-                    float bulletDirection = baseDirection + (degreesPerRow*row);
+                    float bulletDirection = baseDirection + (degreesPerRow * row);
 
                     // Bullet speed*bullet direction, this will determine how much pixels will be incremented/decremented
                     // from the bullet position every frame. Since the bullets doesn't change its direction and speed,
@@ -130,8 +130,8 @@ public partial class BulletHell : IExample
                     // 0 degrees = right, 90 degrees = down, 180 degrees = left and 270 degrees = up, basically clockwise
                     // Case you want it to be anti-clockwise, add "* -1" at the y acceleration
                     bullets[bulletCount].acceleration = new Vector2(
-                        bulletSpeed*MathF.Cos(bulletDirection*DEG2RAD),
-                        bulletSpeed*MathF.Sin(bulletDirection*DEG2RAD)
+                        bulletSpeed * MathF.Cos(bulletDirection * DEG2RAD),
+                        bulletSpeed * MathF.Sin(bulletDirection * DEG2RAD)
                     );
 
                     bulletCount++;
@@ -151,10 +151,10 @@ public partial class BulletHell : IExample
                 bullets[i].position.Y += bullets[i].acceleration.Y;
 
                 // Disable bullet if out of screen
-                if ((bullets[i].position.X < -bulletRadius*2) ||
-                    (bullets[i].position.X > screenWidth + bulletRadius*2) ||
-                    (bullets[i].position.Y < -bulletRadius*2) ||
-                    (bullets[i].position.Y > screenHeight + bulletRadius*2))
+                if ((bullets[i].position.X < -bulletRadius * 2) ||
+                    (bullets[i].position.X > screenWidth + bulletRadius * 2) ||
+                    (bullets[i].position.Y < -bulletRadius * 2) ||
+                    (bullets[i].position.Y > screenHeight + bulletRadius * 2))
                 {
                     bullets[i].disabled = true;
                     bulletDisabledCount++;
@@ -214,60 +214,60 @@ public partial class BulletHell : IExample
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
-            ClearBackground(Color.RayWhite);
+        ClearBackground(Color.RayWhite);
 
-            // Draw magic circle
-            magicCircleRotation++;
-            DrawRectanglePro(new Rectangle((float)screenWidth/2, (float)screenHeight/2, 120, 120),
-                new Vector2(60.0f, 60.0f), magicCircleRotation, Color.Purple);
-            DrawRectanglePro(new Rectangle((float)screenWidth/2, (float)screenHeight/2, 120, 120),
-                new Vector2(60.0f, 60.0f), magicCircleRotation + 45, Color.Purple);
-            DrawCircleLines(screenWidth/2, screenHeight/2, 70, Color.Black);
-            DrawCircleLines(screenWidth/2, screenHeight/2, 50, Color.Black);
-            DrawCircleLines(screenWidth/2, screenHeight/2, 30, Color.Black);
+        // Draw magic circle
+        magicCircleRotation++;
+        DrawRectanglePro(new Rectangle((float)screenWidth / 2, (float)screenHeight / 2, 120, 120),
+            new Vector2(60.0f, 60.0f), magicCircleRotation, Color.Purple);
+        DrawRectanglePro(new Rectangle((float)screenWidth / 2, (float)screenHeight / 2, 120, 120),
+            new Vector2(60.0f, 60.0f), magicCircleRotation + 45, Color.Purple);
+        DrawCircleLines(screenWidth / 2, screenHeight / 2, 70, Color.Black);
+        DrawCircleLines(screenWidth / 2, screenHeight / 2, 50, Color.Black);
+        DrawCircleLines(screenWidth / 2, screenHeight / 2, 30, Color.Black);
 
-            // Draw bullets
-            if (drawInPerformanceMode)
+        // Draw bullets
+        if (drawInPerformanceMode)
+        {
+            // Draw bullets using pre-rendered texture containing circle
+            for (int i = 0; i < bulletCount; i++)
             {
-                // Draw bullets using pre-rendered texture containing circle
-                for (int i = 0; i < bulletCount; i++)
+                // Do not draw disabled bullets (out of screen)
+                if (!bullets[i].disabled)
                 {
-                    // Do not draw disabled bullets (out of screen)
-                    if (!bullets[i].disabled)
-                    {
-                        DrawTexture(bulletTexture.Texture,
-                            (int)(bullets[i].position.X - bulletTexture.Texture.Width*0.5f),
-                            (int)(bullets[i].position.Y - bulletTexture.Texture.Height*0.5f),
-                            bullets[i].color);
-                    }
+                    DrawTexture(bulletTexture.Texture,
+                        (int)(bullets[i].position.X - bulletTexture.Texture.Width * 0.5f),
+                        (int)(bullets[i].position.Y - bulletTexture.Texture.Height * 0.5f),
+                        bullets[i].color);
                 }
             }
-            else
+        }
+        else
+        {
+            // Draw bullets using DrawCircle(), less performant
+            for (int i = 0; i < bulletCount; i++)
             {
-                // Draw bullets using DrawCircle(), less performant
-                for (int i = 0; i < bulletCount; i++)
+                // Do not draw disabled bullets (out of screen)
+                if (!bullets[i].disabled)
                 {
-                    // Do not draw disabled bullets (out of screen)
-                    if (!bullets[i].disabled)
-                    {
-                        DrawCircleV(bullets[i].position, (float)bulletRadius, bullets[i].color);
-                        DrawCircleLinesV(bullets[i].position, (float)bulletRadius, Color.Black);
-                    }
+                    DrawCircleV(bullets[i].position, (float)bulletRadius, bullets[i].color);
+                    DrawCircleLinesV(bullets[i].position, (float)bulletRadius, Color.Black);
                 }
             }
+        }
 
-            // Draw UI
-            DrawRectangle(10, 10, 280, 150, new Color(0, 0, 0, 200));
-            DrawText("Controls:", 20, 20, 10, Color.LightGray);
-            DrawText("- Right/Left or A/D: Change rows number", 40, 40, 10, Color.LightGray);
-            DrawText("- Up/Down or W/S: Change bullet speed", 40, 60, 10, Color.LightGray);
-            DrawText("- Z or X: Change spawn cooldown", 40, 80, 10, Color.LightGray);
-            DrawText("- Space (Hold): Change the angle increment", 40, 100, 10, Color.LightGray);
-            DrawText("- Enter: Switch draw method (Performance)", 40, 120, 10, Color.LightGray);
-            DrawText("- C: Clear bullets", 40, 140, 10, Color.LightGray);
+        // Draw UI
+        DrawRectangle(10, 10, 280, 150, new Color(0, 0, 0, 200));
+        DrawText("Controls:", 20, 20, 10, Color.LightGray);
+        DrawText("- Right/Left or A/D: Change rows number", 40, 40, 10, Color.LightGray);
+        DrawText("- Up/Down or W/S: Change bullet speed", 40, 60, 10, Color.LightGray);
+        DrawText("- Z or X: Change spawn cooldown", 40, 80, 10, Color.LightGray);
+        DrawText("- Space (Hold): Change the angle increment", 40, 100, 10, Color.LightGray);
+        DrawText("- Enter: Switch draw method (Performance)", 40, 120, 10, Color.LightGray);
+        DrawText("- C: Clear bullets", 40, 140, 10, Color.LightGray);
 
-            DrawRectangle(610, 10, 170, 30, new Color(0, 0, 0, 200));
-            if (drawInPerformanceMode)
+        DrawRectangle(610, 10, 170, 30, new Color(0, 0, 0, 200));
+        if (drawInPerformanceMode)
         {
             DrawText("Draw method: DrawTexture(*)", 620, 20, 10, Color.Green);
         }
@@ -277,8 +277,8 @@ public partial class BulletHell : IExample
         }
 
         DrawRectangle(135, 410, 530, 30, new Color(0, 0, 0, 200));
-            DrawText($"[ FPS: {GetFPS()}, Bullets: {bulletCount - bulletDisabledCount}, Rows: {bulletRows}, Bullet speed: {bulletSpeed:F2}, Angle increment per frame: {angleIncrement}, Cooldown: {spawnCooldown:F0} ]",
-                155, 420, 10, Color.Green);
+        DrawText($"[ FPS: {GetFPS()}, Bullets: {bulletCount - bulletDisabledCount}, Rows: {bulletRows}, Bullet speed: {bulletSpeed:F2}, Angle increment per frame: {angleIncrement}, Cooldown: {spawnCooldown:F0} ]",
+            155, 420, 10, Color.Green);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
